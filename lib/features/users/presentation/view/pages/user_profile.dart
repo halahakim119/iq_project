@@ -27,8 +27,8 @@ class UserProfile extends StatelessWidget {
               ),
               loaded: (data) => Center(
                   child: UserWidget(
-                firstName: data.firstName,
-                lastName: data.lastName,
+                name: data.name,
+                password: data.password,
                 department: data.department,
                 email: data.email,
               )),

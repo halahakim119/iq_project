@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 
 class UserWidget extends StatelessWidget {
-  final String? firstName;
-  final String? lastName;
+  final String? name;
+  final String? password;
   final String? email;
   final String? department;
-  const UserWidget(
-      {this.firstName, this.lastName, this.department, this.email});
+  const UserWidget({this.name, this.password, this.department, this.email});
 
   @override
   Widget build(BuildContext context) {
     return ExpansionTile(
       title: Text(
-        ' welcome $firstName ',
+        ' welcome $name ',
       ),
       children: [
         Padding(
@@ -21,7 +20,8 @@ class UserWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Name: $firstName $lastName '),
+              Text('Name: $name'),
+              Text('Name: $password'),
               Text('email: $email'),
               Text('department: $department'),
             ],

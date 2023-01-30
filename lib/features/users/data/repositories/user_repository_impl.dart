@@ -23,14 +23,28 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<Either<Failure, Unit>> updateUser(UserEntity user) async {
-    final UserModel userModel = UserModel(
-        firstName: user.firstName,
-        lastName: user.lastName,
-        department: user.department,
-        email: user.email);
+  Future<Either<Failure, Unit>> updateUser(String user, String type) async {
+    final UserModel userModel;
+    if (type == "name") {
+      userModel = UserModel(
+        name: user,
+      );
+    } else if (type == "department") {
+      userModel = UserModel(
+        department: user,
+      );
+    } else if (type == "email") {
+      userModel = UserModel(email: user);
+    } else if (type == "password") {
+      userModel = UserModel(
+        password: user,
+      );
+    } else {
+      userModel = const UserModel();
+    }
+
     try {
-      await userDataSource.updateUser(userModel);
+      await userDataSource.updateUser(user,type);
       return const Right(unit);
     } on ServerException {
       return Left(ServerFailure());
