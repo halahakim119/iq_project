@@ -21,7 +21,7 @@ class UserWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text('Name: $name'),
-              Text('Name: $password'),
+              Text('password: $password'),
               Text('email: $email'),
               Text('department: $department'),
             ],

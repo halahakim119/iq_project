@@ -7,7 +7,6 @@ import 'features/auth/auth_screen.dart';
 import 'features/users/presentation/view/pages/user_profile.dart';
 import 'features/schedule/daily/home.dart';
 
-
 class WhatDoWeHave extends StatelessWidget {
   const WhatDoWeHave({super.key});
 

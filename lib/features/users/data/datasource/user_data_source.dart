@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
 import 'package:http/http.dart' as http;
+import 'package:iq_project/features/users/data/models/user_model.dart';
+import 'package:iq_project/features/users/domain/entities/user_entity.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../core/error/exception.dart';
@@ -9,7 +11,7 @@ import '../../../../core/error/failure.dart';
 
 abstract class UserDataSource {
   Future<Either<Failure, Map<String, dynamic>>> getUserData();
-  Future<Unit> updateUser(String user, String type);
+  Future<Unit> updateUser(UserEntity userEntity);
 }
 
 class UserDataSourceImpl implements UserDataSource {
@@ -30,38 +32,22 @@ class UserDataSourceImpl implements UserDataSource {
     // return decodedJson;
 
     final decodedJson = json.decode(userInfo);
-    print(decodedJson);
     return Right(decodedJson);
   }
 
   @override
-  Future<Unit> updateUser(String data, String type) async {
+  Future<Unit> updateUser(UserEntity user) async {
     final prefs = await SharedPreferences.getInstance();
     final id = prefs.getString('id');
-    final body;
-    if (type == "name") {
-      body = {
-        "name": data,
-      };
-    } else if (type == "department") {
-      body = {
-        "department": data,
-      };
-    } else if (type == "email") {
-      body = {
-        "email": data,
-      };
-    } else if (type == "password") {
-      body = {
-        "password": data,
-      };
-    } else {
-      body = {''};
-    }
+    final body = {
+      "name": user.name,
+      "password": user.password,
+      "department": user.department,
+      "email": user.email,
+    };
 
     final response = await http.patch(
       Uri.parse('https://your-server.com/users/$id'),
-      // headers: {'Authorization': 'Bearer $token'},
       body: body,
     );
     if (response.statusCode == 200) {
