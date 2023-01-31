@@ -4,22 +4,31 @@ import '../../features/users/data/datasource/user_data_source.dart';
 import '../../features/users/data/repositories/user_repository_impl.dart';
 import '../../features/users/domain/repositories/user_repository.dart';
 import '../../features/users/domain/usecases/get_user_usecase.dart';
+import '../../features/users/domain/usecases/update_user_usecase.dart';
+import '../../features/users/presentation/logic/cubit/update_cubit.dart';
 import '../../features/users/presentation/logic/cubit/user_cubit.dart';
-
 
 final sl = GetIt.instance;
 
 Future<void> init() async {
   //!user
-// Bloc
+// cubit
   sl.registerFactory(() => UserCubit(getData: sl()));
+  sl.registerLazySingleton(
+      () => UpdateCubit(updateUserUsecase: sl(), userCubit: sl()));
 // Usecases
   sl.registerLazySingleton(() => GetUserUsecase(userRepository: sl()));
+  sl.registerLazySingleton(() => UpdateUserUsecase(userRepository: sl()));
 // Repository
   sl.registerLazySingleton<UserRepository>(
       () => UserRepositoryImpl(userDataSource: sl()));
 // data sources
-  sl.registerLazySingleton<UserDataSource>(
-    () => UserDataSourceImpl(),
-  );
+  sl.registerLazySingleton<UserDataSource>(() => UserDataSourceImpl());
 }
+
+void setupLocator() {
+  sl.registerSingleton(init);
+ 
+}
+
+

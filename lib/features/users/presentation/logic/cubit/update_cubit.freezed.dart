@@ -18,51 +18,51 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$UpdateState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(UserEntity user) loaded,
-    required TResult Function(String error) error,
+    required TResult Function() updateInitial,
+    required TResult Function() updateLoading,
+    required TResult Function() updateLoaded,
+    required TResult Function(String error) updateError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(UserEntity user)? loaded,
-    TResult? Function(String error)? error,
+    TResult? Function()? updateInitial,
+    TResult? Function()? updateLoading,
+    TResult? Function()? updateLoaded,
+    TResult? Function(String error)? updateError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(UserEntity user)? loaded,
-    TResult Function(String error)? error,
+    TResult Function()? updateInitial,
+    TResult Function()? updateLoading,
+    TResult Function()? updateLoaded,
+    TResult Function(String error)? updateError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Loaded value) loaded,
-    required TResult Function(_Error value) error,
+    required TResult Function(_UpdateInitial value) updateInitial,
+    required TResult Function(_UpdateLoading value) updateLoading,
+    required TResult Function(_UpdateLoaded value) updateLoaded,
+    required TResult Function(_UpdateError value) updateError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Loaded value)? loaded,
-    TResult? Function(_Error value)? error,
+    TResult? Function(_UpdateInitial value)? updateInitial,
+    TResult? Function(_UpdateLoading value)? updateLoading,
+    TResult? Function(_UpdateLoaded value)? updateLoaded,
+    TResult? Function(_UpdateError value)? updateError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
-    TResult Function(_Error value)? error,
+    TResult Function(_UpdateInitial value)? updateInitial,
+    TResult Function(_UpdateLoading value)? updateLoading,
+    TResult Function(_UpdateLoaded value)? updateLoaded,
+    TResult Function(_UpdateError value)? updateError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -87,34 +87,35 @@ class _$UpdateStateCopyWithImpl<$Res, $Val extends UpdateState>
 }
 
 /// @nodoc
-abstract class _$$_InitialCopyWith<$Res> {
-  factory _$$_InitialCopyWith(
-          _$_Initial value, $Res Function(_$_Initial) then) =
-      __$$_InitialCopyWithImpl<$Res>;
+abstract class _$$_UpdateInitialCopyWith<$Res> {
+  factory _$$_UpdateInitialCopyWith(
+          _$_UpdateInitial value, $Res Function(_$_UpdateInitial) then) =
+      __$$_UpdateInitialCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_InitialCopyWithImpl<$Res>
-    extends _$UpdateStateCopyWithImpl<$Res, _$_Initial>
-    implements _$$_InitialCopyWith<$Res> {
-  __$$_InitialCopyWithImpl(_$_Initial _value, $Res Function(_$_Initial) _then)
+class __$$_UpdateInitialCopyWithImpl<$Res>
+    extends _$UpdateStateCopyWithImpl<$Res, _$_UpdateInitial>
+    implements _$$_UpdateInitialCopyWith<$Res> {
+  __$$_UpdateInitialCopyWithImpl(
+      _$_UpdateInitial _value, $Res Function(_$_UpdateInitial) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Initial implements _Initial {
-  const _$_Initial();
+class _$_UpdateInitial implements _UpdateInitial {
+  const _$_UpdateInitial();
 
   @override
   String toString() {
-    return 'UpdateState.initial()';
+    return 'UpdateState.updateInitial()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initial);
+        (other.runtimeType == runtimeType && other is _$_UpdateInitial);
   }
 
   @override
@@ -123,36 +124,36 @@ class _$_Initial implements _Initial {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(UserEntity user) loaded,
-    required TResult Function(String error) error,
+    required TResult Function() updateInitial,
+    required TResult Function() updateLoading,
+    required TResult Function() updateLoaded,
+    required TResult Function(String error) updateError,
   }) {
-    return initial();
+    return updateInitial();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(UserEntity user)? loaded,
-    TResult? Function(String error)? error,
+    TResult? Function()? updateInitial,
+    TResult? Function()? updateLoading,
+    TResult? Function()? updateLoaded,
+    TResult? Function(String error)? updateError,
   }) {
-    return initial?.call();
+    return updateInitial?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(UserEntity user)? loaded,
-    TResult Function(String error)? error,
+    TResult Function()? updateInitial,
+    TResult Function()? updateLoading,
+    TResult Function()? updateLoaded,
+    TResult Function(String error)? updateError,
     required TResult orElse(),
   }) {
-    if (initial != null) {
-      return initial();
+    if (updateInitial != null) {
+      return updateInitial();
     }
     return orElse();
   }
@@ -160,74 +161,75 @@ class _$_Initial implements _Initial {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Loaded value) loaded,
-    required TResult Function(_Error value) error,
+    required TResult Function(_UpdateInitial value) updateInitial,
+    required TResult Function(_UpdateLoading value) updateLoading,
+    required TResult Function(_UpdateLoaded value) updateLoaded,
+    required TResult Function(_UpdateError value) updateError,
   }) {
-    return initial(this);
+    return updateInitial(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Loaded value)? loaded,
-    TResult? Function(_Error value)? error,
+    TResult? Function(_UpdateInitial value)? updateInitial,
+    TResult? Function(_UpdateLoading value)? updateLoading,
+    TResult? Function(_UpdateLoaded value)? updateLoaded,
+    TResult? Function(_UpdateError value)? updateError,
   }) {
-    return initial?.call(this);
+    return updateInitial?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
-    TResult Function(_Error value)? error,
+    TResult Function(_UpdateInitial value)? updateInitial,
+    TResult Function(_UpdateLoading value)? updateLoading,
+    TResult Function(_UpdateLoaded value)? updateLoaded,
+    TResult Function(_UpdateError value)? updateError,
     required TResult orElse(),
   }) {
-    if (initial != null) {
-      return initial(this);
+    if (updateInitial != null) {
+      return updateInitial(this);
     }
     return orElse();
   }
 }
 
-abstract class _Initial implements UpdateState {
-  const factory _Initial() = _$_Initial;
+abstract class _UpdateInitial implements UpdateState {
+  const factory _UpdateInitial() = _$_UpdateInitial;
 }
 
 /// @nodoc
-abstract class _$$_LoadingCopyWith<$Res> {
-  factory _$$_LoadingCopyWith(
-          _$_Loading value, $Res Function(_$_Loading) then) =
-      __$$_LoadingCopyWithImpl<$Res>;
+abstract class _$$_UpdateLoadingCopyWith<$Res> {
+  factory _$$_UpdateLoadingCopyWith(
+          _$_UpdateLoading value, $Res Function(_$_UpdateLoading) then) =
+      __$$_UpdateLoadingCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_LoadingCopyWithImpl<$Res>
-    extends _$UpdateStateCopyWithImpl<$Res, _$_Loading>
-    implements _$$_LoadingCopyWith<$Res> {
-  __$$_LoadingCopyWithImpl(_$_Loading _value, $Res Function(_$_Loading) _then)
+class __$$_UpdateLoadingCopyWithImpl<$Res>
+    extends _$UpdateStateCopyWithImpl<$Res, _$_UpdateLoading>
+    implements _$$_UpdateLoadingCopyWith<$Res> {
+  __$$_UpdateLoadingCopyWithImpl(
+      _$_UpdateLoading _value, $Res Function(_$_UpdateLoading) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Loading implements _Loading {
-  const _$_Loading();
+class _$_UpdateLoading implements _UpdateLoading {
+  const _$_UpdateLoading();
 
   @override
   String toString() {
-    return 'UpdateState.loading()';
+    return 'UpdateState.updateLoading()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Loading);
+        (other.runtimeType == runtimeType && other is _$_UpdateLoading);
   }
 
   @override
@@ -236,36 +238,36 @@ class _$_Loading implements _Loading {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(UserEntity user) loaded,
-    required TResult Function(String error) error,
+    required TResult Function() updateInitial,
+    required TResult Function() updateLoading,
+    required TResult Function() updateLoaded,
+    required TResult Function(String error) updateError,
   }) {
-    return loading();
+    return updateLoading();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(UserEntity user)? loaded,
-    TResult? Function(String error)? error,
+    TResult? Function()? updateInitial,
+    TResult? Function()? updateLoading,
+    TResult? Function()? updateLoaded,
+    TResult? Function(String error)? updateError,
   }) {
-    return loading?.call();
+    return updateLoading?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(UserEntity user)? loaded,
-    TResult Function(String error)? error,
+    TResult Function()? updateInitial,
+    TResult Function()? updateLoading,
+    TResult Function()? updateLoaded,
+    TResult Function(String error)? updateError,
     required TResult orElse(),
   }) {
-    if (loading != null) {
-      return loading();
+    if (updateLoading != null) {
+      return updateLoading();
     }
     return orElse();
   }
@@ -273,137 +275,113 @@ class _$_Loading implements _Loading {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Loaded value) loaded,
-    required TResult Function(_Error value) error,
+    required TResult Function(_UpdateInitial value) updateInitial,
+    required TResult Function(_UpdateLoading value) updateLoading,
+    required TResult Function(_UpdateLoaded value) updateLoaded,
+    required TResult Function(_UpdateError value) updateError,
   }) {
-    return loading(this);
+    return updateLoading(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Loaded value)? loaded,
-    TResult? Function(_Error value)? error,
+    TResult? Function(_UpdateInitial value)? updateInitial,
+    TResult? Function(_UpdateLoading value)? updateLoading,
+    TResult? Function(_UpdateLoaded value)? updateLoaded,
+    TResult? Function(_UpdateError value)? updateError,
   }) {
-    return loading?.call(this);
+    return updateLoading?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
-    TResult Function(_Error value)? error,
+    TResult Function(_UpdateInitial value)? updateInitial,
+    TResult Function(_UpdateLoading value)? updateLoading,
+    TResult Function(_UpdateLoaded value)? updateLoaded,
+    TResult Function(_UpdateError value)? updateError,
     required TResult orElse(),
   }) {
-    if (loading != null) {
-      return loading(this);
+    if (updateLoading != null) {
+      return updateLoading(this);
     }
     return orElse();
   }
 }
 
-abstract class _Loading implements UpdateState {
-  const factory _Loading() = _$_Loading;
+abstract class _UpdateLoading implements UpdateState {
+  const factory _UpdateLoading() = _$_UpdateLoading;
 }
 
 /// @nodoc
-abstract class _$$_LoadedCopyWith<$Res> {
-  factory _$$_LoadedCopyWith(_$_Loaded value, $Res Function(_$_Loaded) then) =
-      __$$_LoadedCopyWithImpl<$Res>;
-  @useResult
-  $Res call({UserEntity user});
+abstract class _$$_UpdateLoadedCopyWith<$Res> {
+  factory _$$_UpdateLoadedCopyWith(
+          _$_UpdateLoaded value, $Res Function(_$_UpdateLoaded) then) =
+      __$$_UpdateLoadedCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_LoadedCopyWithImpl<$Res>
-    extends _$UpdateStateCopyWithImpl<$Res, _$_Loaded>
-    implements _$$_LoadedCopyWith<$Res> {
-  __$$_LoadedCopyWithImpl(_$_Loaded _value, $Res Function(_$_Loaded) _then)
+class __$$_UpdateLoadedCopyWithImpl<$Res>
+    extends _$UpdateStateCopyWithImpl<$Res, _$_UpdateLoaded>
+    implements _$$_UpdateLoadedCopyWith<$Res> {
+  __$$_UpdateLoadedCopyWithImpl(
+      _$_UpdateLoaded _value, $Res Function(_$_UpdateLoaded) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? user = null,
-  }) {
-    return _then(_$_Loaded(
-      null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as UserEntity,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$_Loaded implements _Loaded {
-  const _$_Loaded(this.user);
-
-  @override
-  final UserEntity user;
+class _$_UpdateLoaded implements _UpdateLoaded {
+  const _$_UpdateLoaded();
 
   @override
   String toString() {
-    return 'UpdateState.loaded(user: $user)';
+    return 'UpdateState.updateLoaded()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_Loaded &&
-            (identical(other.user, user) || other.user == user));
+        (other.runtimeType == runtimeType && other is _$_UpdateLoaded);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, user);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_LoadedCopyWith<_$_Loaded> get copyWith =>
-      __$$_LoadedCopyWithImpl<_$_Loaded>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(UserEntity user) loaded,
-    required TResult Function(String error) error,
+    required TResult Function() updateInitial,
+    required TResult Function() updateLoading,
+    required TResult Function() updateLoaded,
+    required TResult Function(String error) updateError,
   }) {
-    return loaded(user);
+    return updateLoaded();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(UserEntity user)? loaded,
-    TResult? Function(String error)? error,
+    TResult? Function()? updateInitial,
+    TResult? Function()? updateLoading,
+    TResult? Function()? updateLoaded,
+    TResult? Function(String error)? updateError,
   }) {
-    return loaded?.call(user);
+    return updateLoaded?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(UserEntity user)? loaded,
-    TResult Function(String error)? error,
+    TResult Function()? updateInitial,
+    TResult Function()? updateLoading,
+    TResult Function()? updateLoaded,
+    TResult Function(String error)? updateError,
     required TResult orElse(),
   }) {
-    if (loaded != null) {
-      return loaded(user);
+    if (updateLoaded != null) {
+      return updateLoaded();
     }
     return orElse();
   }
@@ -411,63 +389,60 @@ class _$_Loaded implements _Loaded {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Loaded value) loaded,
-    required TResult Function(_Error value) error,
+    required TResult Function(_UpdateInitial value) updateInitial,
+    required TResult Function(_UpdateLoading value) updateLoading,
+    required TResult Function(_UpdateLoaded value) updateLoaded,
+    required TResult Function(_UpdateError value) updateError,
   }) {
-    return loaded(this);
+    return updateLoaded(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Loaded value)? loaded,
-    TResult? Function(_Error value)? error,
+    TResult? Function(_UpdateInitial value)? updateInitial,
+    TResult? Function(_UpdateLoading value)? updateLoading,
+    TResult? Function(_UpdateLoaded value)? updateLoaded,
+    TResult? Function(_UpdateError value)? updateError,
   }) {
-    return loaded?.call(this);
+    return updateLoaded?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
-    TResult Function(_Error value)? error,
+    TResult Function(_UpdateInitial value)? updateInitial,
+    TResult Function(_UpdateLoading value)? updateLoading,
+    TResult Function(_UpdateLoaded value)? updateLoaded,
+    TResult Function(_UpdateError value)? updateError,
     required TResult orElse(),
   }) {
-    if (loaded != null) {
-      return loaded(this);
+    if (updateLoaded != null) {
+      return updateLoaded(this);
     }
     return orElse();
   }
 }
 
-abstract class _Loaded implements UpdateState {
-  const factory _Loaded(final UserEntity user) = _$_Loaded;
-
-  UserEntity get user;
-  @JsonKey(ignore: true)
-  _$$_LoadedCopyWith<_$_Loaded> get copyWith =>
-      throw _privateConstructorUsedError;
+abstract class _UpdateLoaded implements UpdateState {
+  const factory _UpdateLoaded() = _$_UpdateLoaded;
 }
 
 /// @nodoc
-abstract class _$$_ErrorCopyWith<$Res> {
-  factory _$$_ErrorCopyWith(_$_Error value, $Res Function(_$_Error) then) =
-      __$$_ErrorCopyWithImpl<$Res>;
+abstract class _$$_UpdateErrorCopyWith<$Res> {
+  factory _$$_UpdateErrorCopyWith(
+          _$_UpdateError value, $Res Function(_$_UpdateError) then) =
+      __$$_UpdateErrorCopyWithImpl<$Res>;
   @useResult
   $Res call({String error});
 }
 
 /// @nodoc
-class __$$_ErrorCopyWithImpl<$Res>
-    extends _$UpdateStateCopyWithImpl<$Res, _$_Error>
-    implements _$$_ErrorCopyWith<$Res> {
-  __$$_ErrorCopyWithImpl(_$_Error _value, $Res Function(_$_Error) _then)
+class __$$_UpdateErrorCopyWithImpl<$Res>
+    extends _$UpdateStateCopyWithImpl<$Res, _$_UpdateError>
+    implements _$$_UpdateErrorCopyWith<$Res> {
+  __$$_UpdateErrorCopyWithImpl(
+      _$_UpdateError _value, $Res Function(_$_UpdateError) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -475,7 +450,7 @@ class __$$_ErrorCopyWithImpl<$Res>
   $Res call({
     Object? error = null,
   }) {
-    return _then(_$_Error(
+    return _then(_$_UpdateError(
       null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -486,22 +461,22 @@ class __$$_ErrorCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Error implements _Error {
-  const _$_Error(this.error);
+class _$_UpdateError implements _UpdateError {
+  const _$_UpdateError(this.error);
 
   @override
   final String error;
 
   @override
   String toString() {
-    return 'UpdateState.error(error: $error)';
+    return 'UpdateState.updateError(error: $error)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Error &&
+            other is _$_UpdateError &&
             (identical(other.error, error) || other.error == error));
   }
 
@@ -511,42 +486,42 @@ class _$_Error implements _Error {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ErrorCopyWith<_$_Error> get copyWith =>
-      __$$_ErrorCopyWithImpl<_$_Error>(this, _$identity);
+  _$$_UpdateErrorCopyWith<_$_UpdateError> get copyWith =>
+      __$$_UpdateErrorCopyWithImpl<_$_UpdateError>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(UserEntity user) loaded,
-    required TResult Function(String error) error,
+    required TResult Function() updateInitial,
+    required TResult Function() updateLoading,
+    required TResult Function() updateLoaded,
+    required TResult Function(String error) updateError,
   }) {
-    return error(this.error);
+    return updateError(error);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(UserEntity user)? loaded,
-    TResult? Function(String error)? error,
+    TResult? Function()? updateInitial,
+    TResult? Function()? updateLoading,
+    TResult? Function()? updateLoaded,
+    TResult? Function(String error)? updateError,
   }) {
-    return error?.call(this.error);
+    return updateError?.call(error);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(UserEntity user)? loaded,
-    TResult Function(String error)? error,
+    TResult Function()? updateInitial,
+    TResult Function()? updateLoading,
+    TResult Function()? updateLoaded,
+    TResult Function(String error)? updateError,
     required TResult orElse(),
   }) {
-    if (error != null) {
-      return error(this.error);
+    if (updateError != null) {
+      return updateError(error);
     }
     return orElse();
   }
@@ -554,46 +529,46 @@ class _$_Error implements _Error {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Loaded value) loaded,
-    required TResult Function(_Error value) error,
+    required TResult Function(_UpdateInitial value) updateInitial,
+    required TResult Function(_UpdateLoading value) updateLoading,
+    required TResult Function(_UpdateLoaded value) updateLoaded,
+    required TResult Function(_UpdateError value) updateError,
   }) {
-    return error(this);
+    return updateError(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Loaded value)? loaded,
-    TResult? Function(_Error value)? error,
+    TResult? Function(_UpdateInitial value)? updateInitial,
+    TResult? Function(_UpdateLoading value)? updateLoading,
+    TResult? Function(_UpdateLoaded value)? updateLoaded,
+    TResult? Function(_UpdateError value)? updateError,
   }) {
-    return error?.call(this);
+    return updateError?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
-    TResult Function(_Error value)? error,
+    TResult Function(_UpdateInitial value)? updateInitial,
+    TResult Function(_UpdateLoading value)? updateLoading,
+    TResult Function(_UpdateLoaded value)? updateLoaded,
+    TResult Function(_UpdateError value)? updateError,
     required TResult orElse(),
   }) {
-    if (error != null) {
-      return error(this);
+    if (updateError != null) {
+      return updateError(this);
     }
     return orElse();
   }
 }
 
-abstract class _Error implements UpdateState {
-  const factory _Error(final String error) = _$_Error;
+abstract class _UpdateError implements UpdateState {
+  const factory _UpdateError(final String error) = _$_UpdateError;
 
   String get error;
   @JsonKey(ignore: true)
-  _$$_ErrorCopyWith<_$_Error> get copyWith =>
+  _$$_UpdateErrorCopyWith<_$_UpdateError> get copyWith =>
       throw _privateConstructorUsedError;
 }

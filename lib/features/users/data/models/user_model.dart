@@ -2,8 +2,13 @@ import '../../domain/entities/user_entity.dart';
 
 class UserModel extends UserEntity {
   const UserModel(
-      {String? name, String? email, String? department, String? password})
+      {required String id,
+      required String name,
+      required String email,
+      required String department,
+      required String password})
       : super(
+            id: id,
             password: password,
             name: name,
             email: email,
@@ -11,6 +16,7 @@ class UserModel extends UserEntity {
 
   Map<String, dynamic> toJson() {
     return {
+      'id': id,
       'name': name,
       'password': password,
       'email': email,
@@ -20,23 +26,25 @@ class UserModel extends UserEntity {
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
-        name: json['name'] == null ? null : json['name'] as String,
-        password: json['password'] == null ? null : json['password'] as String,
-        email: json['email'] == null ? null : json['email'] as String,
-        department:
-            json['department'] == null ? null : json['department'] as String);
+        id: json['id'] as String,
+        name: json['name'] as String,
+        password: json['password'] as String,
+        email: json['email'] as String,
+        department: json['department'] as String);
   }
   UserModel copyWith({
-    String? name,
-    String? password,
-    String? email,
-    String? department,
+    required String id,
+    required String name,
+    required String password,
+    required String email,
+    required String department,
   }) {
     return UserModel(
-      name: name ?? this.name,
-      password: password ?? this.password,
-      email: email ?? this.email,
-      department: department ?? this.department,
+      id: id,
+      name: name,
+      password: password,
+      email: email,
+      department: department,
     );
   }
 }

@@ -6,6 +6,7 @@ import 'core/network/internet_checker.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await di.init();
+  di.setupLocator();
   runApp(const MyApp());
 }
 
