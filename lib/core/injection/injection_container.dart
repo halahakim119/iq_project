@@ -1,12 +1,12 @@
 import 'package:get_it/get_it.dart';
 
-import '../../features/users/data/datasource/user_data_source.dart';
-import '../../features/users/data/repositories/user_repository_impl.dart';
-import '../../features/users/domain/repositories/user_repository.dart';
-import '../../features/users/domain/usecases/get_user_usecase.dart';
-import '../../features/users/domain/usecases/update_user_usecase.dart';
-import '../../features/users/presentation/logic/cubit/update_cubit.dart';
-import '../../features/users/presentation/logic/cubit/user_cubit.dart';
+import '../../features/profile/data/datasource/user_data_source.dart';
+import '../../features/profile/data/repositories/user_repository_impl.dart';
+import '../../features/profile/domain/repositories/user_repository.dart';
+import '../../features/profile/domain/usecases/get_user_usecase.dart';
+import '../../features/profile/domain/usecases/update_user_usecase.dart';
+import '../../features/profile/presentation/logic/cubit/update_cubit.dart';
+import '../../features/profile/presentation/logic/cubit/user_cubit.dart';
 
 final sl = GetIt.instance;
 

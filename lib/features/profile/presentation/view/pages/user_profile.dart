@@ -35,9 +35,7 @@ class UserProfile extends StatelessWidget {
                       MaterialPageRoute(
                           builder: (context) => EditProfilePage(
                                 user: data,
-                              )
-                          // EditProfile(userEntity: data),
-                          ),
+                              )),
                     );
                   },
                   child: const Icon(Icons.edit),

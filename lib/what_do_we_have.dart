@@ -4,8 +4,9 @@ import 'package:unicons/unicons.dart';
 
 import 'core/theme/app_layout.dart';
 import 'features/auth/auth_screen.dart';
-import 'features/users/presentation/view/pages/user_profile.dart';
 import 'features/schedule/daily/home.dart';
+import 'features/profile/presentation/view/pages/profile_screen.dart';
+import 'features/profile/presentation/view/pages/user_profile.dart';
 
 class WhatDoWeHave extends StatelessWidget {
   const WhatDoWeHave({super.key});
@@ -48,7 +49,7 @@ class WhatDoWeHave extends StatelessWidget {
                   itemLabel: 'menu'),
             ],
             color: const Color.fromARGB(255, 119, 29, 22),
-            screens: [Home(), Home(), UserProfile()],
+            screens: [ProfileScreen(), Home(), UserProfile()],
           )
         : const AuthScreen();
   }

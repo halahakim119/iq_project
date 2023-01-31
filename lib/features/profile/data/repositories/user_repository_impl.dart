@@ -25,7 +25,6 @@ class UserRepositoryImpl implements UserRepository {
   @override
   Future<Either<Failure, Unit>> updateUser(UserEntity user) async {
     final UserModel userModel = UserModel(
-      id: user.id,
       name: user.name,
       email: user.email,
       password: user.password,

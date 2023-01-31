@@ -4,6 +4,7 @@ import 'dart:developer' as developer;
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:iq_project/core/splash/loading_splash.dart';
 
 import '../../what_do_we_have.dart';
 import '../splash/no_internet_splash.dart';
@@ -66,8 +67,12 @@ class _InternetCheckerState extends State<InternetChecker> {
 
   @override
   Widget build(BuildContext context) {
-    return _connectionStatus == ConnectivityResult.wifi
-        ? const WhatDoWeHave()
-        : const NoInternetSplash();
+    return FutureBuilder(
+        future: Future.delayed(const Duration(seconds: 3)),
+        builder: (ctx, timer) => timer.connectionState == ConnectionState.done
+            ? _connectionStatus == ConnectivityResult.wifi
+                ? const WhatDoWeHave()
+                : const NoInternetSplash()
+            : const LoadingSplash());
   }
 }

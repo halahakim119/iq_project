@@ -29,17 +29,17 @@ class _EditProfilePageState extends State<EditProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:const Text("Edit Profile"),
+        title: const Text("Edit Profile"),
       ),
       body: Padding(
-        padding:const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Form(
           key: _formKey,
           child: Column(
             children: <Widget>[
               TextFormField(
                 controller: _usernameController..text = widget.user.name,
-                decoration:const InputDecoration(labelText: "Username"),
+                decoration: const InputDecoration(labelText: "Username"),
                 validator: (value) {
                   if (value!.isEmpty) {
                     return "Username can't be empty";
@@ -71,7 +71,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     UserEntity updatedUser = UserEntity(
-                        id: _usernameController.text,
                         name: _usernameController.text,
                         email: _emailController.text,
                         password: _passwordController.text,
@@ -84,7 +83,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     );
                   }
                 },
-                child: Text("Update"),
+                child: const Text("Update"),
               ),
             ],
           ),
