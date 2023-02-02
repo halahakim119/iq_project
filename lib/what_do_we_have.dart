@@ -4,12 +4,15 @@ import 'package:unicons/unicons.dart';
 
 import 'core/theme/app_layout.dart';
 import 'features/auth/auth_screen.dart';
-import 'features/schedule/daily/home.dart';
 import 'features/profile/presentation/view/pages/profile_screen.dart';
-import 'features/profile/presentation/view/pages/user_profile.dart';
+import 'features/schedule/daily/home.dart';
 
 class WhatDoWeHave extends StatelessWidget {
-  const WhatDoWeHave({super.key});
+  int? pageNum;
+  WhatDoWeHave({
+    this.pageNum,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -38,18 +41,20 @@ class WhatDoWeHave extends StatelessWidget {
                   ),
                   itemLabel: 'order'),
               BottomBarItem(
-                  activeItem: Icon(
-                    UniconsLine.user,
-                    color: Colors.white,
-                  ),
-                  inActiveItem: Icon(
-                    UniconsLine.user,
-                    color: Color.fromARGB(255, 119, 29, 22),
-                  ),
-                  itemLabel: 'menu'),
+                activeItem: Icon(
+                  UniconsLine.user,
+                  color: Colors.white,
+                ),
+                inActiveItem: Icon(
+                  UniconsLine.user,
+                  color: Color.fromARGB(255, 119, 29, 22),
+                ),
+                itemLabel: 'menu',
+              ),
             ],
+            pageNum: pageNum ?? 1,
             color: const Color.fromARGB(255, 119, 29, 22),
-            screens: [ProfileScreen(), Home(), UserProfile()],
+            screens: const [ProfileScreen(), Home(), ProfileScreen()],
           )
         : const AuthScreen();
   }

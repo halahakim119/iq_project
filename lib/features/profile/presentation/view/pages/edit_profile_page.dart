@@ -28,44 +28,64 @@ class _EditProfilePageState extends State<EditProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: const Text("Edit Profile"),
+        leading: const BackButton(
+          color: Colors.white,
+        ),
+        centerTitle: true,
+        backgroundColor: const Color.fromARGB(255, 119, 29, 22),
+        title: const Text(
+          "LUNCH2HQ",
+          style: TextStyle(color: Colors.white),
+        ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
+      body: SingleChildScrollView(
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 30.0),
+          height: MediaQuery.of(context).size.height,
           child: Column(
-            children: <Widget>[
-              TextFormField(
-                controller: _usernameController..text = widget.user.name,
-                decoration: const InputDecoration(labelText: "Username"),
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return "Username can't be empty";
-                  }
-                  return null;
-                },
-              ),
-              TextFormField(
-                controller: _emailController..text = widget.user.email,
-                decoration: const InputDecoration(labelText: "Email"),
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return "Email can't be empty";
-                  }
-                  return null;
-                },
-              ),
-              TextFormField(
-                controller: _passwordController..text = widget.user.password,
-                decoration: const InputDecoration(labelText: "Password"),
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return "Password can't be empty";
-                  }
-                  return null;
-                },
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              const Text('Edit Your Profile',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
+              Form(
+                key: _formKey,
+                child: Column(
+                  children: <Widget>[
+                    TextFormField(
+                      controller: _usernameController..text = widget.user.name,
+                      decoration: const InputDecoration(labelText: "Username"),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Username can't be empty";
+                        }
+                        return null;
+                      },
+                    ),
+                    TextFormField(
+                      controller: _emailController..text = widget.user.email,
+                      decoration: const InputDecoration(labelText: "Email"),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Email can't be empty";
+                        }
+                        return null;
+                      },
+                    ),
+                    TextFormField(
+                      controller: _passwordController
+                        ..text = widget.user.password,
+                      decoration: const InputDecoration(labelText: "Password"),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Password can't be empty";
+                        }
+                        return null;
+                      },
+                    ),
+                  ],
+                ),
               ),
               ElevatedButton(
                 onPressed: () {
@@ -75,9 +95,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         email: _emailController.text,
                         password: _passwordController.text,
                         department: widget.user.department);
+
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) =>
+                        builder: (BuildContext context) =>
                             EditProfile(userEntity: updatedUser),
                       ),
                     );

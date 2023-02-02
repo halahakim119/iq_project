@@ -71,7 +71,7 @@ class _InternetCheckerState extends State<InternetChecker> {
         future: Future.delayed(const Duration(seconds: 3)),
         builder: (ctx, timer) => timer.connectionState == ConnectionState.done
             ? _connectionStatus == ConnectivityResult.wifi
-                ? const WhatDoWeHave()
+                ?  WhatDoWeHave()
                 : const NoInternetSplash()
             : const LoadingSplash());
   }

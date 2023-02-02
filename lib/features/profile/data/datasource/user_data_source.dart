@@ -47,7 +47,8 @@ class UserDataSourceImpl implements UserDataSource {
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonEncode(<String, String>{
-        'name': userModel.name,
+        'first_name': userModel.name,
+        'email': 'janet.weaver@reqres.in',
       }),
     );
 

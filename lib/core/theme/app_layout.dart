@@ -4,27 +4,25 @@ import 'package:flutter/material.dart';
 class AppLayout extends StatefulWidget {
   List<Widget> screens;
   Color color;
-
+  int pageNum;
   List<BottomBarItem> bottomBarItems;
 
   AppLayout(
       {super.key,
       required this.screens,
       required this.color,
-      required this.bottomBarItems});
+      required this.bottomBarItems,
+      required this.pageNum});
 
   @override
   State<AppLayout> createState() => _AppLayoutState();
 }
 
 class _AppLayoutState extends State<AppLayout> {
-  final _pageController = PageController(initialPage: 1);
-
   int maxCount = 3;
 
   @override
   void dispose() {
-    _pageController.dispose();
     super.dispose();
   }
 
@@ -35,14 +33,14 @@ class _AppLayoutState extends State<AppLayout> {
 
   @override
   Widget build(BuildContext context) {
+    final _pageController = PageController(initialPage: widget.pageNum);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: widget.color,
         centerTitle: true,
         title: const Text(
           'What Do We Have?',
-          style: TextStyle(fontSize: 16,color: Colors.white)
-          ,
+          style: TextStyle(fontSize: 16, color: Colors.white),
         ),
       ),
       body: PageView(
@@ -51,6 +49,7 @@ class _AppLayoutState extends State<AppLayout> {
         children: List.generate(
             widget.screens.length, (index) => widget.screens[index]),
       ),
+      extendBodyBehindAppBar: false,
       extendBody: true,
       bottomNavigationBar: (widget.screens.length <= maxCount)
           ? AnimatedNotchBottomBar(

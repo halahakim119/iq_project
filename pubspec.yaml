@@ -45,6 +45,7 @@ dependencies:
   json_annotation:
   dio:
   bloc: ^7.2.0
+  
  
   
 
