@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:dartz/dartz.dart';
 
-import '../../../../core/error/exception.dart';
 import '../../../../core/error/failure.dart';
 import '../../domain/entities/user_entity.dart';
 import '../../domain/repositories/user_repository.dart';
@@ -20,21 +19,5 @@ class UserRepositoryImpl implements UserRepository {
       final UserModel data = UserModel.fromJson(user);
       return Right(data);
     });
-  }
-
-  @override
-  Future<Either<Failure, Unit>> updateUser(UserEntity user) async {
-    final UserModel userModel = UserModel(
-      name: user.name,
-      email: user.email,
-      password: user.password,
-      department: user.department,
-    );
-    try {
-      await userDataSource.updateUser(userModel);
-      return const Right(unit);
-    } on ServerException {
-      return Left(ServerFailure());
-    }
   }
 }

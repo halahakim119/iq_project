@@ -1,15 +1,11 @@
 import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
-import 'package:http/http.dart' as http;
 
-import '../../../../core/error/exception.dart';
 import '../../../../core/error/failure.dart';
-import '../models/user_model.dart';
 
 abstract class UserDataSource {
   Future<Either<Failure, Map<String, dynamic>>> getUserData();
-  Future<Unit> updateUser(UserModel userModel);
 }
 
 class UserDataSourceImpl implements UserDataSource {
@@ -37,41 +33,5 @@ class UserDataSourceImpl implements UserDataSource {
     // } else {
     //   return Left(ServerFailure());
     // }
-  }
-
-  @override
-  Future<Unit> updateUser(UserModel userModel) async {
-    final response = await http.put(
-      Uri.parse('https://reqres.in/api/users/2'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(<String, String>{
-        'first_name': userModel.name,
-        'email': 'janet.weaver@reqres.in',
-      }),
-    );
-
-    // final prefs = await SharedPreferences.getInstance();
-    // final token = prefs.getString('token');
-    // final id = prefs.getString('id');
-
-    // final headers = {
-    //   'Content-Type': 'application/json',
-    //   'Authorization': 'Bearer $token',
-    //   'ID': 'Bearer $id',
-    // };
-
-    // final response = await http.put(
-    //   Uri.parse('<API_END_POINT>'),
-    //   headers: headers,
-    //   body: json.encode(userModel.toJson()),
-    // );
-
-    if (response.statusCode >= 200 && response.statusCode < 300) {
-      return unit;
-    } else {
-      throw ServerException();
-    }
   }
 }
