@@ -1,18 +1,16 @@
 import 'package:animated_notch_bottom_bar/animated_notch_bottom_bar/animated_notch_bottom_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:unicons/unicons.dart';
+
+import '../../features/profile/presentation/view/pages/profile_screen.dart';
+import '../../features/schedule/daily/home.dart';
 
 class AppLayout extends StatefulWidget {
-  List<Widget> screens;
-  Color color;
+  List<Widget> screens = const [ProfileScreen(), Home(), ProfileScreen()];
+  Color color = Color.fromARGB(255, 119, 29, 22);
   int pageNum;
-  List<BottomBarItem> bottomBarItems;
 
-  AppLayout(
-      {super.key,
-      required this.screens,
-      required this.color,
-      required this.bottomBarItems,
-      required this.pageNum});
+  AppLayout({super.key, required this.pageNum});
 
   @override
   State<AppLayout> createState() => _AppLayoutState();
@@ -57,12 +55,45 @@ class _AppLayoutState extends State<AppLayout> {
               color: Colors.white,
               showLabel: false,
               notchColor: widget.color,
-              bottomBarItems: widget.bottomBarItems,
+              bottomBarItems: const [
+                BottomBarItem(
+                    activeItem: Icon(
+                      UniconsLine.calendar_alt,
+                      color: Colors.white,
+                    ),
+                    inActiveItem: Icon(
+                      UniconsLine.calendar_alt,
+                      color: Color.fromARGB(255, 119, 29, 22),
+                    ),
+                    itemLabel: 'schedule'),
+                BottomBarItem(
+                    activeItem: Icon(
+                      UniconsLine.restaurant,
+                      color: Colors.white,
+                    ),
+                    inActiveItem: Icon(
+                      UniconsLine.restaurant,
+                      color: Color.fromARGB(255, 119, 29, 22),
+                    ),
+                    itemLabel: 'order'),
+                BottomBarItem(
+                  activeItem: Icon(
+                    UniconsLine.user,
+                    color: Colors.white,
+                  ),
+                  inActiveItem: Icon(
+                    UniconsLine.user,
+                    color: Color.fromARGB(255, 119, 29, 22),
+                  ),
+                  itemLabel: 'menu',
+                ),
+              ],
               onTap: (index) {
                 _pageController.animateToPage(
                   index,
                   duration: const Duration(milliseconds: 250),
                   curve: Curves.easeIn,
+                  
                 );
               },
             )
