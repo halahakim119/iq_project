@@ -3,10 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:unicons/unicons.dart';
 
 import '../../features/profile/presentation/view/pages/profile_screen.dart';
-import '../../features/schedule/daily/home.dart';
+import '../../features/schedule/presentation/view/pages/schedule_screen.dart';
 
 class AppLayout extends StatefulWidget {
-  List<Widget> screens = const [ProfileScreen(), Home(), ProfileScreen()];
+  List<Widget> screens = [
+    ScheduleScreen(dailyOrWeekly: "weekly"),
+    ScheduleScreen(dailyOrWeekly: "daily"),
+    ProfileScreen()
+  ];
   Color color = Color.fromARGB(255, 119, 29, 22);
   int pageNum;
 
@@ -93,7 +97,6 @@ class _AppLayoutState extends State<AppLayout> {
                   index,
                   duration: const Duration(milliseconds: 250),
                   curve: Curves.easeIn,
-                  
                 );
               },
             )
