@@ -2,17 +2,17 @@ import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
 
-import '../../../../../core/error/failure.dart';
+import '../../../../core/error/failure.dart';
 
 abstract class ScheduleDataSource {
   Future<Either<Failure, Map<String, dynamic>>> getSchedule();
 }
 
-class UserDataSourceImpl implements ScheduleDataSource {
+class ScheduleDataSourceImpl implements ScheduleDataSource {
   @override
   Future<Either<Failure, Map<String, dynamic>>> getSchedule() async {
     String schedule =
-        '{"sunday": {"ksc": ["rice and beans","fries"],"awbara": ["rice and chicken","salad"]},"monday": {"ksc": [],"awbara": []},"tuesday": {"ksc": [],"awbara": []},"wednesday": {"ksc": [],"awbara": []},"thursday": {"ksc": [],"awbara": []}}';
+        '{"sunday": {"ksc": ["sunday ksc rice and beans","fries","fries","fries"],"awbara": ["sunday ksc rice and beans"]},"monday": {"ksc": ["monday kscrice and beans","fries","fries"],"awbara": ["monday awbara rice and beans","fries","fries","fries"]},"tuesday": {"ksc": ["rice and beans","fries"],"awbara": ["rice and beans","fries"]},"wednesday": {"ksc": ["rice and beans","fries"],"awbara": ["rice and beans","fries"]},"thursday": {"ksc": ["rice and beans","fries"],"awbara": ["rice and beans","fries"]}}';
 
     final decodedJson = json.decode(schedule);
     print(decodedJson);

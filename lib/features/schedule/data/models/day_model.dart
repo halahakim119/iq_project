@@ -1,10 +1,10 @@
-import 'package:iq_project/features/schedule/daily/domain/entities/day_entity.dart';
+import '../../domain/entities/day_entity.dart';
 
 class DayModel extends DayEntity {
-  const DayModel({List<dynamic>? ksc, List<dynamic>? awbara})
+  const DayModel({List<String>? ksc, List<String>? awbara})
       : super(ksc: ksc, awbara: awbara);
-      
-  DayModel copyWith({List<dynamic>? ksc, List<dynamic>? awbara}) {
+
+  DayModel copyWith({List<String>? ksc, List<String>? awbara}) {
     return DayModel(ksc: ksc ?? this.ksc, awbara: awbara ?? this.awbara);
   }
 
@@ -14,8 +14,14 @@ class DayModel extends DayEntity {
 
   factory DayModel.fromJson(Map<String, Object?> json) {
     return DayModel(
-        ksc: json['ksc'] == null ? null : json['ksc'] as List<String>,
-        awbara: json['awbara'] == null ? null : json['awbara'] as List<String>);
+      ksc: json['ksc'] == null
+          ? null
+          : List<String>.from((json['ksc'] as List).map((x) => x.toString())),
+      awbara: json['awbara'] == null
+          ? null
+          : List<String>.from(
+              (json['awbara'] as List).map((x) => x.toString())),
+    );
   }
 
   @override

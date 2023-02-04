@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:iq_project/features/schedule/daily/domain/entities/day_entity.dart';
+import 'package:iq_project/features/schedule/domain/entities/day_entity.dart';
 
 class ScheduleEntity extends Equatable {
   final DayEntity? sunday;

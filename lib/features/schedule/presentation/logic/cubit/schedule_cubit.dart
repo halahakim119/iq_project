@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:iq_project/features/schedule/daily/domain/usecases/get_schedule_usecase.dart';
+import 'package:iq_project/features/schedule/domain/usecases/get_schedule_usecase.dart';
 
 import '../../../domain/entities/schedule_entity.dart';
 
