@@ -11,11 +11,153 @@ abstract class ScheduleDataSource {
 class ScheduleDataSourceImpl implements ScheduleDataSource {
   @override
   Future<Either<Failure, Map<String, dynamic>>> getSchedule() async {
-    String schedule =
-        '{"sunday": {"ksc": ["sunday ksc rice and beans","fries","fries","fries"],"awbara": ["sunday ksc rice and beans"]},"monday": {"ksc": ["monday kscrice and beans","fries","fries"],"awbara": ["monday awbara rice and beans","fries","fries","fries"]},"tuesday": {"ksc": ["rice and beans","fries"],"awbara": ["rice and beans","fries"]},"wednesday": {"ksc": ["rice and beans","fries"],"awbara": ["rice and beans","fries"]},"thursday": {"ksc": ["rice and beans","fries"],"awbara": ["rice and beans","fries"]}}';
-
+    String schedule = '''{
+    "sunday": {
+      "ksc": {
+        "id": 1,
+        "meals": [
+          {
+            "id": 1,
+            "meal": "1rice"
+          },
+          {
+            "id": 2,
+            "meal": "1salad"
+          }
+        ]
+      },
+      "awbara": {
+        "id": 2,
+        "meals": [
+          {
+            "id": 1,
+            "meal": "1rice + potatoes + salad"
+          },
+          {
+            "id": 2,
+            "meal": "1salad + potatoes + meat"
+          }
+        ]
+      }
+    },
+    "monday": {
+      "ksc": {
+        "id": 1,
+        "meals": [
+          {
+            "id": 1,
+            "meal": "2rice + potatoes + salad"
+          },
+          {
+            "id": 2,
+            "meal": "2salad + potatoes + meat"
+          }
+        ]
+      },
+      "awbara": {
+        "id": 2,
+        "meals": [
+          {
+            "id": 1,
+            "meal": "2rice + potatoes + salad"
+          },
+          {
+            "id": 2,
+            "meal": "2salad + potatoes + meat"
+          }
+        ]
+      }
+    },
+    "tuesday": {
+      "ksc": {
+        "id": 1,
+        "meals": [
+          {
+            "id": 1,
+            "meal": "3rice + potatoes + salad"
+          },
+          {
+            "id": 2,
+            "meal": "3salad + potatoes + meat"
+          }
+        ]
+      },
+      "awbara": {
+        "id": 2,
+        "meals": [
+          {
+            "id": 1,
+            "meal": "3rice + potatoes + salad"
+          },
+          {
+            "id": 2,
+            "meal": "3salad + potatoes + meat"
+          }
+        ]
+      }
+    },
+    "wednesday": {
+      "ksc": {
+        "id": 1,
+        "meals": [
+          {
+            "id": 1,
+            "meal": "4rice + potatoes + salad"
+          },
+          {
+            "id": 2,
+            "meal": "4salad + potatoes + meat"
+          }
+        ]
+      },
+      "awbara": {
+        "id": 2,
+        "meals": [
+          {
+            "id": 1,
+            "meal": "4rice"
+          },
+          {
+            "id": 2,
+            "meal": "4potatoes + meat"
+          }
+        ]
+      }
+    },
+    "thursday": {
+      "ksc": {
+        "id": 1,
+        "meals": [
+          {
+            "id": 1,
+            "meal": "5potatoes + salad"
+          },
+          {
+            "id": 2,
+            "meal": "5salad"
+          }
+        ]
+      },
+      "awbara": {
+        "id": 2,
+        "meals": [
+          {
+            "id": 1,
+            "meal": "5rice"
+          },
+          {
+            "id": 2,
+            "meal": "5potatoes + meat"
+          }
+        ]
+           }
+           
+           }    
+            }
+       
+''';
     final decodedJson = json.decode(schedule);
-    print(decodedJson);
+   
     return Right(decodedJson);
     //  final prefs = await SharedPreferences.getInstance();
     // final token = prefs.getString('token');

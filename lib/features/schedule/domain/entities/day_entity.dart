@@ -1,8 +1,10 @@
 import 'package:equatable/equatable.dart';
 
+import 'branch_entity.dart';
+
 class DayEntity extends Equatable {
-  final List<String>? ksc;
-  final List<String>? awbara;
+  final BranchEntity? ksc;
+  final BranchEntity? awbara;
   const DayEntity({this.ksc, this.awbara});
 
   @override

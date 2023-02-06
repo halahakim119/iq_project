@@ -1,11 +1,11 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:iq_project/features/schedule/domain/usecases/get_schedule_usecase.dart';
 
 import '../../../domain/entities/schedule_entity.dart';
+import '../../../domain/usecases/get_schedule_usecase.dart';
 
-part 'schedule_state.dart';
 part 'schedule_cubit.freezed.dart';
+part 'schedule_state.dart';
 
 class ScheduleCubit extends Cubit<ScheduleState> {
   final GetScheduleUsecase getData;

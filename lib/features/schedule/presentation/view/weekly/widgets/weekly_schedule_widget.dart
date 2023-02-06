@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 import '../../../../domain/entities/schedule_entity.dart';
-import '../widgets/awbara_container.dart';
 import '../widgets/day_button.dart';
-import '../widgets/ksc_container.dart';
+import 'weekly_awbara_container.dart';
+import 'weekly_ksc_container.dart';
 
 class WeeklySchedulaWidget extends StatefulWidget {
   ScheduleEntity schedule;
@@ -25,66 +25,75 @@ class _WeeklySchedulaWidgetState extends State<WeeklySchedulaWidget> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Container(
-            padding: const EdgeInsets.only(top: 5, bottom: 5),
-            width: MediaQuery.of(context).size.width * 0.9,
-            decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: const BorderRadius.all(Radius.circular(50))),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                DayButton(
-                  day: 'Sun',
-                  index: 0,
-                  selectedDay: selectedDay,
-                  onPressed: onPressed,
+      child: Align(
+        alignment: Alignment.center,
+        child: Container(
+          decoration: const BoxDecoration(
+              borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(50),
+                  bottomRight: Radius.circular(50),
+                  topLeft: Radius.circular(21),
+                  topRight: Radius.circular(21))),
+          width: MediaQuery.of(context).size.width * 0.9,
+          margin: const EdgeInsets.only(top: 20),
+          child: Column(
+            children: [
+              Container(
+              
+                height: 60,
+                width: double.infinity,
+                decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(Radius.circular(50))),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    DayButton(
+                      day: 'Sun',
+                      index: 0,
+                      selectedDay: selectedDay,
+                      onPressed: onPressed,
+                    ),
+                    DayButton(
+                      day: 'Mon',
+                      index: 1,
+                      selectedDay: selectedDay,
+                      onPressed: onPressed,
+                    ),
+                    DayButton(
+                      day: 'Tue',
+                      index: 2,
+                      selectedDay: selectedDay,
+                      onPressed: onPressed,
+                    ),
+                    DayButton(
+                      day: 'Wed',
+                      index: 3,
+                      selectedDay: selectedDay,
+                      onPressed: onPressed,
+                    ),
+                    DayButton(
+                      day: 'Thu',
+                      index: 4,
+                      selectedDay: selectedDay,
+                      onPressed: onPressed,
+                    ),
+                  ],
                 ),
-                DayButton(
-                  day: 'Mon',
-                  index: 1,
-                  selectedDay: selectedDay,
-                  onPressed: onPressed,
-                ),
-                DayButton(
-                  day: 'Tue',
-                  index: 2,
-                  selectedDay: selectedDay,
-                  onPressed: onPressed,
-                ),
-                DayButton(
-                  day: 'Wed',
-                  index: 3,
-                  selectedDay: selectedDay,
-                  onPressed: onPressed,
-                ),
-                DayButton(
-                  day: 'Thu',
-                  index: 4,
-                  selectedDay: selectedDay,
-                  onPressed: onPressed,
-                ),
-              ],
-            ),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              WeeklyKSCContainer(
+                  schedule: widget.schedule, selectedDay: selectedDay),
+              const SizedBox(
+                height: 15,
+              ),
+              WeeklyAwbaraContainer(
+                  schedule: widget.schedule, selectedDay: selectedDay),
+            ],
           ),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.03,
-          ),
-          KSCContainer(
-              selectedSchedule: "weekly",
-              schedule: widget.schedule,
-              selectedDay: selectedDay),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.02,
-          ),
-          AwbaraContainer(
-              selectedSchedule: "weekly",
-              schedule: widget.schedule,
-              selectedDay: selectedDay),
-        ],
+        ),
       ),
     );
   }

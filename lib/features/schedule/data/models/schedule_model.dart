@@ -17,17 +17,21 @@ class ScheduleModel extends ScheduleEntity {
             thursday: thursday);
 
   Map<String, Object?> toJson() {
-    DayModel? day;
+    DayModel? sunday;
+    DayModel? monday;
+    DayModel? tuesday;
+    DayModel? wednesday;
+    DayModel? thursday;
     return {
-      'sunday': day?.toJson(),
-      'monday': day?.toJson(),
-      'tuesday': day?.toJson(),
-      'wednesday': day?.toJson(),
-      'thursday': day?.toJson()
+      'sunday': sunday?.toJson(),
+      'monday': monday?.toJson(),
+      'tuesday': tuesday?.toJson(),
+      'wednesday': wednesday?.toJson(),
+      'thursday': thursday?.toJson()
     };
   }
 
-  static ScheduleModel fromJson(Map<String, Object?> json) {
+  factory ScheduleModel.fromJson(Map<String, Object?> json) {
     return ScheduleModel(
         sunday: json['sunday'] == null
             ? null

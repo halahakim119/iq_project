@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../domain/entities/schedule_entity.dart';
 import 'daily_awbara_container.dart';
+import 'daily_ksc_container.dart';
 
 class DailyScheduleWidget extends StatefulWidget {
   ScheduleEntity schedule;
@@ -25,7 +26,7 @@ class _DailyScheduleWidgetState extends State<DailyScheduleWidget> {
   Widget build(BuildContext context) {
     int hour = DateTime.now().hour;
 
-    return (hour >= 8 && hour < 14)
+    return (hour >= 8 && hour < 24)
         ? FutureBuilder(
             future: _getCurrentDay(),
             builder: (context, snapshot) {
@@ -50,7 +51,7 @@ class _DailyScheduleWidgetState extends State<DailyScheduleWidget> {
                         ),
                       ),
                       selectedRestaurant == "awbara"
-                          ? DailyAwbaraContainer(
+                          ? DailyKSCContainer(
                               schedule: widget.schedule,
                               selectedDay: snapshot.data.toString() == "Sunday"
                                   ? 0

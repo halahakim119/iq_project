@@ -20,8 +20,7 @@ class _DailyAwbaraContainerState extends State<DailyAwbaraContainer> {
 
   void _submit(text) {
     setState(() {
-          selectedChoice =text.toString();
-
+      selectedChoice = text.toString();
     });
   }
 
@@ -49,51 +48,54 @@ class _DailyAwbaraContainerState extends State<DailyAwbaraContainer> {
           Expanded(
               child: widget.selectedDay == 0
                   ? ListView.builder(
-                      itemCount: widget.schedule.sunday!.awbara!.length,
+                      itemCount: widget.schedule.sunday!.awbara!.meals!.length,
                       itemBuilder: (context, index) {
                         return customRadioListTile(
                             index,
-                            Text(widget.schedule.sunday!.awbara![index]
+                            Text(widget.schedule.sunday!.awbara!.meals![index].meal
                                 .toString()));
                       },
                     )
                   : widget.selectedDay == 1
                       ? ListView.builder(
-                          itemCount: widget.schedule.monday!.awbara!.length,
+                          itemCount:
+                              widget.schedule.monday!.awbara!.meals!.length,
                           itemBuilder: (context, index) {
                             return customRadioListTile(
                                 index,
-                                Text(widget.schedule.monday!.awbara![index]
+                                Text(widget
+                                    .schedule.monday!.awbara!.meals![index].meal
                                     .toString()));
                           })
                       : widget.selectedDay == 2
                           ? ListView.builder(
-                              itemCount:
-                                  widget.schedule.tuesday!.awbara!.length,
+                              itemCount: widget
+                                  .schedule.tuesday!.awbara!.meals!.length,
                               itemBuilder: (context, index) {
                                 return customRadioListTile(
                                     index,
-                                    Text(widget.schedule.tuesday!.awbara![index]
+                                    Text(widget
+                                        .schedule.tuesday!.awbara!.meals![index].meal
                                         .toString()));
                               })
                           : widget.selectedDay == 3
                               ? ListView.builder(
-                                  itemCount:
-                                      widget.schedule.wednesday!.awbara!.length,
+                                  itemCount: widget.schedule.wednesday!.awbara!
+                                      .meals!.length,
                                   itemBuilder: (context, index) {
                                     return customRadioListTile(
                                         index,
-                                        Text(widget
-                                            .schedule.wednesday!.awbara![index]
+                                        Text(widget.schedule.wednesday!.awbara!
+                                            .meals![index].meal
                                             .toString()));
                                   })
                               : widget.selectedDay == 4
                                   ? ListView.builder(
-                                      itemCount: widget
-                                          .schedule.thursday!.awbara!.length,
+                                      itemCount: widget.schedule.thursday!
+                                          .awbara!.meals!.length,
                                       itemBuilder: (context, index) {
-                                        return Text(widget
-                                            .schedule.thursday!.awbara![index]
+                                        return Text(widget.schedule.thursday!
+                                            .awbara!.meals![index].meal
                                             .toString());
                                       })
                                   : widget.selectedDay == 5

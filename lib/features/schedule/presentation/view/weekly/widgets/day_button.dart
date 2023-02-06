@@ -17,12 +17,12 @@ class DayButton extends StatelessWidget {
     return GestureDetector(
       onTap: () => onPressed(index),
       child: Container(
-        width: MediaQuery.of(context).size.width * 0.1,
-        height: MediaQuery.of(context).size.width * 0.1,
+        width: MediaQuery.of(context).size.width * 0.13,
+        height: MediaQuery.of(context).size.width * 0.13,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(100),
             color: index == selectedDay
-                ? Theme.of(context).colorScheme.primary
+                ? Theme.of(context).primaryColor
                 : Colors.white),
         child: Center(
             child: Text(
@@ -31,7 +31,7 @@ class DayButton extends StatelessWidget {
               fontWeight: FontWeight.bold,
               color: index == selectedDay
                   ? Colors.white
-                  : Theme.of(context).colorScheme.primary),
+                  : Theme.of(context).primaryColor),
         )),
       ),
     );

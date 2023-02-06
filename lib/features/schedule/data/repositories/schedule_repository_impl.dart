@@ -15,9 +15,11 @@ class ScheduleRepositoryImpl implements ScheduleRepository {
   @override
   Future<Either<Failure, ScheduleEntity>> getData() async {
     final data = await scheduleDataSource.getSchedule();
+    
 
     return data.fold((failure) => Left(failure), (schedule) {
       final ScheduleModel data = ScheduleModel.fromJson(schedule);
+ print(data);
       return Right(data);
     });
   }

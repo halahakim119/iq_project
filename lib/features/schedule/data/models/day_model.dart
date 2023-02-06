@@ -1,34 +1,31 @@
 import '../../domain/entities/day_entity.dart';
+import 'branch_model.dart';
 
 class DayModel extends DayEntity {
-  const DayModel({List<String>? ksc, List<String>? awbara})
+  const DayModel({BranchModel? ksc, BranchModel? awbara})
       : super(ksc: ksc, awbara: awbara);
 
-  DayModel copyWith({List<String>? ksc, List<String>? awbara}) {
-    return DayModel(ksc: ksc ?? this.ksc, awbara: awbara ?? this.awbara);
-  }
-
   Map<String, Object?> toJson() {
-    return {'ksc': ksc, 'awbara': awbara};
+    BranchModel? ksc;
+    BranchModel? awbara;
+    return {'ksc': ksc?.toJson(), 'awbara': awbara?.toJson()};
   }
 
   factory DayModel.fromJson(Map<String, Object?> json) {
     return DayModel(
-      ksc: json['ksc'] == null
-          ? null
-          : List<String>.from((json['ksc'] as List).map((x) => x.toString())),
-      awbara: json['awbara'] == null
-          ? null
-          : List<String>.from(
-              (json['awbara'] as List).map((x) => x.toString())),
-    );
+        ksc: json['ksc'] == null
+            ? null
+            : BranchModel.fromJson(json['ksc'] as Map<String, Object?>),
+        awbara: json['awbara'] == null
+            ? null
+            : BranchModel.fromJson(json['awbara'] as Map<String, Object?>));
   }
 
   @override
   String toString() {
-    return '''Day(
-                ksc:$ksc,
-awbara:$awbara
+    return '''DayModel(
+                ksc:${ksc.toString()},
+awbara:${awbara.toString()}
     ) ''';
   }
 
