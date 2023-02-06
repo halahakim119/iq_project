@@ -18,9 +18,9 @@ import '../../features/auth/auth_screen.dart' as _i2;
 import '../../features/main/main_page.dart' as _i3;
 import '../../features/profile/presentation/view/pages/profile_screen.dart'
     as _i6;
-import '../../features/schedule/presentation/view/pages/daily_schedule_screen.dart'
+import '../../features/schedule/presentation/view/daily/page/daily_schedule_screen.dart'
     as _i5;
-import '../../features/schedule/presentation/view/pages/weekly_schedule_screen.dart'
+import '../../features/schedule/presentation/view/weekly/pages/weekly_schedule_screen.dart'
     as _i4;
 import '../../features/splash/loading_splash.dart' as _i1;
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../logic/cubit/schedule_cubit.dart';
+import '../../../logic/cubit/schedule_cubit.dart';
 import '../widgets/weekly_schedule_widget.dart';
 
 class WeeklyScheduleScreen extends StatelessWidget {

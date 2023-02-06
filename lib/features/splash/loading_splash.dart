@@ -34,6 +34,7 @@ class _LoadingSplashState extends State<LoadingSplash> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -44,10 +45,10 @@ class _LoadingSplashState extends State<LoadingSplash> {
               style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
             ),
             LoadingBouncingGrid.square(
-              borderColor: const Color.fromARGB(255, 119, 29, 22),
+              borderColor: Theme.of(context).colorScheme.primary,
               borderSize: 0.5,
               size: 30.0,
-              backgroundColor: const Color.fromARGB(255, 119, 29, 22),
+              backgroundColor: Theme.of(context).colorScheme.primary,
               duration: const Duration(milliseconds: 1500),
             ),
           ],

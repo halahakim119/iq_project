@@ -1,6 +1,6 @@
 import 'package:iq_project/main.dart';
 
-import '../../../domain/entities/schedule_entity.dart';
+import '../../../../domain/entities/schedule_entity.dart';
 import 'package:flutter/material.dart';
 
 class KSCContainer extends StatefulWidget {
@@ -68,7 +68,7 @@ class _KSCContainerState extends State<KSCContainer> {
                               ? RadioListTile(
                                   dense: true,
                                   activeColor:
-                                      const Color.fromARGB(255, 119, 29, 22),
+                                      Theme.of(context).colorScheme.primary,
                                   controlAffinity:
                                       ListTileControlAffinity.leading,
                                   title: Text(widget
@@ -140,7 +140,7 @@ class _KSCContainerState extends State<KSCContainer> {
                             minimumSize: Size(
                                 MediaQuery.of(context).size.width * 0.7, 50),
                             backgroundColor:
-                                const Color.fromARGB(255, 119, 29, 22),
+                                Theme.of(context).colorScheme.primary,
                           ),
                           child: const Text(
                             'submit',

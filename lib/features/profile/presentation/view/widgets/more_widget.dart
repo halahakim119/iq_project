@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 class MoreWidget extends StatelessWidget {
@@ -5,49 +6,46 @@ class MoreWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Divider(),
-          GestureDetector(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Text('About Us', style: TextStyle(fontWeight: FontWeight.bold)),
-                Icon(
-                  Icons.arrow_forward_ios_rounded,
-                  color: Colors.grey,
-                  size: 15,
-                )
-              ],
-            ),
-            onTap: () {
-              // handle button press
-            },
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Divider(),
+        GestureDetector(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: const [
+              Text('About Us', style: TextStyle(fontWeight: FontWeight.bold)),
+              Icon(
+                Icons.arrow_forward_ios_rounded,
+                color: Colors.grey,
+                size: 15,
+              )
+            ],
           ),
-          const Divider(),
-          GestureDetector(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Text('Ordering Policy',
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                Icon(
-                  Icons.arrow_forward_ios_rounded,
-                  color: Colors.grey,
-                  size: 15,
-                )
-              ],
-            ),
-            onTap: () {
-              // handle button press
-            },
+          onTap: () {
+            context.router.pushNamed('auth');
+          },
+        ),
+        const Divider(),
+        GestureDetector(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: const [
+              Text('Ordering Policy',
+                  style: TextStyle(fontWeight: FontWeight.bold)),
+              Icon(
+                Icons.arrow_forward_ios_rounded,
+                color: Colors.grey,
+                size: 15,
+              )
+            ],
           ),
-          const Divider(),
-        ],
-      ),
+          onTap: () {
+            context.router.pushNamed('auth');
+          },
+        ),
+        const Divider(),
+      ],
     );
   }
 }

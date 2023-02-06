@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../domain/entities/schedule_entity.dart';
+import '../../../../domain/entities/schedule_entity.dart';
 import '../widgets/awbara_container.dart';
 import '../widgets/day_button.dart';
 import '../widgets/ksc_container.dart';
@@ -31,7 +31,7 @@ class _WeeklySchedulaWidgetState extends State<WeeklySchedulaWidget> {
           Container(
             padding: const EdgeInsets.only(top: 5, bottom: 5),
             width: MediaQuery.of(context).size.width * 0.9,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: const BorderRadius.all(Radius.circular(50))),
             child: Row(

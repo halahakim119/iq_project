@@ -20,22 +20,26 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (context) => di.sl<ScheduleCubit>()..fetchData(),
-          ),
-        ],
-        child: OverlaySupport.global(
-      child: MaterialApp.router(
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => di.sl<ScheduleCubit>()..fetchData(),
+        ),
+      ],
+      child: OverlaySupport.global(
+        child: MaterialApp.router(
           routerDelegate: _appRouter.delegate(),
           routeInformationParser: _appRouter.defaultRouteParser(),
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
-            useMaterial3: true,
-            colorSchemeSeed: const Color.fromARGB(255, 119, 29, 22),
-          ),
-        ),
+              brightness: Brightness.light,scaffoldBackgroundColor: Colors.grey.shade200,
+              // useMaterial3: true,\
+              indicatorColor: const Color.fromARGB(255, 119, 29, 22),
+              primaryColor: const Color.fromARGB(255, 119, 29, 22),
+              backgroundColor: Colors.grey.shade200),
+              
+
+        ), 
       ),
     );
   }

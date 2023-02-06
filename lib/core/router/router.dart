@@ -3,8 +3,8 @@ import 'package:auto_route/auto_route.dart';
 import '../../features/auth/auth_screen.dart';
 import '../../features/main/main_page.dart';
 import '../../features/profile/presentation/view/pages/profile_screen.dart';
-import '../../features/schedule/presentation/view/pages/daily_schedule_screen.dart';
-import '../../features/schedule/presentation/view/pages/weekly_schedule_screen.dart';
+import '../../features/schedule/presentation/view/daily/page/daily_schedule_screen.dart';
+import '../../features/schedule/presentation/view/weekly/pages/weekly_schedule_screen.dart';
 import '../../features/splash/loading_splash.dart';
 
 @MaterialAutoRouter(

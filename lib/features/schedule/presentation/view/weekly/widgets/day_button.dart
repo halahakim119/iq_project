@@ -22,7 +22,7 @@ class DayButton extends StatelessWidget {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(100),
             color: index == selectedDay
-                ? const Color.fromARGB(255, 119, 29, 22)
+                ? Theme.of(context).colorScheme.primary
                 : Colors.white),
         child: Center(
             child: Text(
@@ -31,7 +31,7 @@ class DayButton extends StatelessWidget {
               fontWeight: FontWeight.bold,
               color: index == selectedDay
                   ? Colors.white
-                  : const Color.fromARGB(255, 119, 29, 22)),
+                  : Theme.of(context).colorScheme.primary),
         )),
       ),
     );
