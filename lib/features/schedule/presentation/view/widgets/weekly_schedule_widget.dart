@@ -32,7 +32,7 @@ class _WeeklySchedulaWidgetState extends State<WeeklySchedulaWidget> {
             padding: const EdgeInsets.only(top: 5, bottom: 5),
             width: MediaQuery.of(context).size.width * 0.9,
             decoration: BoxDecoration(
-                color: Colors.red.shade100,
+                color: Colors.white,
                 borderRadius: const BorderRadius.all(Radius.circular(50))),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -73,11 +73,17 @@ class _WeeklySchedulaWidgetState extends State<WeeklySchedulaWidget> {
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.03,
           ),
-          KSCContainer(schedule: widget.schedule, selectedDay: selectedDay),
+          KSCContainer(
+              selectedSchedule: "weekly",
+              schedule: widget.schedule,
+              selectedDay: selectedDay),
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.02,
           ),
-          AwbaraContainer(schedule: widget.schedule, selectedDay: selectedDay),
+          AwbaraContainer(
+              selectedSchedule: "weekly",
+              schedule: widget.schedule,
+              selectedDay: selectedDay),
         ],
       ),
     );

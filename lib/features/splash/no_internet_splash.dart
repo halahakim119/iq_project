@@ -26,10 +26,10 @@ class NoInternetSplash extends StatelessWidget {
             ],
           ),
           LoadingBouncingGrid.square(
-            borderColor: const Color.fromARGB(255, 119, 29, 22),
+            borderColor: Theme.of(context).primaryColor,
             borderSize: 0.5,
             size: 30.0,
-            backgroundColor: const Color.fromARGB(255, 119, 29, 22),
+            backgroundColor: Theme.of(context).primaryColor,
             duration: const Duration(milliseconds: 1500),
           )
         ],

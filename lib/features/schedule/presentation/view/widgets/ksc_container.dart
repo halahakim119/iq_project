@@ -1,80 +1,155 @@
+import 'package:iq_project/main.dart';
+
 import '../../../domain/entities/schedule_entity.dart';
 import 'package:flutter/material.dart';
 
-class KSCContainer extends StatelessWidget {
+class KSCContainer extends StatefulWidget {
   int selectedDay;
+  String selectedSchedule;
   ScheduleEntity schedule;
   KSCContainer({
+    required this.selectedSchedule,
     required this.selectedDay,
     required this.schedule,
   });
 
   @override
+  State<KSCContainer> createState() => _KSCContainerState();
+}
+
+class _KSCContainerState extends State<KSCContainer> {
+  String selectedChoice = '';
+
+  void _submit() {
+    setState(() {
+      selectedChoice = widget.schedule.sunday!.ksc![_selectedIndex].toString();
+    });
+  }
+
+  @override
+  int _selectedIndex = 0;
+  @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.25,
+      height: widget.selectedSchedule == "weekly"
+          ? MediaQuery.of(context).size.height * 0.25
+          : MediaQuery.of(context).size.height * 0.6,
       width: MediaQuery.of(context).size.width * 0.9,
-      decoration: BoxDecoration(
-          color: Colors.red.shade100,
-          borderRadius:const  BorderRadius.all(Radius.circular(20))),
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.all(Radius.circular(20)),
+      ),
       child: Padding(
-        padding: const EdgeInsets.all(30.0),
+        padding: widget.selectedSchedule == "weekly"
+            ? const EdgeInsets.only(top: 30.0, left: 30.0, bottom: 10)
+            : const EdgeInsets.all(0.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'KSC',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
+            widget.selectedSchedule == "weekly"
+                ? const Text(
+                    'KSC',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  )
+                : const Padding(
+                    padding: EdgeInsets.only(top: 30, bottom: 15, left: 30),
+                    child: Text(
+                      'Todays schedule',
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                    ),
+                  ),
             Expanded(
-                child: selectedDay == 0
+                child: widget.selectedDay == 0
                     ? ListView.builder(
-                        itemCount: schedule.sunday!.ksc!.length,
+                        itemCount: widget.schedule.sunday!.ksc!.length,
                         itemBuilder: (context, index) {
-                          return Text(
-                              schedule.sunday!.ksc![index].toString());
-                        })
-                    : selectedDay == 1
+                          return widget.selectedSchedule == "daily"
+                              ? RadioListTile(
+                                  dense: true,
+                                  activeColor:
+                                      const Color.fromARGB(255, 119, 29, 22),
+                                  controlAffinity:
+                                      ListTileControlAffinity.leading,
+                                  title: Text(widget
+                                      .schedule.sunday!.ksc![index]
+                                      .toString()),
+                                  value: index,
+                                  groupValue: _selectedIndex,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _selectedIndex = value!;
+                                    });
+                                  },
+                                )
+                              : Text(widget.schedule.sunday!.ksc![index]
+                                  .toString());
+                        },
+                      )
+                    : widget.selectedDay == 1
                         ? ListView.builder(
-                            itemCount: schedule.monday!.ksc!.length,
+                            itemCount: widget.schedule.monday!.ksc!.length,
                             itemBuilder: (context, index) {
-                              return Text(
-                                  schedule.monday!.ksc![index].toString());
+                              return Text(widget.schedule.monday!.ksc![index]
+                                  .toString());
                             })
-                        : selectedDay == 2
+                        : widget.selectedDay == 2
                             ? ListView.builder(
-                                itemCount: schedule.tuesday!.ksc!.length,
+                                itemCount: widget.schedule.tuesday!.ksc!.length,
                                 itemBuilder: (context, index) {
-                                  return Text(schedule.tuesday!.ksc![index]
+                                  return Text(widget
+                                      .schedule.tuesday!.ksc![index]
                                       .toString());
                                 })
-                            : selectedDay == 3
+                            : widget.selectedDay == 3
                                 ? ListView.builder(
-                                    itemCount: schedule.tuesday!.ksc!.length,
+                                    itemCount:
+                                        widget.schedule.tuesday!.ksc!.length,
                                     itemBuilder: (context, index) {
-                                      return Text(schedule
-                                          .tuesday!.ksc![index]
+                                      return Text(widget
+                                          .schedule.tuesday!.ksc![index]
                                           .toString());
                                     })
-                                : selectedDay == 4
+                                : widget.selectedDay == 4
                                     ? ListView.builder(
-                                        itemCount:
-                                            schedule.wednesday!.ksc!.length,
+                                        itemCount: widget
+                                            .schedule.wednesday!.ksc!.length,
                                         itemBuilder: (context, index) {
-                                          return Text(schedule
-                                              .wednesday!.ksc![index]
+                                          return Text(widget
+                                              .schedule.wednesday!.ksc![index]
                                               .toString());
                                         })
-                                    : selectedDay == 3
+                                    : widget.selectedDay == 3
                                         ? ListView.builder(
-                                            itemCount: schedule
-                                                .thursday!.ksc!.length,
+                                            itemCount: widget
+                                                .schedule.thursday!.ksc!.length,
                                             itemBuilder: (context, index) {
-                                              return Text(schedule
+                                              return Text(widget.schedule
                                                   .thursday!.ksc![index]
                                                   .toString());
                                             })
-                                        : Container())
+                                        : Container()),
+            widget.selectedSchedule == "daily"
+                ? Padding(
+                    padding: const EdgeInsets.only(top: 20.0),
+                    child: Align(
+                        alignment: Alignment.bottomCenter,
+                        child: ElevatedButton(
+                          onPressed: () => _submit(),
+                          style: ElevatedButton.styleFrom(
+                            minimumSize: Size(
+                                MediaQuery.of(context).size.width * 0.7, 50),
+                            backgroundColor:
+                                const Color.fromARGB(255, 119, 29, 22),
+                          ),
+                          child: const Text(
+                            'submit',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        )),
+                  )
+                : SizedBox(),
+            Text(selectedChoice)
           ],
         ),
       ),

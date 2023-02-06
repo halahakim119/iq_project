@@ -10,10 +10,12 @@ import '../../features/schedule/data/repositories/schedule_repository_impl.dart'
 import '../../features/schedule/domain/repositories/schedule_repository.dart';
 import '../../features/schedule/domain/usecases/get_schedule_usecase.dart';
 import '../../features/schedule/presentation/logic/cubit/schedule_cubit.dart';
+import '../network/internet_checker.dart';
 
 final sl = GetIt.instance;
 
 Future<void> init() async {
+sl.registerLazySingleton(() => InternetChecker());
   //!user
 // cubit
   sl.registerFactory(() => UserCubit(getData: sl()));

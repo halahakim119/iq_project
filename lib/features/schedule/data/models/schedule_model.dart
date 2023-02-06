@@ -16,8 +16,6 @@ class ScheduleModel extends ScheduleEntity {
             wednesday: wednesday,
             thursday: thursday);
 
-
-
   Map<String, Object?> toJson() {
     DayModel? day;
     return {

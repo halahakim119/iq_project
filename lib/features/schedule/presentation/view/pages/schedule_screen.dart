@@ -22,6 +22,7 @@ class ScheduleScreen extends StatelessWidget {
       create: (_) => di.sl<ScheduleCubit>()..fetchData(),
       child: SingleChildScrollView(
         child: Container(
+          color: Colors.grey.shade200,
           padding: const EdgeInsets.all(8),
           height: MediaQuery.of(context).size.height -
               (appBarHeight + bottomNavigationBarHeight),
@@ -31,8 +32,10 @@ class ScheduleScreen extends StatelessWidget {
                   loading: () =>
                       const Center(child: CircularProgressIndicator()),
                   loaded: (schedule) => dailyOrWeekly == "daily"
-                      ? DailyScheduleWidget(schedule: schedule,)
-                      : WeeklySchedulaWidget(schedule: schedule),
+                      ? DailyScheduleWidget(schedule: schedule)
+                      : dailyOrWeekly == "weekly"
+                          ? WeeklySchedulaWidget(schedule: schedule)
+                          : Container(),
                   error: (error) => Center(
                         child: Text(error.toString()),
                       ));

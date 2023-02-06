@@ -20,16 +20,18 @@ class DayButton extends StatelessWidget {
         width: MediaQuery.of(context).size.width * 0.1,
         height: MediaQuery.of(context).size.width * 0.1,
         decoration: BoxDecoration(
-            borderRadius:BorderRadius.circular(100),
+            borderRadius: BorderRadius.circular(100),
             color: index == selectedDay
                 ? const Color.fromARGB(255, 119, 29, 22)
-                : Colors.red.shade100),
+                : Colors.white),
         child: Center(
             child: Text(
           day,
           style: TextStyle(
               fontWeight: FontWeight.bold,
-              color: index == selectedDay ? Colors.white : const Color.fromARGB(255, 119, 29, 22)),
+              color: index == selectedDay
+                  ? Colors.white
+                  : const Color.fromARGB(255, 119, 29, 22)),
         )),
       ),
     );

@@ -9,13 +9,13 @@ class MoreWidget extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [const Divider(),
+        children: [
+          const Divider(),
           GestureDetector(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: const [
-                Text('About Us',
-                    style: TextStyle(fontWeight: FontWeight.bold)),
+                Text('About Us', style: TextStyle(fontWeight: FontWeight.bold)),
                 Icon(
                   Icons.arrow_forward_ios_rounded,
                   color: Colors.grey,
