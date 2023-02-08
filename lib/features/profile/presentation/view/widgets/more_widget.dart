@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-
+import 'package:auto_size_text/auto_size_text.dart';
 class MoreWidget extends StatelessWidget {
   const MoreWidget({super.key});
 
@@ -9,15 +9,16 @@ class MoreWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Divider(),
+         Divider(color:   Theme.of(context).colorScheme.onPrimary),
         GestureDetector(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Text('About Us', style: TextStyle(fontWeight: FontWeight.bold)),
+            children:  [
+              AutoSizeText('About Us', style: TextStyle(fontWeight: FontWeight.bold,
+              color: Theme.of(context).colorScheme.onTertiary)),
               Icon(
                 Icons.arrow_forward_ios_rounded,
-                color: Colors.grey,
+                color:  Theme.of(context).colorScheme.onTertiary,
                 size: 15,
               )
             ],
@@ -27,16 +28,16 @@ class MoreWidget extends StatelessWidget {
             context.router.pushNamed('aboutUs');
           },
         ),
-        const Divider(),
+         Divider(color:   Theme.of(context).colorScheme.onPrimary),
         GestureDetector(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Text('Ordering Policy',
-                  style: TextStyle(fontWeight: FontWeight.bold)),
+            children:  [
+              AutoSizeText('Ordering Policy',
+                  style: TextStyle(fontWeight: FontWeight.bold,color:  Theme.of(context).colorScheme.onTertiary)),
               Icon(
                 Icons.arrow_forward_ios_rounded,
-                color: Colors.grey,
+                color: Theme.of(context).colorScheme.onTertiary,
                 size: 15,
               )
             ],
@@ -45,7 +46,7 @@ class MoreWidget extends StatelessWidget {
             context.router.pushNamed('orderingPolicy');
           },
         ),
-        const Divider(),
+         Divider(color:   Theme.of(context).colorScheme.onTertiary),
       ],
     );
   }

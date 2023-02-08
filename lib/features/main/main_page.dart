@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:unicons/unicons.dart';
-
+import 'package:auto_size_text/auto_size_text.dart';
 import '../../core/router/router.gr.dart';
 
 class MainPage extends StatelessWidget {
@@ -13,14 +13,16 @@ class MainPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title:  Text(
+        title: AutoSizeText(
           'iHUNGRY',
           style: TextStyle(
-            letterSpacing: 4,
-              color: Theme.of(context).colorScheme.secondary, fontSize: 20, fontFamily: 'Fredoka_One'),
+              letterSpacing: 4,
+              color: Theme.of(context).colorScheme.background,
+              fontSize: 20,
+              fontFamily: 'Fredoka_One'),
         ),
         centerTitle: true,
-        backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: Theme.of(context).colorScheme.primary,
       ),
       body: AutoTabsScaffold(
         routes: const [
@@ -31,24 +33,24 @@ class MainPage extends StatelessWidget {
         bottomNavigationBuilder: (_, tabsRouter) {
           return CurvedNavigationBar(
             onTap: tabsRouter.setActiveIndex,
-            color: Theme.of(context).primaryColor,
+            color: Theme.of(context).colorScheme.primary,
             animationDuration: const Duration(milliseconds: 250),
-            index: tabsRouter.activeIndex ,
-            buttonBackgroundColor: Theme.of(context).primaryColor,
-            backgroundColor: Theme.of(context).backgroundColor,
+            index: tabsRouter.activeIndex,
+            buttonBackgroundColor: Theme.of(context).colorScheme.primary,
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             animationCurve: Curves.ease,
-            items:  [
+            items: [
               Icon(
                 UniconsLine.calendar_alt,
-                color: Theme.of(context).colorScheme.secondary,
+                color: Theme.of(context).colorScheme.background,
               ),
               Icon(
                 UniconsLine.restaurant,
-                color: Theme.of(context).colorScheme.secondary,
+                color: Theme.of(context).colorScheme.background,
               ),
               Icon(
                 UniconsLine.user,
-                color: Theme.of(context).colorScheme.secondary,
+                color: Theme.of(context).colorScheme.background,
               ),
             ],
           );

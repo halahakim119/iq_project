@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../domain/entities/schedule_entity.dart';
@@ -36,7 +36,7 @@ class _DailyScheduleWidgetState extends State<DailyScheduleWidget> {
                         margin: const EdgeInsets.all(20),
                         height: 40,
                         decoration:  BoxDecoration(
-                            color: Theme.of(context).colorScheme.secondary,
+                            color: Theme.of(context).colorScheme.onSecondary,
                             borderRadius:
                                 BorderRadius.all(Radius.circular(50))),
                         child: Row(
@@ -130,16 +130,16 @@ class _DailyScheduleWidgetState extends State<DailyScheduleWidget> {
                   topRight: Radius.circular(50),
                   bottomRight: Radius.circular(50)),
               color: selectedRestaurant == restaurant
-                  ? Theme.of(context).primaryColor
-                  : Theme.of(context).colorScheme.secondary),
+                  ? Theme.of(context).colorScheme.primary
+                  : Theme.of(context).colorScheme.onSecondary),
           child: Center(
-            child: Text(
+            child: AutoSizeText(
               restaurant.toUpperCase(),
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: selectedRestaurant == restaurant
-                      ? Theme.of(context).colorScheme.secondary
-                      : Colors.black),
+                      ? Theme.of(context).colorScheme.onTertiary
+                      : Theme.of(context).colorScheme.primary),
             ),
           ),
         ),

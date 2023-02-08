@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:auto_size_text/auto_size_text.dart';
 import '../../../../domain/entities/schedule_entity.dart';
 
 class WeeklyKSCContainer extends StatefulWidget {
@@ -23,7 +23,7 @@ class _WeeklyKSCContainerState extends State<WeeklyKSCContainer> {
       height: MediaQuery.of(context).size.height * 0.25,
       width: MediaQuery.of(context).size.width * 0.9,
       decoration:  BoxDecoration(
-        color: Theme.of(context).colorScheme.secondary,
+        color: Theme.of(context).colorScheme.onSecondary,
         borderRadius: BorderRadius.all(Radius.circular(20)),
       ),
       child: Padding(
@@ -31,9 +31,9 @@ class _WeeklyKSCContainerState extends State<WeeklyKSCContainer> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            AutoSizeText(
               'ksc'.toUpperCase(),
-              style: const TextStyle(fontWeight: FontWeight.bold),
+              style:  TextStyle(fontWeight: FontWeight.bold,color:Theme.of(context).colorScheme.onTertiary),
             ),
             const SizedBox(
               height: 5,
@@ -43,8 +43,10 @@ class _WeeklyKSCContainerState extends State<WeeklyKSCContainer> {
                     ? ListView.separated(
                         itemCount: widget.schedule.sunday!.ksc!.meals!.length,
                         itemBuilder: (context, index) {
-                          return Text(
-                              '• ${widget.schedule.sunday!.ksc!.meals![index].meal}');
+                          return AutoSizeText(
+                              '• ${widget.schedule.sunday!.ksc!.meals![index].meal}',style: TextStyle(color:Theme.of(context).colorScheme.onTertiary
+                              
+                              ),);
                         },
                         separatorBuilder: (BuildContext context, int index) {
                           return const SizedBox(
@@ -57,8 +59,8 @@ class _WeeklyKSCContainerState extends State<WeeklyKSCContainer> {
                             itemCount:
                                 widget.schedule.monday!.ksc!.meals!.length,
                             itemBuilder: (context, index) {
-                              return Text(
-                                  '• ${widget.schedule.monday!.ksc!.meals![index].meal}');
+                              return AutoSizeText(
+                                  '• ${widget.schedule.monday!.ksc!.meals![index].meal}',style: TextStyle(color:Theme.of(context).colorScheme.onTertiary));
                             },
                             separatorBuilder:
                                 (BuildContext context, int index) {
@@ -72,8 +74,8 @@ class _WeeklyKSCContainerState extends State<WeeklyKSCContainer> {
                                 itemCount:
                                     widget.schedule.tuesday!.ksc!.meals!.length,
                                 itemBuilder: (context, index) {
-                                  return Text(
-                                      '• ${widget.schedule.tuesday!.ksc!.meals![index].meal}');
+                                  return AutoSizeText(
+                                      '• ${widget.schedule.tuesday!.ksc!.meals![index].meal}',style: TextStyle(color: Theme.of(context).colorScheme.onTertiary));
                                 },
                                 separatorBuilder:
                                     (BuildContext context, int index) {
@@ -87,8 +89,8 @@ class _WeeklyKSCContainerState extends State<WeeklyKSCContainer> {
                                 itemCount:
                                     widget.schedule.wednesday!.ksc!.meals!.length,
                                 itemBuilder: (context, index) {
-                                  return Text(
-                                      '• ${widget.schedule.wednesday!.ksc!.meals![index].meal}');
+                                  return AutoSizeText(
+                                      '• ${widget.schedule.wednesday!.ksc!.meals![index].meal}',style: TextStyle(color:Theme.of(context).colorScheme.onTertiary));
                                 },
                                 separatorBuilder:
                                     (BuildContext context, int index) {
@@ -102,8 +104,8 @@ class _WeeklyKSCContainerState extends State<WeeklyKSCContainer> {
                                         itemCount: widget.schedule.thursday!
                                             .ksc!.meals!.length,
                                         itemBuilder: (context, index) {
-                                          return Text(
-                                              '• ${widget.schedule.thursday!.ksc!.meals![index].meal}');
+                                          return AutoSizeText(
+                                              '• ${widget.schedule.thursday!.ksc!.meals![index].meal}',style: TextStyle(color: Theme.of(context).colorScheme.onTertiary));
                                         },
                                         separatorBuilder:
                                             (BuildContext context, int index) {

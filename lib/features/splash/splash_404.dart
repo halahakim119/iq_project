@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-
+import 'package:auto_size_text/auto_size_text.dart';
 import '../../core/theme/custom_elevated_button.dart';
 
 class Splash404 extends StatelessWidget {
@@ -18,7 +18,7 @@ class Splash404 extends StatelessWidget {
         height: MediaQuery.of(context).size.height * 0.7,
         width: double.infinity,
         decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.secondary,
+            color: Theme.of(context).colorScheme.onSecondary,
             borderRadius: BorderRadius.all(Radius.circular(20))),
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           Container(
@@ -30,19 +30,30 @@ class Splash404 extends StatelessWidget {
                     fit: BoxFit.contain),
                 borderRadius: BorderRadius.all(Radius.circular(20))),
           ),
-          const Text(
+          AutoSizeText(
             'Oops!',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 30,
+              color: Theme.of(context).colorScheme.onTertiary,
+            ),
           ),
           const SizedBox(
             height: 10,
           ),
-          Text(error),
+          AutoSizeText(
+            error,
+            style: TextStyle(
+              color:Theme.of(context).colorScheme.onTertiary,
+            ),
+          ),
           const SizedBox(
             height: 100,
           ),
           CustomElevatedButton(
-            child: const Text('Back To Home Page'),
+            child:  AutoSizeText('Back To Home Page', style: TextStyle(
+              color: Theme.of(context).colorScheme.background,
+            ),),
             onPressed: () {
               context.router.pushNamed('main');
             },

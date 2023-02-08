@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class CountDownTimer extends StatefulWidget {
@@ -44,9 +44,9 @@ class _CountDownTimerState extends State<CountDownTimer> {
   Widget build(BuildContext context) {
     final minute = (_start / 60).floor();
     final second = _start - minute * 60;
-    return Text(
+    return AutoSizeText(
       '${minute.toString().padLeft(2, '0')}:${second.toString().padLeft(2, '0')}',
-      style: const TextStyle(fontSize: 20),
+      style:  TextStyle(color: Theme.of(context).colorScheme.onTertiary,fontWeight: FontWeight.bold,fontSize: 16),
     );
   }
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:auto_size_text/auto_size_text.dart';
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
@@ -7,7 +7,7 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-        child: Text('login'),
+        child: AutoSizeText('login'),
       ),
     );
   }

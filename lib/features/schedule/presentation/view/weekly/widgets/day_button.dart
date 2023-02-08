@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:auto_size_text/auto_size_text.dart';
 class DayButton extends StatelessWidget {
   final String day;
   final int index;
@@ -22,16 +22,17 @@ class DayButton extends StatelessWidget {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(100),
             color: index == selectedDay
-                ? Theme.of(context).primaryColor
-                : Theme.of(context).colorScheme.secondary),
+                ? Theme.of(context).colorScheme.primary
+                : Theme.of(context).colorScheme.onSecondary),
         child: Center(
-            child: Text(
+            child: AutoSizeText(
           day,
           style: TextStyle(
               fontWeight: FontWeight.bold,
               color: index == selectedDay
-                  ? Theme.of(context).colorScheme.secondary
-                  : Theme.of(context).primaryColor),
+                  ? Theme.of(context).colorScheme.background
+                  : Theme.of(context).colorScheme.onTertiary
+                  ),
         )),
       ),
     );

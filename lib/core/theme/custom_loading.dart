@@ -25,7 +25,7 @@ class CustomLoading extends StatelessWidget {
           ),
           CircularProgressIndicator(
               strokeWidth: 1, 
-              color: Theme.of(context).primaryColor),
+              color: Theme.of(context).colorScheme.onTertiary),
         ],
       ),
     );

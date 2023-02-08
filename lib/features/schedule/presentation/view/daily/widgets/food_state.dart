@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:auto_size_text/auto_size_text.dart';
 import 'count_down_timer.dart';
 
 class FoodState extends StatelessWidget {
@@ -17,8 +17,8 @@ class FoodState extends StatelessWidget {
           height: MediaQuery.of(context).size.height * 0.7,
           width: double.infinity,
           decoration:  BoxDecoration(
-              color: Theme.of(context).colorScheme.secondary,
-              borderRadius: BorderRadius.all(Radius.circular(20))),
+              color: Theme.of(context).colorScheme.onSecondary,
+              borderRadius: const BorderRadius.all(Radius.circular(20))),
           child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -43,16 +43,16 @@ class FoodState extends StatelessWidget {
                           const BorderRadius.all(Radius.circular(20))),
                 ),
                 (hour >= 6 && hour < 9)
-                    ? customText('Menu Not Ready',
-                        'Today\'s menu is not set yet, please check back later at 9:00')
+                    ? customAutoSizeText('Menu Not Ready',
+                        'Today\'s menu is not set yet, please check back later at 9:00',context)
                     : (hour >= 10 && hour < 12)
-                        ? customText('The food is not ready yet',
-                            'Chef is currently preparing your dishes')
+                        ? customAutoSizeText('The food is not ready yet',
+                            'Chef is currently preparing your dishes',context)
                         : (hour >= 12 && hour < 13)
-                            ? customText('Lunch time',
-                                'The food is ready, come and enjoy a delicious meal.')
-                            : customText('Closed',
-                                'Sorry, we\'re not serving food outside of our work hours. Please come back tomorrow.'),
+                            ? customAutoSizeText('Lunch time',
+                                'The food is ready, come and enjoy a delicious meal.',context)
+                            : customAutoSizeText('Closed',
+                                'Sorry, we\'re not serving food outside of our work hours. Please come back tomorrow.',context),
                 (hour >= 12 && hour < 13)
                     ? Container(
                         margin: const EdgeInsets.only(top: 20),
@@ -65,7 +65,7 @@ class FoodState extends StatelessWidget {
     );
   }
 
-  Widget customText(boldText, normalText) {
+  Widget customAutoSizeText(boldText, normalText,context) {
     return Container(
       margin: const EdgeInsets.only(right: 25, left: 25),
       child: Column(
@@ -73,20 +73,22 @@ class FoodState extends StatelessWidget {
           const SizedBox(
             height: 30,
           ),
-          Text(
+          AutoSizeText(
             boldText,
             textAlign: TextAlign.center,
-            style: const TextStyle(
+            style:  TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 25,
+               color:Theme.of(context).colorScheme.onTertiary,
             ),
           ),
           const SizedBox(
             height: 10,
           ),
-          Text(
+          AutoSizeText(
             normalText,
             textAlign: TextAlign.center,
+            style: TextStyle(color:Theme.of(context).colorScheme.onTertiary,),
           ),
         ],
       ),

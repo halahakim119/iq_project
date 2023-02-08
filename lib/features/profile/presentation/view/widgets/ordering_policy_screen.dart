@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:auto_size_text/auto_size_text.dart';
 class OrderingPolicyScreen extends StatelessWidget {
   const OrderingPolicyScreen({super.key});
 
@@ -7,7 +7,7 @@ class OrderingPolicyScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('order'),
+        title: AutoSizeText('order'),
       ),
       body: Container(),
     );

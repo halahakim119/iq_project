@@ -43,7 +43,7 @@ class _WeeklySchedulaWidgetState extends State<WeeklySchedulaWidget> {
                 height: 60,
                 width: double.infinity,
                 decoration:  BoxDecoration(
-                    color: Theme.of(context).colorScheme.secondary,
+                    color: Theme.of(context).colorScheme.onSecondary,
                     borderRadius: BorderRadius.all(Radius.circular(50))),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,

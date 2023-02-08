@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:auto_size_text/auto_size_text.dart';
 import '../../../../domain/entities/schedule_entity.dart';
 
 class DailyKSCContainer extends StatefulWidget {
@@ -29,21 +29,20 @@ class _DailyKSCContainerState extends State<DailyKSCContainer> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      
       height: MediaQuery.of(context).size.height * 0.6,
       width: MediaQuery.of(context).size.width * 0.9,
-      decoration:  BoxDecoration(
-        color: Theme.of(context).colorScheme.secondary,
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.onSecondary,
         borderRadius: BorderRadius.all(Radius.circular(20)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Padding(
-            padding: EdgeInsets.only(top: 30, bottom: 15, left: 30),
-            child: Text(
+           Padding(
+            padding:const EdgeInsets.only(top: 30, bottom: 15, left: 30),
+            child: AutoSizeText(
               'Todays schedule',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20,color:Theme.of(context).colorScheme.onTertiary),
             ),
           ),
           Expanded(
@@ -53,51 +52,51 @@ class _DailyKSCContainerState extends State<DailyKSCContainer> {
                       itemBuilder: (context, index) {
                         return customRadioListTile(
                             index,
-                            Text(widget.schedule.sunday!.ksc!.meals![index].meal
-                                .toString()));
+                            AutoSizeText(widget
+                                .schedule.sunday!.ksc!.meals![index].meal
+                                .toString(), style: TextStyle(color:Theme.of(context).colorScheme.onTertiary)));
                       },
                     )
                   : widget.selectedDay == 1
                       ? ListView.builder(
-                          itemCount:
-                              widget.schedule.monday!.ksc!.meals!.length,
+                          itemCount: widget.schedule.monday!.ksc!.meals!.length,
                           itemBuilder: (context, index) {
                             return customRadioListTile(
                                 index,
-                                Text(widget
+                                AutoSizeText(widget
                                     .schedule.monday!.ksc!.meals![index].meal
-                                    .toString()));
+                                    .toString(), style: TextStyle(color: Theme.of(context).colorScheme.onTertiary)));
                           })
                       : widget.selectedDay == 2
                           ? ListView.builder(
-                              itemCount: widget
-                                  .schedule.tuesday!.ksc!.meals!.length,
+                              itemCount:
+                                  widget.schedule.tuesday!.ksc!.meals!.length,
                               itemBuilder: (context, index) {
                                 return customRadioListTile(
                                     index,
-                                    Text(widget
-                                        .schedule.tuesday!.ksc!.meals![index].meal
-                                        .toString()));
+                                    AutoSizeText(widget.schedule.tuesday!.ksc!
+                                        .meals![index].meal
+                                        .toString(), style: TextStyle(color: Theme.of(context).colorScheme.onTertiary)));
                               })
                           : widget.selectedDay == 3
                               ? ListView.builder(
-                                  itemCount: widget.schedule.wednesday!.ksc!
-                                      .meals!.length,
+                                  itemCount: widget
+                                      .schedule.wednesday!.ksc!.meals!.length,
                                   itemBuilder: (context, index) {
                                     return customRadioListTile(
                                         index,
-                                        Text(widget.schedule.wednesday!.ksc!
-                                            .meals![index].meal
-                                            .toString()));
+                                        AutoSizeText(widget.schedule.wednesday!
+                                            .ksc!.meals![index].meal
+                                            .toString(), style: TextStyle(color: Theme.of(context).colorScheme.onTertiary)));
                                   })
                               : widget.selectedDay == 4
                                   ? ListView.builder(
-                                      itemCount: widget.schedule.thursday!
-                                          .ksc!.meals!.length,
+                                      itemCount: widget.schedule.thursday!.ksc!
+                                          .meals!.length,
                                       itemBuilder: (context, index) {
-                                        return Text(widget.schedule.thursday!
-                                            .ksc!.meals![index].meal
-                                            .toString());
+                                        return AutoSizeText(widget.schedule
+                                            .thursday!.ksc!.meals![index].meal
+                                            .toString(), style: TextStyle(color: Theme.of(context).colorScheme.onTertiary));
                                       })
                                   : widget.selectedDay == 5
                                       ? Container()
@@ -111,15 +110,16 @@ class _DailyKSCContainerState extends State<DailyKSCContainer> {
                   style: ElevatedButton.styleFrom(
                     minimumSize:
                         Size(MediaQuery.of(context).size.width * 0.7, 50),
-                    backgroundColor: Theme.of(context).primaryColor,
+                    backgroundColor: Theme.of(context).colorScheme.primary,
                   ),
-                  child:  Text(
+                  child: AutoSizeText(
                     'submit',
-                    style: TextStyle(color: Theme.of(context).colorScheme.secondary),
+                    style: TextStyle(
+                        color: Theme.of(context).colorScheme.background),
                   ),
                 ),
               )),
-          Text(selectedChoice)
+          AutoSizeText(selectedChoice)
         ],
       ),
     );
@@ -128,7 +128,8 @@ class _DailyKSCContainerState extends State<DailyKSCContainer> {
   Widget customRadioListTile(index, text) {
     return RadioListTile(
       dense: true,
-      activeColor: Theme.of(context).primaryColor,
+      activeColor: Theme.of(context).colorScheme.onTertiary,
+      
       controlAffinity: ListTileControlAffinity.leading,
       title: text,
       value: index,

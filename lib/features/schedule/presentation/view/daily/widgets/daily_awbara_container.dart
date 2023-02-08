@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../domain/entities/schedule_entity.dart';
-
+import 'package:auto_size_text/auto_size_text.dart';
 class DailyAwbaraContainer extends StatefulWidget {
   int selectedDay;
 
@@ -32,17 +32,17 @@ class _DailyAwbaraContainerState extends State<DailyAwbaraContainer> {
       height: MediaQuery.of(context).size.height * 0.6,
       width: MediaQuery.of(context).size.width * 0.9,
       decoration:  BoxDecoration(
-        color: Theme.of(context).colorScheme.secondary,
+        color: Theme.of(context).colorScheme.onSecondary,
         borderRadius: BorderRadius.all(Radius.circular(20)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Padding(
-            padding: EdgeInsets.only(top: 30, bottom: 15, left: 30),
-            child: Text(
+           Padding(
+            padding:const EdgeInsets.only(top: 30, bottom: 15, left: 30),
+            child: AutoSizeText(
               'Todays schedule',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20,color: Theme.of(context).colorScheme.onTertiary),
             ),
           ),
           Expanded(
@@ -52,8 +52,8 @@ class _DailyAwbaraContainerState extends State<DailyAwbaraContainer> {
                       itemBuilder: (context, index) {
                         return customRadioListTile(
                             index,
-                            Text(widget.schedule.sunday!.awbara!.meals![index].meal
-                                .toString()));
+                            AutoSizeText(widget.schedule.sunday!.awbara!.meals![index].meal
+                                .toString(), style: TextStyle(color:Theme.of(context).colorScheme.onTertiary)));
                       },
                     )
                   : widget.selectedDay == 1
@@ -63,9 +63,9 @@ class _DailyAwbaraContainerState extends State<DailyAwbaraContainer> {
                           itemBuilder: (context, index) {
                             return customRadioListTile(
                                 index,
-                                Text(widget
+                                AutoSizeText(widget
                                     .schedule.monday!.awbara!.meals![index].meal
-                                    .toString()));
+                                    .toString(), style: TextStyle(color: Theme.of(context).colorScheme.onTertiary)));
                           })
                       : widget.selectedDay == 2
                           ? ListView.builder(
@@ -74,9 +74,9 @@ class _DailyAwbaraContainerState extends State<DailyAwbaraContainer> {
                               itemBuilder: (context, index) {
                                 return customRadioListTile(
                                     index,
-                                    Text(widget
+                                    AutoSizeText(widget
                                         .schedule.tuesday!.awbara!.meals![index].meal
-                                        .toString()));
+                                        .toString(), style: TextStyle(color: Theme.of(context).colorScheme.onTertiary)));
                               })
                           : widget.selectedDay == 3
                               ? ListView.builder(
@@ -85,18 +85,18 @@ class _DailyAwbaraContainerState extends State<DailyAwbaraContainer> {
                                   itemBuilder: (context, index) {
                                     return customRadioListTile(
                                         index,
-                                        Text(widget.schedule.wednesday!.awbara!
+                                        AutoSizeText(widget.schedule.wednesday!.awbara!
                                             .meals![index].meal
-                                            .toString()));
+                                            .toString(), style: TextStyle(color: Theme.of(context).colorScheme.onTertiary)));
                                   })
                               : widget.selectedDay == 4
                                   ? ListView.builder(
                                       itemCount: widget.schedule.thursday!
                                           .awbara!.meals!.length,
                                       itemBuilder: (context, index) {
-                                        return Text(widget.schedule.thursday!
+                                        return AutoSizeText(widget.schedule.thursday!
                                             .awbara!.meals![index].meal
-                                            .toString());
+                                            .toString(), style: TextStyle(color: Theme.of(context).colorScheme.onTertiary));
                                       })
                                   : widget.selectedDay == 5
                                       ? Container()
@@ -110,15 +110,15 @@ class _DailyAwbaraContainerState extends State<DailyAwbaraContainer> {
                   style: ElevatedButton.styleFrom(
                     minimumSize:
                         Size(MediaQuery.of(context).size.width * 0.7, 50),
-                    backgroundColor: Theme.of(context).primaryColor,
+                    backgroundColor: Theme.of(context).colorScheme.primary,
                   ),
-                  child:  Text(
+                  child:  AutoSizeText(
                     'submit',
-                    style: TextStyle(color: Theme.of(context).colorScheme.secondary),
+                    style: TextStyle(color: Theme.of(context).colorScheme.background),
                   ),
                 ),
               )),
-          Text(selectedChoice)
+          AutoSizeText(selectedChoice)
         ],
       ),
     );
@@ -127,7 +127,7 @@ class _DailyAwbaraContainerState extends State<DailyAwbaraContainer> {
   Widget customRadioListTile(index, text) {
     return RadioListTile(
       dense: true,
-      activeColor: Theme.of(context).primaryColor,
+      activeColor:Theme.of(context).colorScheme.onTertiary,
       controlAffinity: ListTileControlAffinity.leading,
       title: text,
       value: index,

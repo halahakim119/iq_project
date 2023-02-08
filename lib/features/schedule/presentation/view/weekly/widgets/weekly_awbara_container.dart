@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:auto_size_text/auto_size_text.dart';
 import '../../../../domain/entities/schedule_entity.dart';
 
 class WeeklyAwbaraContainer extends StatefulWidget {
@@ -33,7 +33,7 @@ class _WeeklyAwbaraContainerState extends State<WeeklyAwbaraContainer> {
       height: MediaQuery.of(context).size.height * 0.25,
       width: MediaQuery.of(context).size.width * 0.9,
       decoration:  BoxDecoration(
-        color: Theme.of(context).colorScheme.secondary,
+        color: Theme.of(context).colorScheme.onSecondary,
         borderRadius: BorderRadius.all(Radius.circular(20)),
       ),
       child: Padding(
@@ -41,9 +41,9 @@ class _WeeklyAwbaraContainerState extends State<WeeklyAwbaraContainer> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            AutoSizeText(
               'awbara'.toUpperCase(),
-              style: const TextStyle(fontWeight: FontWeight.bold),
+              style:  TextStyle(fontWeight: FontWeight.bold,color:Theme.of(context).colorScheme.onTertiary),
             ),
             const SizedBox(
               height: 5,
@@ -54,8 +54,8 @@ class _WeeklyAwbaraContainerState extends State<WeeklyAwbaraContainer> {
                         itemCount:
                             widget.schedule.sunday!.awbara!.meals!.length,
                         itemBuilder: (context, index) {
-                          return Text(
-                              '• ${widget.schedule.sunday!.awbara!.meals![index].meal}');
+                          return AutoSizeText(
+                              '• ${widget.schedule.sunday!.awbara!.meals![index].meal}',style: TextStyle(color:Theme.of(context).colorScheme.onTertiary));
                         },
                         separatorBuilder: (BuildContext context, int index) {
                           return const SizedBox(
@@ -68,8 +68,8 @@ class _WeeklyAwbaraContainerState extends State<WeeklyAwbaraContainer> {
                             itemCount:
                                 widget.schedule.monday!.awbara!.meals!.length,
                             itemBuilder: (context, index) {
-                              return Text(
-                                  '• ${widget.schedule.monday!.awbara!.meals![index].meal}');
+                              return AutoSizeText(
+                                  '• ${widget.schedule.monday!.awbara!.meals![index].meal}',style: TextStyle(color: Theme.of(context).colorScheme.onTertiary));
                             },
                             separatorBuilder:
                                 (BuildContext context, int index) {
@@ -83,8 +83,8 @@ class _WeeklyAwbaraContainerState extends State<WeeklyAwbaraContainer> {
                                 itemCount: widget
                                     .schedule.tuesday!.awbara!.meals!.length,
                                 itemBuilder: (context, index) {
-                                  return Text(
-                                      '• ${widget.schedule.tuesday!.awbara!.meals![index].meal}');
+                                  return AutoSizeText(
+                                      '• ${widget.schedule.tuesday!.awbara!.meals![index].meal}',style: TextStyle(color:Theme.of(context).colorScheme.onTertiary));
                                 },
                                 separatorBuilder:
                                     (BuildContext context, int index) {
@@ -98,8 +98,8 @@ class _WeeklyAwbaraContainerState extends State<WeeklyAwbaraContainer> {
                                     itemCount: widget.schedule.wednesday!.awbara!
                                         .meals!.length,
                                     itemBuilder: (context, index) {
-                                      return Text(
-                                          '• ${widget.schedule.wednesday!.awbara!.meals![index].meal}');
+                                      return AutoSizeText(
+                                          '• ${widget.schedule.wednesday!.awbara!.meals![index].meal}',style: TextStyle(color: Theme.of(context).colorScheme.onTertiary));
                                     },
                                     separatorBuilder:
                                         (BuildContext context, int index) {
@@ -113,8 +113,8 @@ class _WeeklyAwbaraContainerState extends State<WeeklyAwbaraContainer> {
                                         itemCount: widget.schedule.thursday!
                                             .awbara!.meals!.length,
                                         itemBuilder: (context, index) {
-                                          return Text(
-                                              '• ${widget.schedule.thursday!.awbara!.meals![index].meal}');
+                                          return AutoSizeText(
+                                              '• ${widget.schedule.thursday!.awbara!.meals![index].meal}',style: TextStyle(color: Theme.of(context).colorScheme.onTertiary));
                                         },
                                         separatorBuilder:
                                             (BuildContext context, int index) {

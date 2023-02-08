@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:iq_project/core/network/internet_checker.dart';
 
 import '../../../../../core/injection/injection_container.dart';
@@ -20,7 +21,7 @@ class _LoadingSplashState extends State<LoadingSplash> {
 
     sl<InternetChecker>().run();
 
-    Future.delayed(const Duration(seconds:4), () {
+    Future.delayed(const Duration(seconds: 4), () {
       final token = "token";
 
       if (token.isNotEmpty) {
@@ -34,22 +35,24 @@ class _LoadingSplashState extends State<LoadingSplash> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).primaryColor,
+      backgroundColor: Theme.of(context).colorScheme.primary,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             const SizedBox(),
-             Text(
+            AutoSizeText(
               'IHUNGRY?',
               style: TextStyle(
-                  fontFamily: 'Monoton', fontSize: 32, color: Theme.of(context).colorScheme.secondary),
+                  fontFamily: 'Monoton',
+                  fontSize: 32,
+                  color: Theme.of(context).colorScheme.background),
             ),
             LoadingBouncingGrid.square(
-              borderColor: Theme.of(context).colorScheme.secondary,
+              borderColor: Theme.of(context).colorScheme.background,
               borderSize: 0.5,
               size: 30.0,
-              backgroundColor: Theme.of(context).colorScheme.secondary,
+              backgroundColor: Theme.of(context).colorScheme.background,
               duration: const Duration(milliseconds: 1500),
             ),
           ],

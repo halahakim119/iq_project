@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:auto_size_text/auto_size_text.dart';
 import '../../../../../core/theme/custom_loading.dart';
 import '../../../../splash/splash_404.dart';
 import '../../logic/cubit/user_cubit.dart';
@@ -16,43 +16,43 @@ class UserProfile extends StatelessWidget {
         loaded: (data) => Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Divider(),
+             Divider(color:   Theme.of(context).colorScheme.onPrimary),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text('Full Name',
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                Text(
+                 AutoSizeText('Full Name',
+                    style: TextStyle(fontWeight: FontWeight.bold,color:  Theme.of(context).colorScheme.onTertiary)),
+                AutoSizeText(
                   data.name,
-                  style: const TextStyle(color: Colors.grey),
+                  style:  TextStyle(color:   Theme.of(context).colorScheme.onPrimary),
                 ),
               ],
             ),
-            const Divider(),
+             Divider(color:   Theme.of(context).colorScheme.onPrimary),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text('Department',
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                Text(
+                 AutoSizeText('Department',
+                    style: TextStyle(fontWeight: FontWeight.bold,color:  Theme.of(context).colorScheme.onTertiary)),
+                AutoSizeText(
                   data.department,
-                  style: const TextStyle(color: Colors.grey),
+                  style:  TextStyle(color:   Theme.of(context).colorScheme.onPrimary),
                 ),
               ],
             ),
-            const Divider(),
+             Divider(color:   Theme.of(context).colorScheme.onPrimary),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text('Email',
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                Text(
+                 AutoSizeText('Email',
+                    style: TextStyle(fontWeight: FontWeight.bold,color: Theme.of(context).colorScheme.onTertiary)),
+                AutoSizeText(
                   data.email,
-                  style: const TextStyle(color: Colors.grey),
+                  style:  TextStyle(color:   Theme.of(context).colorScheme.onPrimary),
                 ),
               ],
             ),
-            const Divider(),
+             Divider(color:   Theme.of(context).colorScheme.onPrimary),
           ],
         ),
         error: (error) => Splash404(error: error),
