@@ -42,8 +42,8 @@ class _WeeklySchedulaWidgetState extends State<WeeklySchedulaWidget> {
               
                 height: 60,
                 width: double.infinity,
-                decoration: const BoxDecoration(
-                    color: Colors.white,
+                decoration:  BoxDecoration(
+                    color: Theme.of(context).colorScheme.secondary,
                     borderRadius: BorderRadius.all(Radius.circular(50))),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,

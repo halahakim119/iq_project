@@ -1,4 +1,6 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:iq_project/features/profile/presentation/view/widgets/about_us_screen.dart';
+import 'package:iq_project/features/profile/presentation/view/widgets/ordering_policy_screen.dart';
 
 import '../../features/auth/auth_screen.dart';
 import '../../features/main/main_page.dart';
@@ -20,6 +22,16 @@ import '../../features/splash/loading_splash.dart';
       path: 'auth',
       name: 'AuthRoute',
       page: AuthScreen,
+    ),
+    AutoRoute(
+      path: 'aboutUs',
+      name: 'AboutUsScreenRoute',
+      page: AboutUsScreen,
+    ),
+    AutoRoute(
+      path: 'orderingPolicy',
+      name: 'OrderingPolicyScreenRoute',
+      page: OrderingPolicyScreen,
     ),
     AutoRoute(
       path: 'main',

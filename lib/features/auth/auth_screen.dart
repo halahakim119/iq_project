@@ -5,7 +5,8 @@ class AuthScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
+      appBar: AppBar(title: Text('data')),
       body: Center(
         child: Text('Auth'),
       ),

@@ -24,10 +24,7 @@ class _DailyScheduleWidgetState extends State<DailyScheduleWidget> {
 
   @override
   Widget build(BuildContext context) {
-    int hour = DateTime.now().hour;
-
-    return (hour >= 8 && hour < 24)
-        ? FutureBuilder(
+    return FutureBuilder(
             future: _getCurrentDay(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
@@ -38,8 +35,8 @@ class _DailyScheduleWidgetState extends State<DailyScheduleWidget> {
                       Container(
                         margin: const EdgeInsets.all(20),
                         height: 40,
-                        decoration: const BoxDecoration(
-                            color: Colors.white,
+                        decoration:  BoxDecoration(
+                            color: Theme.of(context).colorScheme.secondary,
                             borderRadius:
                                 BorderRadius.all(Radius.circular(50))),
                         child: Row(
@@ -93,9 +90,7 @@ class _DailyScheduleWidgetState extends State<DailyScheduleWidget> {
               }
             },
           )
-        : Center(
-            child: Text('food is not ready yet'),
-          );
+        ;
   }
 
   Future<String> _getCurrentDay() async {
@@ -136,14 +131,14 @@ class _DailyScheduleWidgetState extends State<DailyScheduleWidget> {
                   bottomRight: Radius.circular(50)),
               color: selectedRestaurant == restaurant
                   ? Theme.of(context).primaryColor
-                  : Colors.white),
+                  : Theme.of(context).colorScheme.secondary),
           child: Center(
             child: Text(
               restaurant.toUpperCase(),
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: selectedRestaurant == restaurant
-                      ? Colors.white
+                      ? Theme.of(context).colorScheme.secondary
                       : Colors.black),
             ),
           ),

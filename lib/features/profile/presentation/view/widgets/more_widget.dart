@@ -23,7 +23,8 @@ class MoreWidget extends StatelessWidget {
             ],
           ),
           onTap: () {
-            context.router.pushNamed('auth');
+            
+            context.router.pushNamed('aboutUs');
           },
         ),
         const Divider(),
@@ -41,7 +42,7 @@ class MoreWidget extends StatelessWidget {
             ],
           ),
           onTap: () {
-            context.router.pushNamed('auth');
+            context.router.pushNamed('orderingPolicy');
           },
         ),
         const Divider(),

@@ -31,8 +31,8 @@ class _DailyAwbaraContainerState extends State<DailyAwbaraContainer> {
     return Container(
       height: MediaQuery.of(context).size.height * 0.6,
       width: MediaQuery.of(context).size.width * 0.9,
-      decoration: const BoxDecoration(
-        color: Colors.white,
+      decoration:  BoxDecoration(
+        color: Theme.of(context).colorScheme.secondary,
         borderRadius: BorderRadius.all(Radius.circular(20)),
       ),
       child: Column(
@@ -112,9 +112,9 @@ class _DailyAwbaraContainerState extends State<DailyAwbaraContainer> {
                         Size(MediaQuery.of(context).size.width * 0.7, 50),
                     backgroundColor: Theme.of(context).primaryColor,
                   ),
-                  child: const Text(
+                  child:  Text(
                     'submit',
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: Theme.of(context).colorScheme.secondary),
                   ),
                 ),
               )),

@@ -32,8 +32,8 @@ class _WeeklyAwbaraContainerState extends State<WeeklyAwbaraContainer> {
     return Container(
       height: MediaQuery.of(context).size.height * 0.25,
       width: MediaQuery.of(context).size.width * 0.9,
-      decoration: const BoxDecoration(
-        color: Colors.white,
+      decoration:  BoxDecoration(
+        color: Theme.of(context).colorScheme.secondary,
         borderRadius: BorderRadius.all(Radius.circular(20)),
       ),
       child: Padding(

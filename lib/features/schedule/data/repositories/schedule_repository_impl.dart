@@ -19,7 +19,7 @@ class ScheduleRepositoryImpl implements ScheduleRepository {
 
     return data.fold((failure) => Left(failure), (schedule) {
       final ScheduleModel data = ScheduleModel.fromJson(schedule);
- print(data);
+ 
       return Right(data);
     });
   }

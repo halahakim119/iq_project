@@ -11,88 +11,112 @@
 // ignore_for_file: type=lint
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i7;
-import 'package:flutter/material.dart' as _i8;
+import 'package:auto_route/auto_route.dart' as _i9;
+import 'package:flutter/material.dart' as _i10;
 
 import '../../features/auth/auth_screen.dart' as _i2;
-import '../../features/main/main_page.dart' as _i3;
+import '../../features/main/main_page.dart' as _i5;
 import '../../features/profile/presentation/view/pages/profile_screen.dart'
-    as _i6;
-import '../../features/schedule/presentation/view/daily/page/daily_schedule_screen.dart'
-    as _i5;
-import '../../features/schedule/presentation/view/weekly/pages/weekly_schedule_screen.dart'
+    as _i8;
+import '../../features/profile/presentation/view/widgets/about_us_screen.dart'
+    as _i3;
+import '../../features/profile/presentation/view/widgets/ordering_policy_screen.dart'
     as _i4;
+import '../../features/schedule/presentation/view/daily/page/daily_schedule_screen.dart'
+    as _i7;
+import '../../features/schedule/presentation/view/weekly/pages/weekly_schedule_screen.dart'
+    as _i6;
 import '../../features/splash/loading_splash.dart' as _i1;
 
-class AppRouter extends _i7.RootStackRouter {
-  AppRouter([_i8.GlobalKey<_i8.NavigatorState>? navigatorKey])
+class AppRouter extends _i9.RootStackRouter {
+  AppRouter([_i10.GlobalKey<_i10.NavigatorState>? navigatorKey])
       : super(navigatorKey);
 
   @override
-  final Map<String, _i7.PageFactory> pagesMap = {
+  final Map<String, _i9.PageFactory> pagesMap = {
     LoadingSplashRoute.name: (routeData) {
-      return _i7.MaterialPageX<dynamic>(
+      return _i9.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i1.LoadingSplash(),
       );
     },
     AuthRoute.name: (routeData) {
-      return _i7.MaterialPageX<dynamic>(
+      return _i9.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i2.AuthScreen(),
       );
     },
-    MainRoute.name: (routeData) {
-      return _i7.MaterialPageX<dynamic>(
+    AboutUsScreenRoute.name: (routeData) {
+      return _i9.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i3.MainPage(),
+        child: _i3.AboutUsScreen(),
+      );
+    },
+    OrderingPolicyScreenRoute.name: (routeData) {
+      return _i9.MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const _i4.OrderingPolicyScreen(),
+      );
+    },
+    MainRoute.name: (routeData) {
+      return _i9.MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const _i5.MainPage(),
       );
     },
     WeeklyScheduleScreenRoute.name: (routeData) {
-      return _i7.MaterialPageX<dynamic>(
+      return _i9.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i4.WeeklyScheduleScreen(),
+        child: _i6.WeeklyScheduleScreen(),
       );
     },
     DailyScheduleScreenRoute.name: (routeData) {
-      return _i7.MaterialPageX<dynamic>(
+      return _i9.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i5.DailyScheduleScreen(),
+        child: _i7.DailyScheduleScreen(),
       );
     },
     ProfileScreenRoute.name: (routeData) {
-      return _i7.MaterialPageX<dynamic>(
+      return _i9.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i6.ProfileScreen(),
+        child: const _i8.ProfileScreen(),
       );
     },
   };
 
   @override
-  List<_i7.RouteConfig> get routes => [
-        _i7.RouteConfig(
+  List<_i9.RouteConfig> get routes => [
+        _i9.RouteConfig(
           LoadingSplashRoute.name,
           path: '/',
         ),
-        _i7.RouteConfig(
+        _i9.RouteConfig(
           AuthRoute.name,
           path: 'auth',
         ),
-        _i7.RouteConfig(
+        _i9.RouteConfig(
+          AboutUsScreenRoute.name,
+          path: 'aboutUs',
+        ),
+        _i9.RouteConfig(
+          OrderingPolicyScreenRoute.name,
+          path: 'orderingPolicy',
+        ),
+        _i9.RouteConfig(
           MainRoute.name,
           path: 'main',
           children: [
-            _i7.RouteConfig(
+            _i9.RouteConfig(
               WeeklyScheduleScreenRoute.name,
               path: 'weekly',
               parent: MainRoute.name,
             ),
-            _i7.RouteConfig(
+            _i9.RouteConfig(
               DailyScheduleScreenRoute.name,
               path: 'daily',
               parent: MainRoute.name,
             ),
-            _i7.RouteConfig(
+            _i9.RouteConfig(
               ProfileScreenRoute.name,
               path: 'profile',
               parent: MainRoute.name,
@@ -104,7 +128,7 @@ class AppRouter extends _i7.RootStackRouter {
 
 /// generated route for
 /// [_i1.LoadingSplash]
-class LoadingSplashRoute extends _i7.PageRouteInfo<void> {
+class LoadingSplashRoute extends _i9.PageRouteInfo<void> {
   const LoadingSplashRoute()
       : super(
           LoadingSplashRoute.name,
@@ -116,7 +140,7 @@ class LoadingSplashRoute extends _i7.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i2.AuthScreen]
-class AuthRoute extends _i7.PageRouteInfo<void> {
+class AuthRoute extends _i9.PageRouteInfo<void> {
   const AuthRoute()
       : super(
           AuthRoute.name,
@@ -127,9 +151,33 @@ class AuthRoute extends _i7.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i3.MainPage]
-class MainRoute extends _i7.PageRouteInfo<void> {
-  const MainRoute({List<_i7.PageRouteInfo>? children})
+/// [_i3.AboutUsScreen]
+class AboutUsScreenRoute extends _i9.PageRouteInfo<void> {
+  const AboutUsScreenRoute()
+      : super(
+          AboutUsScreenRoute.name,
+          path: 'aboutUs',
+        );
+
+  static const String name = 'AboutUsScreenRoute';
+}
+
+/// generated route for
+/// [_i4.OrderingPolicyScreen]
+class OrderingPolicyScreenRoute extends _i9.PageRouteInfo<void> {
+  const OrderingPolicyScreenRoute()
+      : super(
+          OrderingPolicyScreenRoute.name,
+          path: 'orderingPolicy',
+        );
+
+  static const String name = 'OrderingPolicyScreenRoute';
+}
+
+/// generated route for
+/// [_i5.MainPage]
+class MainRoute extends _i9.PageRouteInfo<void> {
+  const MainRoute({List<_i9.PageRouteInfo>? children})
       : super(
           MainRoute.name,
           path: 'main',
@@ -140,8 +188,8 @@ class MainRoute extends _i7.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i4.WeeklyScheduleScreen]
-class WeeklyScheduleScreenRoute extends _i7.PageRouteInfo<void> {
+/// [_i6.WeeklyScheduleScreen]
+class WeeklyScheduleScreenRoute extends _i9.PageRouteInfo<void> {
   const WeeklyScheduleScreenRoute()
       : super(
           WeeklyScheduleScreenRoute.name,
@@ -152,8 +200,8 @@ class WeeklyScheduleScreenRoute extends _i7.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i5.DailyScheduleScreen]
-class DailyScheduleScreenRoute extends _i7.PageRouteInfo<void> {
+/// [_i7.DailyScheduleScreen]
+class DailyScheduleScreenRoute extends _i9.PageRouteInfo<void> {
   const DailyScheduleScreenRoute()
       : super(
           DailyScheduleScreenRoute.name,
@@ -164,8 +212,8 @@ class DailyScheduleScreenRoute extends _i7.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i6.ProfileScreen]
-class ProfileScreenRoute extends _i7.PageRouteInfo<void> {
+/// [_i8.ProfileScreen]
+class ProfileScreenRoute extends _i9.PageRouteInfo<void> {
   const ProfileScreenRoute()
       : super(
           ProfileScreenRoute.name,

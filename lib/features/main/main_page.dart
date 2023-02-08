@@ -13,9 +13,11 @@ class MainPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: const Text(
-          'Projet name',
-          style: TextStyle(color: Colors.white, fontSize: 18),
+        title:  Text(
+          'iHUNGRY',
+          style: TextStyle(
+            letterSpacing: 4,
+              color: Theme.of(context).colorScheme.secondary, fontSize: 20, fontFamily: 'Fredoka_One'),
         ),
         centerTitle: true,
         backgroundColor: Theme.of(context).primaryColor,
@@ -31,22 +33,22 @@ class MainPage extends StatelessWidget {
             onTap: tabsRouter.setActiveIndex,
             color: Theme.of(context).primaryColor,
             animationDuration: const Duration(milliseconds: 250),
-            index: tabsRouter.activeIndex,
+            index: tabsRouter.activeIndex ,
             buttonBackgroundColor: Theme.of(context).primaryColor,
             backgroundColor: Theme.of(context).backgroundColor,
             animationCurve: Curves.ease,
-            items: const [
+            items:  [
               Icon(
                 UniconsLine.calendar_alt,
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.secondary,
               ),
               Icon(
                 UniconsLine.restaurant,
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.secondary,
               ),
               Icon(
                 UniconsLine.user,
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.secondary,
               ),
             ],
           );

@@ -32,14 +32,15 @@ class MyApp extends StatelessWidget {
           routeInformationParser: _appRouter.defaultRouteParser(),
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
-              brightness: Brightness.light,scaffoldBackgroundColor: Colors.grey.shade200,
-              // useMaterial3: true,\
+              scaffoldBackgroundColor: Colors.grey.shade200,
+              useMaterial3: true,
+              colorScheme: const ColorScheme.light(
+                secondary: Colors.white,
+              ),
               indicatorColor: const Color.fromARGB(255, 119, 29, 22),
-              primaryColor: const Color.fromARGB(255, 119, 29, 22),
+              primaryColor: Color.fromARGB(255, 255, 17, 0),
               backgroundColor: Colors.grey.shade200),
-              
-
-        ), 
+        ),
       ),
     );
   }

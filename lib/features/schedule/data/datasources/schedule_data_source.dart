@@ -1,7 +1,8 @@
 import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
-
+// import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:http/http.dart' as http;
 import '../../../../core/error/failure.dart';
 
 abstract class ScheduleDataSource {
@@ -157,12 +158,11 @@ class ScheduleDataSourceImpl implements ScheduleDataSource {
        
 ''';
     final decodedJson = json.decode(schedule);
-   
+
     return Right(decodedJson);
     //  final prefs = await SharedPreferences.getInstance();
     // final token = prefs.getString('token');
     // final id = prefs.getString('id');
-    //  use id;
 
     // final headers = {
     //   'Content-Type': 'application/json',
