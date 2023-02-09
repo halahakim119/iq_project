@@ -19,11 +19,11 @@ class ScheduleDataSourceImpl implements ScheduleDataSource {
         "meals": [
           {
             "id": 1,
-            "meal": "1rice"
+            "meal": "Rice + roasted potatoes + mixed greens salad"
           },
           {
             "id": 2,
-            "meal": "1salad"
+            "meal": "Fried rice + mashed potatoes + coleslaw salad"
           }
         ]
       },
@@ -32,11 +32,11 @@ class ScheduleDataSourceImpl implements ScheduleDataSource {
         "meals": [
           {
             "id": 1,
-            "meal": "1rice + potatoes + salad"
+            "meal": "Rice pilaf + baked potatoes + tomato and cucumber salad"
           },
           {
             "id": 2,
-            "meal": "1salad + potatoes + meat"
+            "meal": "Basmati rice + mashed sweet potatoes + carrot and raisin salad"
           }
         ]
       }
@@ -47,11 +47,11 @@ class ScheduleDataSourceImpl implements ScheduleDataSource {
         "meals": [
           {
             "id": 1,
-            "meal": "2rice + potatoes + salad"
+            "meal": "Rice and beans + french fried potatoes + Caesar salad"
           },
           {
             "id": 2,
-            "meal": "2salad + potatoes + meat"
+            "meal": "Jasmine rice + boiled baby potatoes + spinach salad"
           }
         ]
       },
@@ -60,11 +60,11 @@ class ScheduleDataSourceImpl implements ScheduleDataSource {
         "meals": [
           {
             "id": 1,
-            "meal": "2rice + potatoes + salad"
+            "meal": "Brown rice + roasted garlic potatoes + mixed fruit salad"
           },
           {
             "id": 2,
-            "meal": "2salad + potatoes + meat"
+            "meal": "Stuffed bell peppers with rice and potatoes + arugula salad"
           }
         ]
       }
@@ -75,11 +75,11 @@ class ScheduleDataSourceImpl implements ScheduleDataSource {
         "meals": [
           {
             "id": 1,
-            "meal": "3rice + potatoes + salad"
+            "meal": "Stuffed bell peppers with rice and potatoes + arugula salad"
           },
           {
             "id": 2,
-            "meal": "3salad + potatoes + meat"
+            "meal": "Rice and chicken stew + roasted baby potatoes + mixed vegetable salad."
           }
         ]
       },
@@ -88,11 +88,11 @@ class ScheduleDataSourceImpl implements ScheduleDataSource {
         "meals": [
           {
             "id": 1,
-            "meal": "3rice + potatoes + salad"
+            "meal": "Rice and tofu stir-fry + mashed purple potatoes + beet salad"
           },
           {
             "id": 2,
-            "meal": "3salad + potatoes + meat"
+            "meal": "Rice and vegetable stir-fry + roasted fingerling potatoes + kale salad"
           }
         ]
       }
@@ -103,11 +103,11 @@ class ScheduleDataSourceImpl implements ScheduleDataSource {
         "meals": [
           {
             "id": 1,
-            "meal": "4rice + potatoes + salad"
+            "meal": "Rice and shrimp paella + fried yukon gold potatoes + cherry tomato and mozzarella salad"
           },
           {
             "id": 2,
-            "meal": "4salad + potatoes + meat"
+            "meal": "Rice and beef stir-fry + crispy smashed potatoes + red onion and radicchio salad"
           }
         ]
       },
@@ -116,11 +116,11 @@ class ScheduleDataSourceImpl implements ScheduleDataSource {
         "meals": [
           {
             "id": 1,
-            "meal": "4rice"
+            "meal": "Rice and sausage casserole + boiled red potatoes + red lettuce and apple salad"
           },
           {
             "id": 2,
-            "meal": "4potatoes + meat"
+            "meal": "Rice and mushroom risotto + mashed sweet and regular potatoes + mixed greens and feta cheese salad"
           }
         ]
       }
@@ -131,11 +131,11 @@ class ScheduleDataSourceImpl implements ScheduleDataSource {
         "meals": [
           {
             "id": 1,
-            "meal": "5potatoes + salad"
+            "meal": "Rice and mushroom risotto + mashed sweet and regular potatoes + mixed greens and feta cheese salad"
           },
           {
             "id": 2,
-            "meal": "5salad"
+            "meal": "Rice and pork chops + mashed purple and sweet potatoes + mixed greens and nuts salad"
           }
         ]
       },
@@ -144,11 +144,11 @@ class ScheduleDataSourceImpl implements ScheduleDataSource {
         "meals": [
           {
             "id": 1,
-            "meal": "5rice"
+            "meal": "Rice and lentil soup + boiled baby potatoes + mixed vegetable and lemon vinaigrette salad"
           },
           {
             "id": 2,
-            "meal": "5potatoes + meat"
+            "meal": "Rice and chicken alfredo + crispy rosemary roasted potatoes + mixed greens and pear salad."
           }
         ]
            }

@@ -47,7 +47,7 @@ class _DailyScheduleWidgetState extends State<DailyScheduleWidget> {
                           ],
                         ),
                       ),
-                      selectedRestaurant == "awbara"
+                      selectedRestaurant == "ksc"
                           ? DailyKSCContainer(
                               schedule: widget.schedule,
                               selectedDay: snapshot.data.toString() == "Sunday"
@@ -138,7 +138,7 @@ class _DailyScheduleWidgetState extends State<DailyScheduleWidget> {
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: selectedRestaurant == restaurant
-                      ? Theme.of(context).colorScheme.onTertiary
+                      ? Theme.of(context).colorScheme.background
                       : Theme.of(context).colorScheme.primary),
             ),
           ),

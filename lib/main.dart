@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:overlay_support/overlay_support.dart';
 
 import 'core/injection/injection_container.dart' as di;
 import 'core/router/router.gr.dart';
@@ -33,11 +34,13 @@ class MyApp extends StatelessWidget {
       ],
       child: BlocBuilder<ThemeBloc, ThemeState>(
         builder: (context, state) {
-          return MaterialApp.router(
-              routerDelegate: _appRouter.delegate(),
-              routeInformationParser: _appRouter.defaultRouteParser(),
-              debugShowCheckedModeBanner: false,
-              theme: state.themeData);
+          return OverlaySupport.global(
+            child: MaterialApp.router(
+                routerDelegate: _appRouter.delegate(),
+                routeInformationParser: _appRouter.defaultRouteParser(),
+                debugShowCheckedModeBanner: false,
+                theme: state.themeData),
+          );
         },
       ),
     );

@@ -1,10 +1,11 @@
-import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/material.dart';
+
 import '../../../../domain/entities/schedule_entity.dart';
+import 'day_meals.dart';
 
 class WeeklyKSCContainer extends StatefulWidget {
   int selectedDay;
-
   ScheduleEntity schedule;
   WeeklyKSCContainer({
     required this.selectedDay,
@@ -17,14 +18,13 @@ class WeeklyKSCContainer extends StatefulWidget {
 
 class _WeeklyKSCContainerState extends State<WeeklyKSCContainer> {
   @override
-  @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.25,
+      height: MediaQuery.of(context).size.height * 0.3,
       width: MediaQuery.of(context).size.width * 0.9,
-      decoration:  BoxDecoration(
+      decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.onSecondary,
-        borderRadius: BorderRadius.all(Radius.circular(20)),
+        borderRadius: const BorderRadius.all(Radius.circular(20)),
       ),
       child: Padding(
         padding: const EdgeInsets.only(top: 30.0, left: 30.0, bottom: 10),
@@ -32,88 +32,27 @@ class _WeeklyKSCContainerState extends State<WeeklyKSCContainer> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             AutoSizeText(
-              'ksc'.toUpperCase(),
-              style:  TextStyle(fontWeight: FontWeight.bold,color:Theme.of(context).colorScheme.onTertiary),
+              ' ksc'.toUpperCase(),
+              style: TextStyle(
+                  fontSize: 18,
+                  color: Theme.of(context).colorScheme.onTertiary),
             ),
             const SizedBox(
               height: 5,
             ),
             Expanded(
                 child: widget.selectedDay == 0
-                    ? ListView.separated(
-                        itemCount: widget.schedule.sunday!.ksc!.meals!.length,
-                        itemBuilder: (context, index) {
-                          return AutoSizeText(
-                              '• ${widget.schedule.sunday!.ksc!.meals![index].meal}',style: TextStyle(color:Theme.of(context).colorScheme.onTertiary
-                              
-                              ),);
-                        },
-                        separatorBuilder: (BuildContext context, int index) {
-                          return const SizedBox(
-                            height: 5,
-                          );
-                        },
-                      )
+                    ? DayMeals(widget.schedule.sunday!.ksc!.meals!)
                     : widget.selectedDay == 1
-                        ? ListView.separated(
-                            itemCount:
-                                widget.schedule.monday!.ksc!.meals!.length,
-                            itemBuilder: (context, index) {
-                              return AutoSizeText(
-                                  '• ${widget.schedule.monday!.ksc!.meals![index].meal}',style: TextStyle(color:Theme.of(context).colorScheme.onTertiary));
-                            },
-                            separatorBuilder:
-                                (BuildContext context, int index) {
-                              return const SizedBox(
-                                height: 5,
-                              );
-                            },
-                          )
+                        ? DayMeals(widget.schedule.monday!.ksc!.meals!)
                         : widget.selectedDay == 2
-                            ? ListView.separated(
-                                itemCount:
-                                    widget.schedule.tuesday!.ksc!.meals!.length,
-                                itemBuilder: (context, index) {
-                                  return AutoSizeText(
-                                      '• ${widget.schedule.tuesday!.ksc!.meals![index].meal}',style: TextStyle(color: Theme.of(context).colorScheme.onTertiary));
-                                },
-                                separatorBuilder:
-                                    (BuildContext context, int index) {
-                                  return const SizedBox(
-                                    height: 5,
-                                  );
-                                },
-                              )
+                            ? DayMeals(widget.schedule.tuesday!.ksc!.meals!)
                             : widget.selectedDay == 3
-                                ? ListView.separated(
-                                itemCount:
-                                    widget.schedule.wednesday!.ksc!.meals!.length,
-                                itemBuilder: (context, index) {
-                                  return AutoSizeText(
-                                      '• ${widget.schedule.wednesday!.ksc!.meals![index].meal}',style: TextStyle(color:Theme.of(context).colorScheme.onTertiary));
-                                },
-                                separatorBuilder:
-                                    (BuildContext context, int index) {
-                                  return const SizedBox(
-                                    height: 5,
-                                  );
-                                },
-                              )
+                                ? DayMeals(
+                                    widget.schedule.wednesday!.ksc!.meals!)
                                 : widget.selectedDay == 4
-                                    ? ListView.separated(
-                                        itemCount: widget.schedule.thursday!
-                                            .ksc!.meals!.length,
-                                        itemBuilder: (context, index) {
-                                          return AutoSizeText(
-                                              '• ${widget.schedule.thursday!.ksc!.meals![index].meal}',style: TextStyle(color: Theme.of(context).colorScheme.onTertiary));
-                                        },
-                                        separatorBuilder:
-                                            (BuildContext context, int index) {
-                                          return const SizedBox(
-                                            height: 5,
-                                          );
-                                        },
-                                      )
+                                    ? DayMeals(
+                                        widget.schedule.thursday!.ksc!.meals!)
                                     : widget.selectedDay == 5
                                         ? Container()
                                         : Container()),

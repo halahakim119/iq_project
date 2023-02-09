@@ -1,7 +1,8 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../domain/entities/schedule_entity.dart';
-import 'package:auto_size_text/auto_size_text.dart';
+
 class DailyAwbaraContainer extends StatefulWidget {
   int selectedDay;
 
@@ -31,73 +32,37 @@ class _DailyAwbaraContainerState extends State<DailyAwbaraContainer> {
     return Container(
       height: MediaQuery.of(context).size.height * 0.6,
       width: MediaQuery.of(context).size.width * 0.9,
-      decoration:  BoxDecoration(
+      decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.onSecondary,
         borderRadius: BorderRadius.all(Radius.circular(20)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-           Padding(
-            padding:const EdgeInsets.only(top: 30, bottom: 15, left: 30),
+          Padding(
+            padding: const EdgeInsets.only(top: 30, bottom: 15, left: 30),
             child: AutoSizeText(
               'Todays schedule',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20,color: Theme.of(context).colorScheme.onTertiary),
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                  color: Theme.of(context).colorScheme.onTertiary),
             ),
           ),
           Expanded(
-              child: widget.selectedDay == 0
-                  ? ListView.builder(
-                      itemCount: widget.schedule.sunday!.awbara!.meals!.length,
-                      itemBuilder: (context, index) {
-                        return customRadioListTile(
-                            index,
-                            AutoSizeText(widget.schedule.sunday!.awbara!.meals![index].meal
-                                .toString(), style: TextStyle(color:Theme.of(context).colorScheme.onTertiary)));
-                      },
-                    )
+               child: widget.selectedDay == 0
+                  ? CustomDailyMealsAwbara(widget.schedule.sunday!.awbara!.meals)
                   : widget.selectedDay == 1
-                      ? ListView.builder(
-                          itemCount:
-                              widget.schedule.monday!.awbara!.meals!.length,
-                          itemBuilder: (context, index) {
-                            return customRadioListTile(
-                                index,
-                                AutoSizeText(widget
-                                    .schedule.monday!.awbara!.meals![index].meal
-                                    .toString(), style: TextStyle(color: Theme.of(context).colorScheme.onTertiary)));
-                          })
+                      ? CustomDailyMealsAwbara(widget.schedule.monday!.awbara!.meals)
                       : widget.selectedDay == 2
-                          ? ListView.builder(
-                              itemCount: widget
-                                  .schedule.tuesday!.awbara!.meals!.length,
-                              itemBuilder: (context, index) {
-                                return customRadioListTile(
-                                    index,
-                                    AutoSizeText(widget
-                                        .schedule.tuesday!.awbara!.meals![index].meal
-                                        .toString(), style: TextStyle(color: Theme.of(context).colorScheme.onTertiary)));
-                              })
+                          ? CustomDailyMealsAwbara(
+                              widget.schedule.tuesday!.awbara!.meals)
                           : widget.selectedDay == 3
-                              ? ListView.builder(
-                                  itemCount: widget.schedule.wednesday!.awbara!
-                                      .meals!.length,
-                                  itemBuilder: (context, index) {
-                                    return customRadioListTile(
-                                        index,
-                                        AutoSizeText(widget.schedule.wednesday!.awbara!
-                                            .meals![index].meal
-                                            .toString(), style: TextStyle(color: Theme.of(context).colorScheme.onTertiary)));
-                                  })
+                              ? CustomDailyMealsAwbara(
+                                  widget.schedule.wednesday!.awbara!.meals)
                               : widget.selectedDay == 4
-                                  ? ListView.builder(
-                                      itemCount: widget.schedule.thursday!
-                                          .awbara!.meals!.length,
-                                      itemBuilder: (context, index) {
-                                        return AutoSizeText(widget.schedule.thursday!
-                                            .awbara!.meals![index].meal
-                                            .toString(), style: TextStyle(color: Theme.of(context).colorScheme.onTertiary));
-                                      })
+                                  ? CustomDailyMealsAwbara(
+                                      widget.schedule.thursday!.awbara!.meals)
                                   : widget.selectedDay == 5
                                       ? Container()
                                       : Container()),
@@ -112,9 +77,10 @@ class _DailyAwbaraContainerState extends State<DailyAwbaraContainer> {
                         Size(MediaQuery.of(context).size.width * 0.7, 50),
                     backgroundColor: Theme.of(context).colorScheme.primary,
                   ),
-                  child:  AutoSizeText(
+                  child: AutoSizeText(
                     'submit',
-                    style: TextStyle(color: Theme.of(context).colorScheme.background),
+                    style: TextStyle(
+                        color: Theme.of(context).colorScheme.background),
                   ),
                 ),
               )),
@@ -123,11 +89,24 @@ class _DailyAwbaraContainerState extends State<DailyAwbaraContainer> {
       ),
     );
   }
+   Widget CustomDailyMealsAwbara(meals) {
+    return ListView.builder(
+      itemCount: meals.length,
+      itemBuilder: (context, index) {
+        return customRadioListTile(
+            index,
+            AutoSizeText(meals[index].meal.toString(),
+                style: TextStyle(
+                    color: Theme.of(context).colorScheme.onTertiary)));
+      },
+    );
+  }
+
 
   Widget customRadioListTile(index, text) {
     return RadioListTile(
       dense: true,
-      activeColor:Theme.of(context).colorScheme.onTertiary,
+      activeColor: Theme.of(context).colorScheme.onTertiary,
       controlAffinity: ListTileControlAffinity.leading,
       title: text,
       value: index,

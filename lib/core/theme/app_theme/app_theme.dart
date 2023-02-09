@@ -18,6 +18,7 @@ final appThemeData = {
       blendOnLevel: 40,
       blendOnColors: true,
     ),
+    
     visualDensity: FlexColorScheme.comfortablePlatformDensity,
   ),
   AppTheme.darkTheme: FlexThemeData.dark(
@@ -28,6 +29,7 @@ final appThemeData = {
     primary: const Color.fromARGB(255, 19, 0, 0),
     visualDensity: FlexColorScheme.comfortablePlatformDensity,
     useMaterial3: true,
+    
   )
 };
 
