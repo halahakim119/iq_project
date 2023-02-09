@@ -45,7 +45,6 @@ dependencies:
   json_annotation:
   dio:
   http:
-  
   auto_route: ^5.0.4
   overlay_support: ^2.1.0
   curved_navigation_bar: ^1.0.3
