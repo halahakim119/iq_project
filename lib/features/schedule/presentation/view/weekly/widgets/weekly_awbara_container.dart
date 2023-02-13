@@ -19,10 +19,10 @@ class _WeeklyAwbaraContainerState extends State<WeeklyAwbaraContainer> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.3,
+      // height: MediaQuery.of(context).size.height * 0.3,
       width: MediaQuery.of(context).size.width * 0.9,
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.onSecondary,
+        // color: Theme.of(context).colorScheme.onSecondary,
         borderRadius: BorderRadius.all(Radius.circular(20)),
       ),
       child: Padding(
@@ -40,7 +40,7 @@ class _WeeklyAwbaraContainerState extends State<WeeklyAwbaraContainer> {
             const SizedBox(
               height: 5,
             ),
-            Expanded(
+            Container(
                 child: widget.selectedDay == 0
                     ? DayMeals(widget.schedule.sunday!.awbara!.meals!)
                     : widget.selectedDay == 1

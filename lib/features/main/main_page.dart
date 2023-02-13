@@ -37,7 +37,7 @@ class MainPage extends StatelessWidget {
             animationDuration: const Duration(milliseconds: 250),
             index: tabsRouter.activeIndex,
             buttonBackgroundColor: Theme.of(context).colorScheme.primary,
-            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+            backgroundColor: Colors.transparent,
             animationCurve: Curves.ease,
             items: [
               Icon(

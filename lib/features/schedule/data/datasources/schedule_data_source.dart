@@ -24,6 +24,20 @@ class ScheduleDataSourceImpl implements ScheduleDataSource {
           {
             "id": 2,
             "meal": "Fried rice + mashed potatoes + coleslaw salad"
+          },
+           {
+            "id": 3,
+            "meal": "Fried rice + mashed potatoes + coleslaw salad"
+          }
+          ,
+           {
+            "id": 4,
+            "meal": "Fried rice + mashed potatoes + coleslaw salad"
+          }
+          ,
+           {
+            "id": 5,
+            "meal": "Fried rice + mashed potatoes + coleslaw salad"
           }
         ]
       },
@@ -38,6 +52,7 @@ class ScheduleDataSourceImpl implements ScheduleDataSource {
             "id": 2,
             "meal": "Basmati rice + mashed sweet potatoes + carrot and raisin salad"
           }
+         
         ]
       }
     },

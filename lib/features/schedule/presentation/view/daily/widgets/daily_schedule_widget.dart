@@ -1,10 +1,11 @@
 import 'dart:async';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../domain/entities/schedule_entity.dart';
 import 'daily_awbara_container.dart';
-import 'daily_ksc_container.dart';
+import 'daily_container.dart';
 
 class DailyScheduleWidget extends StatefulWidget {
   ScheduleEntity schedule;
@@ -25,72 +26,82 @@ class _DailyScheduleWidgetState extends State<DailyScheduleWidget> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-            future: _getCurrentDay(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      future: _getCurrentDay(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Container(
+                  margin: const EdgeInsets.all(20),
+                  height: 40,
+                  decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.onSecondary,
+                      borderRadius: BorderRadius.all(Radius.circular(50))),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      Container(
-                        margin: const EdgeInsets.all(20),
-                        height: 40,
-                        decoration:  BoxDecoration(
-                            color: Theme.of(context).colorScheme.onSecondary,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(50))),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            customGestureDetector('ksc'),
-                            customGestureDetector('awbara'),
-                          ],
-                        ),
-                      ),
-                      selectedRestaurant == "ksc"
-                          ? DailyKSCContainer(
-                              schedule: widget.schedule,
-                              selectedDay: snapshot.data.toString() == "Sunday"
-                                  ? 0
-                                  : snapshot.data.toString() == "Monday"
-                                      ? 1
-                                      : snapshot.data.toString() == "Tuesday"
-                                          ? 2
-                                          : snapshot.data.toString() ==
-                                                  "Wednesday"
-                                              ? 3
-                                              : snapshot.data.toString() ==
-                                                      "Thursday"
-                                                  ? 4
-                                                  : 5,
-                            )
-                          : DailyAwbaraContainer(
-                              schedule: widget.schedule,
-                              selectedDay: snapshot.data.toString() == "Sunday"
-                                  ? 0
-                                  : snapshot.data.toString() == "Monday"
-                                      ? 1
-                                      : snapshot.data.toString() == "Tuesday"
-                                          ? 2
-                                          : snapshot.data.toString() ==
-                                                  "Wednesday"
-                                              ? 3
-                                              : snapshot.data.toString() ==
-                                                      "Thursday"
-                                                  ? 4
-                                                  : 5,
-                            )
+                      customGestureDetector('ksc'),
+                      customGestureDetector('awbara'),
                     ],
                   ),
-                );
-              } else {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-            },
-          )
-        ;
+                ),
+                selectedRestaurant == "ksc"
+                    ? DailyContainer(
+                        restaurant: 'ksc',
+                        schedule: widget.schedule,
+                        selectedDay: snapshot.data.toString() == "Sunday"
+                            ? 0
+                            : snapshot.data.toString() == "Monday"
+                                ? 1
+                                : snapshot.data.toString() == "Tuesday"
+                                    ? 2
+                                    : snapshot.data.toString() == "Wednesday"
+                                        ? 3
+                                        : snapshot.data.toString() == "Thursday"
+                                            ? 4
+                                            : 5,
+                      )
+                    : DailyContainer(
+                        restaurant: 'awbara',
+                        schedule: widget.schedule,
+                        selectedDay: snapshot.data.toString() == "Sunday"
+                            ? 0
+                            : snapshot.data.toString() == "Monday"
+                                ? 1
+                                : snapshot.data.toString() == "Tuesday"
+                                    ? 2
+                                    : snapshot.data.toString() == "Wednesday"
+                                        ? 3
+                                        : snapshot.data.toString() == "Thursday"
+                                            ? 4
+                                            : 5,
+                      )
+                // DailyAwbaraContainer(
+                //     schedule: widget.schedule,
+                //     selectedDay: snapshot.data.toString() == "Sunday"
+                //         ? 0
+                //         : snapshot.data.toString() == "Monday"
+                //             ? 1
+                //             : snapshot.data.toString() == "Tuesday"
+                //                 ? 2
+                //                 : snapshot.data.toString() == "Wednesday"
+                //                     ? 3
+                //                     : snapshot.data.toString() == "Thursday"
+                //                         ? 4
+                //                         : 5,
+                //   )
+              ],
+            ),
+          );
+        } else {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+      },
+    );
   }
 
   Future<String> _getCurrentDay() async {

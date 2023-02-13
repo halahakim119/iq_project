@@ -10,13 +10,24 @@ class DayMeals extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
+      shrinkWrap: true,
       itemCount: Meals.length,
       itemBuilder: (context, index) {
         return Container(
           padding: const EdgeInsets.all(10),
           margin: const EdgeInsets.only(right: 25),
           decoration: BoxDecoration(
-            color: Theme.of(context).scaffoldBackgroundColor,
+            // borderRadius: BorderRadius.circular(20.0),
+
+            boxShadow: const [
+              BoxShadow(
+                color: Colors.grey,
+                blurRadius: 10,
+                spreadRadius: 1,
+                offset: Offset(5, 5),
+              ),
+            ],
+            color: Theme.of(context).colorScheme.onSecondary,
             borderRadius: const BorderRadius.all(Radius.circular(20)),
           ),
           child: AutoSizeText(
@@ -27,7 +38,7 @@ class DayMeals extends StatelessWidget {
       },
       separatorBuilder: (BuildContext context, int index) {
         return const SizedBox(
-          height: 5,
+          height: 15,
         );
       },
     );

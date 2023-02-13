@@ -16,7 +16,7 @@ class FoodState extends StatelessWidget {
           alignment: Alignment.center,
           height: MediaQuery.of(context).size.height * 0.7,
           width: double.infinity,
-          decoration:  BoxDecoration(
+          decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.onSecondary,
               borderRadius: const BorderRadius.all(Radius.circular(20))),
           child: Column(
@@ -30,29 +30,28 @@ class FoodState extends StatelessWidget {
                       image: DecorationImage(
                           image: (hour >= 6 && hour < 9)
                               ? const AssetImage('assets/images/waiting.png')
-                              : (hour >= 10 && hour < 12)
-                                  ? const AssetImage(
-                                      'assets/images/cooking.png')
-                                  : (hour >= 12 && hour < 13)
-                                      ? const AssetImage(
-                                          'assets/images/eating.png')
-                                      : const AssetImage(
-                                          'assets/images/no_work.png'),
+                              : (hour >= 12 && hour < 13)
+                                  ? const AssetImage('assets/images/eating.png')
+                                  : const AssetImage(
+                                      'assets/images/no_work.png'),
                           fit: BoxFit.contain),
                       borderRadius:
                           const BorderRadius.all(Radius.circular(20))),
                 ),
                 (hour >= 6 && hour < 9)
-                    ? customAutoSizeText('Menu Not Ready',
-                        'Today\'s menu is not set yet, please check back later at 9:00',context)
-                    : (hour >= 10 && hour < 12)
-                        ? customAutoSizeText('The food is not ready yet',
-                            'Chef is currently preparing your dishes',context)
-                        : (hour >= 12 && hour < 13)
-                            ? customAutoSizeText('Lunch time',
-                                'The food is ready, come and enjoy a delicious meal.',context)
-                            : customAutoSizeText('Closed',
-                                'Sorry, we\'re not serving food outside of our work hours. Please come back tomorrow.',context),
+                    ? customAutoSizeText(
+                        'Menu Not Ready',
+                        'Today\'s menu is not set yet, please check back later at 9:00',
+                        context)
+                    : (hour >= 12 && hour < 13)
+                        ? customAutoSizeText(
+                            'Lunch time',
+                            'The food is ready, come and enjoy a delicious meal.',
+                            context)
+                        : customAutoSizeText(
+                            'Closed',
+                            'Sorry, we\'re not serving food outside of our work hours. Please come back tomorrow.',
+                            context),
                 (hour >= 12 && hour < 13)
                     ? Container(
                         margin: const EdgeInsets.only(top: 20),
@@ -65,7 +64,7 @@ class FoodState extends StatelessWidget {
     );
   }
 
-  Widget customAutoSizeText(boldText, normalText,context) {
+  Widget customAutoSizeText(boldText, normalText, context) {
     return Container(
       margin: const EdgeInsets.only(right: 25, left: 25),
       child: Column(
@@ -76,10 +75,10 @@ class FoodState extends StatelessWidget {
           AutoSizeText(
             boldText,
             textAlign: TextAlign.center,
-            style:  TextStyle(
+            style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 25,
-               color:Theme.of(context).colorScheme.onTertiary,
+              color: Theme.of(context).colorScheme.onTertiary,
             ),
           ),
           const SizedBox(
@@ -88,7 +87,9 @@ class FoodState extends StatelessWidget {
           AutoSizeText(
             normalText,
             textAlign: TextAlign.center,
-            style: TextStyle(color:Theme.of(context).colorScheme.onTertiary,),
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.onTertiary,
+            ),
           ),
         ],
       ),

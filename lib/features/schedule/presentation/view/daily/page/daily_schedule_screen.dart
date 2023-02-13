@@ -1,4 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,7 +16,7 @@ class DailyScheduleScreen extends StatelessWidget {
 
     return (day == 5 || day == 6)
         ? WeekendWidget()
-        : (hour >= 9 && hour < 10)
+        : (hour >= 9 && hour < 15)
             ? SingleChildScrollView(
                 child: BlocBuilder<ScheduleCubit, ScheduleState>(
                   builder: (context, state) {
