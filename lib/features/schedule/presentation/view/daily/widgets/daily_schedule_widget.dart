@@ -4,7 +4,6 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../domain/entities/schedule_entity.dart';
-import 'daily_awbara_container.dart';
 import 'daily_container.dart';
 
 class DailyScheduleWidget extends StatefulWidget {
@@ -49,7 +48,7 @@ class _DailyScheduleWidgetState extends State<DailyScheduleWidget> {
                 ),
                 selectedRestaurant == "ksc"
                     ? DailyContainer(
-                        restaurant: 'ksc',
+                        restaurant: selectedRestaurant,
                         schedule: widget.schedule,
                         selectedDay: snapshot.data.toString() == "Sunday"
                             ? 0
@@ -64,7 +63,7 @@ class _DailyScheduleWidgetState extends State<DailyScheduleWidget> {
                                             : 5,
                       )
                     : DailyContainer(
-                        restaurant: 'awbara',
+                        restaurant: selectedRestaurant,
                         schedule: widget.schedule,
                         selectedDay: snapshot.data.toString() == "Sunday"
                             ? 0

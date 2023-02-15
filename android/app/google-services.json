@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "898822517484",
+    "project_id": "ihungry-iq",
+    "storage_bucket": "ihungry-iq.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:898822517484:android:ac98066fbddbf51f15abc9",
+        "android_client_info": {
+          "package_name": "com.example.iq_project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "898822517484-h5al9hefj6p3usgisv1vgaikq456ui0k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwmAyD2N4tQ_oEQ1n1tpPltO-o1Rg9ZY8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "898822517484-h5al9hefj6p3usgisv1vgaikq456ui0k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

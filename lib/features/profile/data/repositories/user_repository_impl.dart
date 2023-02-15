@@ -16,7 +16,7 @@ class UserRepositoryImpl implements UserRepository {
   Future<Either<Failure, UserEntity>> user() async {
     final result = await userDataSource.getUserData();
     return result.fold((failure) => Left(failure), (user) {
-      final UserModel data = UserModel.fromJson(user);
+      final UserModel data = UserModel.fromFirebaseMap(user);
       return Right(data);
     });
   }

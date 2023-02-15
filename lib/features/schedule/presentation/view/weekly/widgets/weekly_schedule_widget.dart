@@ -29,6 +29,7 @@ class _WeeklySchedulaWidgetState extends State<WeeklySchedulaWidget> {
         alignment: Alignment.center,
         child: Container(
           decoration: const BoxDecoration(
+            
               borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(50),
                   bottomRight: Radius.circular(50),
@@ -39,10 +40,11 @@ class _WeeklySchedulaWidgetState extends State<WeeklySchedulaWidget> {
           child: Column(
             children: [
               Container(
-              
+
                 height: 60,
                 width: double.infinity,
-                decoration:  BoxDecoration(
+                decoration: BoxDecoration(
+                  
                     color: Theme.of(context).colorScheme.onSecondary,
                     borderRadius: BorderRadius.all(Radius.circular(50))),
                 child: Row(

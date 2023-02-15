@@ -46,7 +46,7 @@ class MoreWidget extends StatelessWidget {
             context.router.pushNamed('orderingPolicy');
           },
         ),
-         Divider(color:   Theme.of(context).colorScheme.onTertiary),
+         Divider(color:   Theme.of(context).colorScheme.onPrimary),
       ],
     );
   }

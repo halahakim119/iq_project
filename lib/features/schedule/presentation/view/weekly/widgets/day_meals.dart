@@ -9,36 +9,31 @@ class DayMeals extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-      shrinkWrap: true,
-      itemCount: Meals.length,
-      itemBuilder: (context, index) {
-        return Container(
-          padding: const EdgeInsets.all(10),
-          margin: const EdgeInsets.only(right: 25),
-          decoration: BoxDecoration(
-            // borderRadius: BorderRadius.circular(20.0),
-
-            boxShadow: const [
-              BoxShadow(
-                color: Colors.grey,
-                blurRadius: 10,
-                spreadRadius: 1,
-                offset: Offset(5, 5),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        int columnCount = (constraints.maxWidth < 300) ? 1 : (constraints.maxWidth > 300 && constraints.maxWidth < 500)? 2:3;
+        return GridView.count(
+          shrinkWrap: true,
+          crossAxisCount: columnCount,
+          childAspectRatio: 1.5,
+          mainAxisSpacing: 10,
+          crossAxisSpacing: 10,
+          children: List.generate(Meals.length, (index) {
+            return Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+               
+                color: Theme.of(context).colorScheme.onSecondary,
+                borderRadius: const BorderRadius.all(Radius.circular(20)),
               ),
-            ],
-            color: Theme.of(context).colorScheme.onSecondary,
-            borderRadius: const BorderRadius.all(Radius.circular(20)),
-          ),
-          child: AutoSizeText(
-            '${Meals[index].meal}',
-            style: TextStyle(color: Theme.of(context).colorScheme.onTertiary),
-          ),
-        );
-      },
-      separatorBuilder: (BuildContext context, int index) {
-        return const SizedBox(
-          height: 15,
+              child: AutoSizeText(
+                '${Meals[index].meal}',
+                style: TextStyle(
+                    color: Theme.of(context).colorScheme.onTertiary,
+                    overflow: TextOverflow.fade),
+              ),
+            );
+          }),
         );
       },
     );

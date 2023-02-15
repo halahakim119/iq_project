@@ -1,9 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:iq_project/core/theme/custom_loading.dart';
 
 import '../../../../../../core/injection/injection_container.dart' as di;
+import '../../../../../../core/theme/custom_loading.dart';
 import '../../../../../order/domain/entities/order_entity.dart';
 import '../../../../../order/presentation/logic/cubit/order_cubit.dart';
 import '../../../../domain/entities/schedule_entity.dart';
@@ -34,8 +34,7 @@ class _DailyContainerState extends State<DailyContainer> {
   var chosenRestaurant;
 
   @override
-  void initState() {
-    super.initState();
+  Widget build(BuildContext context) {
     day = widget.selectedDay == 0
         ? widget.schedule.sunday
         : widget.selectedDay == 1
@@ -50,11 +49,6 @@ class _DailyContainerState extends State<DailyContainer> {
         : widget.restaurant == 'awbara'
             ? day.awbara
             : day.awbara;
-    print(chosenRestaurant);
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => di.sl<OrderCubit>(),
       child: Container(
