@@ -19,12 +19,12 @@ class SignupRepositoryImpl implements SignupRepository {
   Future<Either<SignUpWithEmailAndPasswordFailure, Unit>> register(
       SignupEntity parameters) async {
     try {
-       final result = await _firebaseAuth.createUserWithEmailAndPassword(
+      final result = await _firebaseAuth.createUserWithEmailAndPassword(
         email: parameters.email,
         password: parameters.password,
       );
 
-     final currentUser = result.user;
+      final currentUser = result.user;
       await currentUser?.updateDisplayName(parameters.name);
       await currentUser?.updatePhotoURL(parameters.department);
 

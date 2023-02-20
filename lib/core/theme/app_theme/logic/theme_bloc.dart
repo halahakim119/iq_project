@@ -7,9 +7,8 @@ import 'theme_state.dart';
 class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
   ThemeBloc()
       : super(ThemeState(themeData: appThemeData[AppTheme.lightTheme])) {
-    on<ThemeChanged>((event, emit) {
+    on<ThemeChanged>((event, emit) async {
       emit(ThemeState(themeData: appThemeData[event.theme]));
     });
   }
 }
-

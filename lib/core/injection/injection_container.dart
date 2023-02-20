@@ -31,8 +31,11 @@ final sl = GetIt.instance;
 Future<void> init() async {
   //! Firebase Auth
   sl.registerLazySingleton(() => FirebaseAuth.instance);
-  final FirebaseDatabase database = FirebaseDatabase.instance;
-  sl.registerLazySingleton(() => database.reference());
+
+  //! FirebaseDatabase
+  sl.registerLazySingleton(() => FirebaseDatabase.instance);
+  sl.registerLazySingleton(() => sl<FirebaseDatabase>().reference());
+
 
   //! Authentication Cubit
   sl.registerFactory(

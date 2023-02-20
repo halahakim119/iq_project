@@ -27,7 +27,7 @@ final appThemeData = {
     onPrimary: Colors.white,
     background: const Color.fromARGB(255, 255, 255, 255),
     onSecondary: Color.fromARGB(255, 52, 50, 50),
-    primary: Color.fromARGB(232, 255, 0, 0),
+    primary: Color.fromARGB(255, 255, 77, 0),
     visualDensity: FlexColorScheme.comfortablePlatformDensity,
     useMaterial3: true,
   )

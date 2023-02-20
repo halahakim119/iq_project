@@ -1,13 +1,13 @@
 import 'dart:async';
+
+import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
-import 'package:iq_project/core/network/internet_checker.dart';
-
-import '../../../../../core/injection/injection_container.dart';
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animations/loading_animations.dart';
+
+import '../../../../../core/injection/injection_container.dart' as di;
+import '../../core/network/internet_checker.dart';
 
 class LoadingSplash extends StatefulWidget {
   const LoadingSplash({super.key});
@@ -21,7 +21,7 @@ class _LoadingSplashState extends State<LoadingSplash> {
   void initState() {
     super.initState();
 
-    sl<InternetChecker>().run();
+    di.sl<InternetChecker>().run();
 
     Future.delayed(const Duration(seconds: 3), () async {
       final FirebaseAuth auth = FirebaseAuth.instance;

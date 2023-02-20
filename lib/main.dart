@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:overlay_support/overlay_support.dart';
 
 import 'core/injection/injection_container.dart' as di;
@@ -32,9 +33,12 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => ThemeBloc(),
         ),
-        BlocProvider(create: (context) => di.sl<AuthenticationCubit>())
+        BlocProvider(
+          create: (context) => di.sl<AuthenticationCubit>(),
+        ),
       ],
       child: BlocBuilder<ThemeBloc, ThemeState>(
+        
         builder: (context, state) {
           return OverlaySupport.global(
             child: MaterialApp.router(

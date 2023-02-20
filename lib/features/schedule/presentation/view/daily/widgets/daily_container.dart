@@ -1,6 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:iq_project/features/order/data/models/order_model.dart';
 
 import '../../../../../../core/injection/injection_container.dart' as di;
 import '../../../../../../core/theme/custom_loading.dart';
@@ -9,6 +11,7 @@ import '../../../../../order/presentation/logic/cubit/order_cubit.dart';
 import '../../../../domain/entities/schedule_entity.dart';
 
 class DailyContainer extends StatefulWidget {
+
   int selectedDay;
   ScheduleEntity schedule;
   String restaurant;
@@ -29,6 +32,7 @@ class _DailyContainerState extends State<DailyContainer> {
   bool _submitted = false;
   String selectedRestaurantID = '1';
   String selectedMealID = '1';
+   final currentUser = FirebaseAuth.instance.currentUser;
 
   var day;
   var chosenRestaurant;
@@ -110,10 +114,10 @@ class _DailyContainerState extends State<DailyContainer> {
                           onPressed: () {
                             CustomOrderedMealKSC(chosenRestaurant);
 
-                            final OrderEntity order = OrderEntity(
-                              mealID: selectedMealID,
-                              restaurantID: selectedRestaurantID,
-                            );
+                            final OrderModel order = OrderModel(
+                                mealID: selectedMealID,
+                                restaurantID: selectedRestaurantID,
+                                department: currentUser!.photoURL);
 
                             di.sl<OrderCubit>().order(order);
                           },
