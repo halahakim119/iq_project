@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:unicons/unicons.dart';
 
 import '../../../../../core/injection/injection_container.dart' as di;
@@ -54,7 +54,7 @@ class ProfileScreen extends StatelessWidget {
                           const SizedBox(
                             height: 10,
                           ),
-                          const UserProfile(),
+                          UserProfile(),
                           const SizedBox(
                             height: 10,
                           ),
@@ -95,7 +95,6 @@ class ProfileScreen extends StatelessWidget {
                       const EdgeInsets.only(bottom: 15, left: 15, right: 15),
                   alignment: Alignment.bottomCenter,
                   child: ElevatedButton(
-                    
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Theme.of(context).colorScheme.primary,
                       minimumSize: const Size(double.infinity, 50),
@@ -105,9 +104,7 @@ class ProfileScreen extends StatelessWidget {
                               bottomRight: Radius.circular(20))),
                     ),
                     onPressed: (() async {
-                      final prefs = await SharedPreferences.getInstance();
-                      prefs.remove("token");
-                      prefs.remove("id");
+                      await FirebaseAuth.instance.signOut();
                       context.router.replaceNamed('auth');
                     }),
                     child: Text('LOG OUT',

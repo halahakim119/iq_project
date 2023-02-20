@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 
-import '../../../../core/error/failure.dart';
+import '../../../../core/error/firebase_exceptions.dart';
 import '../entities/signup_entity.dart';
 import '../repositories/signup_repository.dart';
 
@@ -9,7 +9,8 @@ class SignupUseCase {
 
   SignupUseCase(this._signupRepository);
 
-  Future<Either<Failure, Unit>> call(SignupEntity parameters) async {
+  Future<Either<SignUpWithEmailAndPasswordFailure, Unit>> call(
+      SignupEntity parameters) async {
     return await _signupRepository.register(parameters);
   }
 }

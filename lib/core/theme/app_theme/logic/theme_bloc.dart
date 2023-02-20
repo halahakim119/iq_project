@@ -12,3 +12,4 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
     });
   }
 }
+

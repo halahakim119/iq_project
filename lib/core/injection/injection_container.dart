@@ -1,5 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:get_it/get_it.dart';
 
+import '../../features/auth/data/repositories/login_repository_impl.dart';
+import '../../features/auth/data/repositories/signup_repository_impl.dart';
+import '../../features/auth/domain/repositories/login_repository.dart';
+import '../../features/auth/domain/repositories/signup_repository.dart';
+import '../../features/auth/domain/usecases/login_use_case.dart';
+import '../../features/auth/domain/usecases/signup_use_case.dart';
+import '../../features/auth/presentation/logic/cubit/authentication_cubit.dart';
 import '../../features/order/data/datasources/order_data_source.dart';
 import '../../features/order/data/repositories/order_repository_impl.dart';
 import '../../features/order/domain/repositories/order_repository.dart';
@@ -20,7 +29,28 @@ import '../network/internet_checker.dart';
 final sl = GetIt.instance;
 
 Future<void> init() async {
-  //!Theme
+  //! Firebase Auth
+  sl.registerLazySingleton(() => FirebaseAuth.instance);
+  final FirebaseDatabase database = FirebaseDatabase.instance;
+  sl.registerLazySingleton(() => database.reference());
+
+  //! Authentication Cubit
+  sl.registerFactory(
+    () => AuthenticationCubit(
+      firebaseAuth: sl(),
+      loginUseCase: sl(),
+      signupUseCase: sl(),
+    ),
+  );
+
+// Usecases
+  sl.registerLazySingleton(() => LoginUseCase(sl()));
+  sl.registerLazySingleton(() => SignupUseCase(sl()));
+
+// Repository
+  sl.registerLazySingleton<LoginRepository>(() => LoginRepositoryImpl(sl()));
+  sl.registerLazySingleton<SignupRepository>(
+      () => SignupRepositoryImpl(sl(), sl()));
 
   //!internet Checker
   sl.registerLazySingleton(() => InternetChecker());
@@ -35,7 +65,8 @@ Future<void> init() async {
   sl.registerLazySingleton<UserRepository>(
       () => UserRepositoryImpl(userDataSource: sl()));
 // data sources
-  sl.registerLazySingleton<UserDataSource>(() => UserDataSourceImpl());
+  sl.registerLazySingleton<UserDataSource>(
+      () => UserDataSourceImpl(userDatabaseReference: sl()));
   //!order
 // cubit
   sl.registerFactory(() => OrderCubit(orderUseCase: sl()));
@@ -61,8 +92,4 @@ Future<void> init() async {
       () => ScheduleRepositoryImpl(scheduleDataSource: sl()));
 // data sources
   sl.registerLazySingleton<ScheduleDataSource>(() => ScheduleDataSourceImpl());
-}
-
-void setupLocator() {
-  sl.registerSingleton(init);
 }

@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:iq_project/core/network/internet_checker.dart';
 
 import '../../../../../core/injection/injection_container.dart';
@@ -21,11 +23,18 @@ class _LoadingSplashState extends State<LoadingSplash> {
 
     sl<InternetChecker>().run();
 
-    Future.delayed(const Duration(seconds: 4), () {
-      final token = "token";
+    Future.delayed(const Duration(seconds: 3), () async {
+      final FirebaseAuth auth = FirebaseAuth.instance;
+      User? user = auth.currentUser;
 
-      if (token.isNotEmpty) {
-        context.router.pushNamed('main');
+      if (user != null) {
+        if (user.emailVerified) {
+          context.router.pushNamed('main');
+        } else {
+          Scaffold(
+            body: Container(child: Text('not varified')),
+          );
+        }
       } else {
         context.router.pushNamed('auth');
       }

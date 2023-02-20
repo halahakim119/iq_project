@@ -15,9 +15,12 @@ class UserRepositoryImpl implements UserRepository {
   @override
   Future<Either<Failure, UserEntity>> user() async {
     final result = await userDataSource.getUserData();
-    return result.fold((failure) => Left(failure), (user) {
-      final UserModel data = UserModel.fromFirebaseMap(user);
-      return Right(data);
-    });
+
+    return result.fold(
+      (failure) => Left(failure),
+      (user) {
+        return Right(user);
+      },
+    );
   }
 }

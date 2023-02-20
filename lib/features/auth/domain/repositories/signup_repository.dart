@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 
-import '../../../../core/error/failure.dart';
+import '../../../../core/error/firebase_exceptions.dart';
 import '../entities/signup_entity.dart';
 
 abstract class SignupRepository {
-  Future<Either<Failure, Unit>> register(SignupEntity parameters);
+  Future<Either<SignUpWithEmailAndPasswordFailure, Unit>> register(SignupEntity parameters);
 }

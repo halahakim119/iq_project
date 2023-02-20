@@ -1,12 +1,13 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:auto_size_text/auto_size_text.dart';
+
 import '../../../../../core/theme/custom_loading.dart';
 import '../../../../splash/splash_404.dart';
 import '../../logic/cubit/user_cubit.dart';
 
 class UserProfile extends StatelessWidget {
-  const UserProfile({super.key});
+  
 
   @override
   Widget build(BuildContext context) {

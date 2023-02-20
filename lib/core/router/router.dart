@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:iq_project/features/profile/presentation/view/widgets/about_us_screen.dart';
 import 'package:iq_project/features/profile/presentation/view/widgets/ordering_policy_screen.dart';
 
-import '../../features/auth/auth_screen.dart';
+import '../../features/auth/presentation/view/auth_screen.dart';
 import '../../features/main/main_page.dart';
 import '../../features/profile/presentation/view/pages/profile_screen.dart';
 import '../../features/schedule/presentation/view/daily/page/daily_schedule_screen.dart';

@@ -7,13 +7,13 @@ import 'core/injection/injection_container.dart' as di;
 import 'core/router/router.gr.dart';
 import 'core/theme/app_theme/logic/theme_bloc.dart';
 import 'core/theme/app_theme/logic/theme_state.dart';
+import 'features/auth/presentation/logic/cubit/authentication_cubit.dart';
 import 'features/schedule/presentation/logic/cubit/schedule_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  await di.init();
-  di.setupLocator();
+  di.init();
   runApp(MyApp());
 }
 
@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => ThemeBloc(),
         ),
+        BlocProvider(create: (context) => di.sl<AuthenticationCubit>())
       ],
       child: BlocBuilder<ThemeBloc, ThemeState>(
         builder: (context, state) {
