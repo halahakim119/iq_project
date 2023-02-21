@@ -36,7 +36,6 @@ Future<void> init() async {
   sl.registerLazySingleton(() => FirebaseDatabase.instance);
   sl.registerLazySingleton(() => sl<FirebaseDatabase>().reference());
 
-
   //! Authentication Cubit
   sl.registerFactory(
     () => AuthenticationCubit(

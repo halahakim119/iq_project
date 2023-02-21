@@ -77,20 +77,7 @@ class _DailyScheduleWidgetState extends State<DailyScheduleWidget> {
                                             ? 4
                                             : 5,
                       )
-                // DailyAwbaraContainer(
-                //     schedule: widget.schedule,
-                //     selectedDay: snapshot.data.toString() == "Sunday"
-                //         ? 0
-                //         : snapshot.data.toString() == "Monday"
-                //             ? 1
-                //             : snapshot.data.toString() == "Tuesday"
-                //                 ? 2
-                //                 : snapshot.data.toString() == "Wednesday"
-                //                     ? 3
-                //                     : snapshot.data.toString() == "Thursday"
-                //                         ? 4
-                //                         : 5,
-                //   )
+               
               ],
             ),
           );
