@@ -9,7 +9,8 @@ final appThemeData = {
     scheme: FlexScheme.rosewood,
     surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
     blendLevel: 9,
-    scaffoldBackground: Colors.grey.shade200,
+    // scaffoldBackground: Colors.grey.shade200,
+    scaffoldBackground: Colors.white,
     background: Colors.white,
     onSecondary: Colors.white,
     primary: Color.fromARGB(255, 255, 77, 0),
@@ -22,6 +23,7 @@ final appThemeData = {
     visualDensity: FlexColorScheme.comfortablePlatformDensity,
   ),
   AppTheme.darkTheme: FlexThemeData.dark(
+    
     surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
     onTertiary: Colors.white,
     onPrimary: Colors.white,

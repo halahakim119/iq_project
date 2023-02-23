@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../core/injection/injection_container.dart' as di;
-import '../../../../../../core/theme/custom_loading.dart';
 import '../../../../../order/data/models/order_model.dart';
 import '../../../../../order/presentation/logic/cubit/order_cubit.dart';
 import '../../../../domain/entities/schedule_entity.dart';
@@ -53,87 +52,138 @@ class _DailyContainerState extends State<DailyContainer> {
             : day.awbara;
     return BlocProvider(
       create: (context) => di.sl<OrderCubit>(),
-      child: Container(
-          height: MediaQuery.of(context).size.height * 0.6,
+      child: BlocListener<OrderCubit, OrderState>(
+        listener: (context, state) {},
+        child: Container(
+          height: MediaQuery.of(context).size.height * 0.4,
           width: MediaQuery.of(context).size.width * 0.9,
           decoration: BoxDecoration(
+            border: Border.all(
+                width: 1, color: Theme.of(context).colorScheme.primary),
             color: Theme.of(context).colorScheme.onSecondary,
             borderRadius: const BorderRadius.all(Radius.circular(20)),
           ),
           child: _submitted
-              ? BlocConsumer<OrderCubit, OrderState>(
-                  listener: (context, state) {
-                    state.maybeWhen(
-                        loaded: () {
-                          return Text(_selectedMeal);
-                        },
-                        error: (error) {
-                          return Center(
-                            child: Text(error),
-                          );
-                        },
-                        orElse: () {});
-                  },
-                  builder: (context, state) {
-                    return state.maybeWhen(
-                      loading: () => const CustomLoading(),
-                      loaded: () {
-                        return Text(_selectedMeal);
-                      },
-                      error: (error) {
-                        return Center(
-                          child: Text(error),
+              ? Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(top: 30, bottom: 15, left: 30),
+                      child: AutoSizeText(
+                        'Selected meal:',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: Theme.of(context).colorScheme.onTertiary),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 30, bottom: 30),
+                      child: AutoSizeText(
+                        _selectedMeal,
+                        style: TextStyle(
+                            fontWeight: FontWeight.normal,
+                            fontSize: 16,
+                            color: Theme.of(context).colorScheme.onTertiary),
+                      ),
+                    ),
+                    BlocListener<OrderCubit, OrderState>(
+                      listener: (context, state) {
+                        state.maybeWhen(
+                          loaded: (id) {
+                            Align(
+                              alignment: Alignment.bottomCenter,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      di.sl<OrderCubit>().deleteOrder(
+                                          id, currentUser!.photoURL!);
+                                      setState(() {
+                                        _submitted = false;
+                                        _selectedMeal = '';
+                                      });
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      minimumSize: Size(
+                                          MediaQuery.of(context).size.width *
+                                              0.35,
+                                          50),
+                                      backgroundColor:
+                                          Theme.of(context).colorScheme.primary,
+                                    ),
+                                    child: AutoSizeText(
+                                      'Delete',
+                                      style: TextStyle(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .background),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                          orElse: () {},
                         );
                       },
-                      orElse: () {
-                        return Container();
-                      },
-                    );
-                  },
+                    )
+                  ],
                 )
-              : Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  Padding(
-                    padding:
-                        const EdgeInsets.only(top: 30, bottom: 15, left: 30),
-                    child: AutoSizeText(
-                      'Todays schedule',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                          color: Theme.of(context).colorScheme.onTertiary),
+              : Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(top: 30, bottom: 15, left: 30),
+                      child: AutoSizeText(
+                        'Todays schedule',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: Theme.of(context).colorScheme.onTertiary),
+                      ),
                     ),
-                  ),
-                  Expanded(child: CustomDailyMealsKSC(chosenRestaurant.meals)),
-                  Align(
-                      alignment: Alignment.bottomCenter,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(100),
-                        child: ElevatedButton(
-                          onPressed: () {
-                            CustomOrderedMealKSC(chosenRestaurant);
-
-                            final OrderModel order = OrderModel(
-                                mealID: selectedMealID,
-                                restaurantID: selectedRestaurantID,
-                                department: currentUser!.photoURL);
-
-                            di.sl<OrderCubit>().order(order);
-                          },
-                          style: ElevatedButton.styleFrom(
-                            minimumSize: Size(
-                                MediaQuery.of(context).size.width * 0.7, 50),
-                            backgroundColor:
-                                Theme.of(context).colorScheme.primary,
+                    Expanded(
+                        child: CustomDailyMealsKSC(chosenRestaurant.meals)),
+                    Align(
+                        alignment: Alignment.center,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(100),
+                            child: ElevatedButton(
+                              onPressed: () {
+                                submitCustomOrder(chosenRestaurant);
+                                final OrderModel order = OrderModel(
+                                    mealID: selectedMealID,
+                                    restaurantID: selectedRestaurantID,
+                                    department: currentUser!.photoURL!);
+                        
+                                di.sl<OrderCubit>().order(order);
+                              },
+                              style: ElevatedButton.styleFrom(
+                                minimumSize: Size(
+                                    MediaQuery.of(context).size.width * 0.7, 50),
+                                backgroundColor:
+                                    Theme.of(context).colorScheme.primary,
+                              ),
+                              child: AutoSizeText(
+                                'Submit',
+                                style: TextStyle(
+                                    color:
+                                        Theme.of(context).colorScheme.background),
+                              ),
+                            ),
                           ),
-                          child: AutoSizeText(
-                            'Submit',
-                            style: TextStyle(
-                                color:
-                                    Theme.of(context).colorScheme.background),
-                          ),
-                        ),
-                      ))
-                ])),
+                        ))
+                  ],
+                ),
+        ),
+      ),
     );
   }
 
@@ -150,12 +200,19 @@ class _DailyContainerState extends State<DailyContainer> {
     );
   }
 
-  void CustomOrderedMealKSC(order) {
+  void submitCustomOrder(order) {
+    if (order.meals == null || order.meals!.isEmpty) {
+      return;
+    }
+    if (_selectedIndex < 0 || _selectedIndex >= order.meals!.length) {
+      return;
+    }
+    final selectedMeal = order.meals![_selectedIndex];
     selectedRestaurantID = order.id.toString();
-    selectedMealID = order.meals![_selectedIndex].id.toString();
+    selectedMealID = selectedMeal.id.toString();
     setState(() {
-      _selectedMeal = order.meals![_selectedIndex].meal.toString();
-      _submitted = true;
+      _selectedMeal = selectedMeal.meal.toString();
+      _submitted = !_submitted;
     });
   }
 

@@ -36,6 +36,9 @@ class _DailyScheduleWidgetState extends State<DailyScheduleWidget> {
                   margin: const EdgeInsets.all(20),
                   height: 40,
                   decoration: BoxDecoration(
+                      border: Border.all(
+                          width: 1,
+                          color: Theme.of(context).colorScheme.onSecondary),
                       color: Theme.of(context).colorScheme.onSecondary,
                       borderRadius: BorderRadius.all(Radius.circular(50))),
                   child: Row(
@@ -77,7 +80,6 @@ class _DailyScheduleWidgetState extends State<DailyScheduleWidget> {
                                             ? 4
                                             : 5,
                       )
-               
               ],
             ),
           );

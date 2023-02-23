@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
 
 import '../../../../core/error/failure.dart';
-import '../../data/models/order_model.dart';
 import '../entities/order_entity.dart';
 import '../repositories/order_repository.dart';
 
@@ -10,7 +9,11 @@ class OrderUseCase {
 
   OrderUseCase({required this.orderRepository});
 
-  Future<Either<Failure, Unit>> call(OrderEntity parameters) async {
+  Future<Either<Failure, String>> call(OrderEntity parameters) async {
     return await orderRepository.order(parameters);
+  }
+
+  Future<Either<Failure, Unit>> deleteOrder(String orderId,String department) async {
+    return await orderRepository.deleteOrder(orderId,department);
   }
 }

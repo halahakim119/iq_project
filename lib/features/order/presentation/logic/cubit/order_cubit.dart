@@ -13,11 +13,25 @@ class OrderCubit extends Cubit<OrderState> {
 
   Future<void> order(OrderModel parameters) async {
     emit(const OrderState.loading());
+
     try {
-      await orderUseCase.call(parameters);
-      emit(const OrderState.loaded());
+      final result = await orderUseCase.call(parameters);
+      result.fold(
+        (failure) => emit(OrderState.error(failure.toString())),
+        (id) => emit(OrderState.loaded(id)),
+      );
     } catch (e) {
-      emit(OrderState.error(e.toString()));
+      emit(OrderState.error('Failed to submit order: $e'));
+    }
+  }
+
+  Future<void> deleteOrder(String orderId, String department) async {
+    emit(const OrderState.loading());
+    try {
+      await orderUseCase.deleteOrder(orderId, department);
+      emit(OrderState.loaded(department));
+    } catch (e) {
+      emit(OrderState.error('Failed to delete order: $e'));
     }
   }
 }

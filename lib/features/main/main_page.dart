@@ -17,12 +17,14 @@ class MainPage extends StatelessWidget {
           'iHUNGRY',
           style: TextStyle(
               letterSpacing: 4,
-              color: Theme.of(context).colorScheme.background,
-              fontSize: 20,
+              color: Theme.of(context).colorScheme.primary,
+              fontSize: 25,
               fontFamily: 'Fredoka_One'),
         ),
         centerTitle: true,
-        backgroundColor: Theme.of(context).colorScheme.primary,
+        backgroundColor: Colors.transparent,
+        elevation: 0,shadowColor: Colors.black,
+      
       ),
       body: AutoTabsScaffold(
         routes: const [
@@ -33,7 +35,7 @@ class MainPage extends StatelessWidget {
         bottomNavigationBuilder: (_, tabsRouter) {
           return CurvedNavigationBar(
             onTap: tabsRouter.setActiveIndex,
-            color: Theme.of(context).colorScheme.primary,
+            color: Colors.transparent,
             animationDuration: const Duration(milliseconds: 250),
             index: tabsRouter.activeIndex,
             buttonBackgroundColor: Theme.of(context).colorScheme.primary,
@@ -42,15 +44,21 @@ class MainPage extends StatelessWidget {
             items: [
               Icon(
                 UniconsLine.calendar_alt,
-                color: Theme.of(context).colorScheme.background,
+                color: tabsRouter.activeIndex == 0
+                    ? Theme.of(context).colorScheme.background
+                    : Theme.of(context).colorScheme.primary,
               ),
               Icon(
                 UniconsLine.restaurant,
-                color: Theme.of(context).colorScheme.background,
+                color: tabsRouter.activeIndex == 1
+                    ? Theme.of(context).colorScheme.background
+                    : Theme.of(context).colorScheme.primary,
               ),
               Icon(
                 UniconsLine.user,
-                color: Theme.of(context).colorScheme.background,
+                color: tabsRouter.activeIndex == 2
+                    ? Theme.of(context).colorScheme.background
+                    : Theme.of(context).colorScheme.primary,
               ),
             ],
           );

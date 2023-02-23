@@ -1,10 +1,10 @@
 import 'package:equatable/equatable.dart';
 
 class OrderEntity extends Equatable {
-  String? restaurantID;
-  String? mealID;
-  String? department;
-  OrderEntity({
+  final String restaurantID;
+  final String mealID;
+  final String department;
+  const OrderEntity({
     required this.restaurantID,
     required this.mealID,
     required this.department,

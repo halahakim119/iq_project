@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../domain/entities/schedule_entity.dart';
 import '../widgets/day_button.dart';
-import 'weekly_awbara_container.dart';
-import 'weekly_ksc_container.dart';
+import 'day_meals.dart';
 
 class WeeklySchedulaWidget extends StatefulWidget {
   ScheduleEntity schedule;
@@ -25,77 +24,71 @@ class _WeeklySchedulaWidgetState extends State<WeeklySchedulaWidget> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Align(
-        alignment: Alignment.center,
-        child: Container(
-          decoration: const BoxDecoration(
-            
-              borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(50),
-                  bottomRight: Radius.circular(50),
-                  topLeft: Radius.circular(21),
-                  topRight: Radius.circular(21))),
-          width: MediaQuery.of(context).size.width * 0.9,
-          margin: const EdgeInsets.only(top: 20),
-          child: Column(
+      scrollDirection: Axis.vertical,
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Container(
-
-                height: 60,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  
-                    color: Theme.of(context).colorScheme.onSecondary,
-                    borderRadius: BorderRadius.all(Radius.circular(50))),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    DayButton(
-                      day: 'Sun',
-                      index: 0,
-                      selectedDay: selectedDay,
-                      onPressed: onPressed,
-                    ),
-                    DayButton(
-                      day: 'Mon',
-                      index: 1,
-                      selectedDay: selectedDay,
-                      onPressed: onPressed,
-                    ),
-                    DayButton(
-                      day: 'Tue',
-                      index: 2,
-                      selectedDay: selectedDay,
-                      onPressed: onPressed,
-                    ),
-                    DayButton(
-                      day: 'Wed',
-                      index: 3,
-                      selectedDay: selectedDay,
-                      onPressed: onPressed,
-                    ),
-                    DayButton(
-                      day: 'Thu',
-                      index: 4,
-                      selectedDay: selectedDay,
-                      onPressed: onPressed,
-                    ),
-                  ],
-                ),
+              DayButton(
+                day: 'Sun',
+                index: 0,
+                selectedDay: selectedDay,
+                onPressed: onPressed,
               ),
-              const SizedBox(
-                height: 15,
+              DayButton(
+                day: 'Mon',
+                index: 1,
+                selectedDay: selectedDay,
+                onPressed: onPressed,
               ),
-              WeeklyKSCContainer(
-                  schedule: widget.schedule, selectedDay: selectedDay),
-              const SizedBox(
-                height: 15,
+              DayButton(
+                day: 'Tue',
+                index: 2,
+                selectedDay: selectedDay,
+                onPressed: onPressed,
               ),
-              WeeklyAwbaraContainer(
-                  schedule: widget.schedule, selectedDay: selectedDay),
+              DayButton(
+                day: 'Wed',
+                index: 3,
+                selectedDay: selectedDay,
+                onPressed: onPressed,
+              ),
+              DayButton(
+                day: 'Thu',
+                index: 4,
+                selectedDay: selectedDay,
+                onPressed: onPressed,
+              ),
             ],
           ),
-        ),
+          selectedDay == 0
+              ? DayMeals(
+                  KSCMeals: widget.schedule.sunday!.ksc!.meals!,
+                  AwbaraMeals: widget.schedule.sunday!.awbara!.meals!)
+              : selectedDay == 1
+                  ? DayMeals(
+                      KSCMeals: widget.schedule.monday!.ksc!.meals!,
+                      AwbaraMeals: widget.schedule.monday!.awbara!.meals!)
+                  : selectedDay == 2
+                      ? DayMeals(
+                          KSCMeals: widget.schedule.tuesday!.ksc!.meals!,
+                          AwbaraMeals: widget.schedule.tuesday!.awbara!.meals!)
+                      : selectedDay == 3
+                          ? DayMeals(
+                              KSCMeals: widget.schedule.wednesday!.ksc!.meals!,
+                              AwbaraMeals:
+                                  widget.schedule.wednesday!.awbara!.meals!)
+                          : selectedDay == 4
+                              ? DayMeals(
+                                  KSCMeals:
+                                      widget.schedule.thursday!.ksc!.meals!,
+                                  AwbaraMeals:
+                                      widget.schedule.thursday!.awbara!.meals!)
+                              : selectedDay == 5
+                                  ? Container()
+                                  : Container(),
+        ],
       ),
     );
   }

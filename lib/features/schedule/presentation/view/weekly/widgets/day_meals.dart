@@ -4,38 +4,57 @@ import 'package:flutter/material.dart';
 import '../../../../domain/entities/meal_entity.dart';
 
 class DayMeals extends StatelessWidget {
-  List<MealEntity> Meals;
-  DayMeals(this.Meals);
+  final List<MealEntity> KSCMeals;
+  final List<MealEntity> AwbaraMeals;
+  DayMeals({required this.KSCMeals, required this.AwbaraMeals});
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        int columnCount = (constraints.maxWidth < 300) ? 1 : (constraints.maxWidth > 300 && constraints.maxWidth < 500)? 2:3;
-        return GridView.count(
-          shrinkWrap: true,
-          crossAxisCount: columnCount,
-          childAspectRatio: 1.5,
-          mainAxisSpacing: 10,
-          crossAxisSpacing: 10,
-          children: List.generate(Meals.length, (index) {
+    return SizedBox(
+      height: MediaQuery.of(context).size.height* 0.69,
+      child: ListView.separated(
+        physics: const AlwaysScrollableScrollPhysics(),
+        separatorBuilder: (BuildContext context, int index) => const Divider(),
+        itemCount: KSCMeals.length + AwbaraMeals.length,
+        itemBuilder: (BuildContext context, int index) {
+          if (index < KSCMeals.length) {
             return Container(
+              margin: const EdgeInsets.all(10),
               padding: const EdgeInsets.all(10),
+              height: 55,
               decoration: BoxDecoration(
-               
-                color: Theme.of(context).colorScheme.onSecondary,
+                color: Theme.of(context).colorScheme.primary,
                 borderRadius: const BorderRadius.all(Radius.circular(20)),
               ),
               child: AutoSizeText(
-                '${Meals[index].meal}',
+                '${KSCMeals[index].meal}',
                 style: TextStyle(
-                    color: Theme.of(context).colorScheme.onTertiary,
-                    overflow: TextOverflow.fade),
+                  color: Theme.of(context).colorScheme.onTertiary,
+                  overflow: TextOverflow.fade,
+                ),
               ),
             );
-          }),
-        );
-      },
+          } else {
+            final AwbaraIndex = index - KSCMeals.length;
+            return Container(
+              margin: const EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
+              height: 55,
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.primary,
+                borderRadius: const BorderRadius.all(Radius.circular(20)),
+              ),
+              child: AutoSizeText(
+                '${AwbaraMeals[AwbaraIndex].meal}',
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onTertiary,
+                  overflow: TextOverflow.fade,
+                ),
+              ),
+            );
+          }
+        },
+      ),
     );
   }
 }
