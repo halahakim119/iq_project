@@ -27,6 +27,7 @@ class _WeeklySchedulaWidgetState extends State<WeeklySchedulaWidget> {
       scrollDirection: Axis.vertical,
       child: Column(
         children: [
+          const SizedBox(height: 15),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -88,6 +89,7 @@ class _WeeklySchedulaWidgetState extends State<WeeklySchedulaWidget> {
                               : selectedDay == 5
                                   ? Container()
                                   : Container(),
+          const SizedBox(height: 15),
         ],
       ),
     );

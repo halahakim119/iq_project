@@ -50,19 +50,19 @@ class MainPage extends StatelessWidget {
               Icon(
                 UniconsLine.calendar_alt,
                 color: tabsRouter.activeIndex == 0
-                    ? Theme.of(context).scaffoldBackgroundColor
+                    ? Theme.of(context).colorScheme.onPrimary
                     : Theme.of(context).colorScheme.primary,
               ),
               Icon(
                 UniconsLine.restaurant,
                 color: tabsRouter.activeIndex == 1
-                    ? Theme.of(context).scaffoldBackgroundColor
+                    ? Theme.of(context).colorScheme.onPrimary
                     : Theme.of(context).colorScheme.primary,
               ),
               Icon(
                 UniconsLine.user,
                 color: tabsRouter.activeIndex == 2
-                    ? Theme.of(context).scaffoldBackgroundColor
+                    ? Theme.of(context).colorScheme.onPrimary
                     : Theme.of(context).colorScheme.primary,
               ),
             ],

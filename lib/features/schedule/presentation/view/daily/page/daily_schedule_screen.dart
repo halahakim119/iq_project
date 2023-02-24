@@ -24,7 +24,7 @@ class DailyScheduleScreen extends StatelessWidget {
                       loading: () => const CustomLoading(),
                       loaded: (schedule) =>
                           DailyScheduleWidget(schedule: schedule),
-                      error: (error) => Splash404(error: error),
+                      error: (_) => Splash404(),
                     );
                   },
                 ),

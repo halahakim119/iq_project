@@ -7,8 +7,6 @@ import '../../../../splash/splash_404.dart';
 import '../../logic/cubit/user_cubit.dart';
 
 class UserProfile extends StatelessWidget {
-  
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<UserCubit, UserState>(builder: (context, state) {
@@ -17,46 +15,55 @@ class UserProfile extends StatelessWidget {
         loaded: (data) => Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-             Divider(color:   Theme.of(context).colorScheme.onSecondary),
+            Divider(color: Theme.of(context).colorScheme.onSecondary),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                 AutoSizeText('Full Name',
-                    style: TextStyle(fontWeight: FontWeight.bold,color:  Theme.of(context).colorScheme.onSecondary)),
+                AutoSizeText('Full Name',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.onSecondary)),
                 AutoSizeText(
                   data.name,
-                  style:  TextStyle(color:   Theme.of(context).colorScheme.onSecondary),
+                  style: TextStyle(
+                      color: Theme.of(context).colorScheme.onSecondary),
                 ),
               ],
             ),
-             Divider(color:   Theme.of(context).colorScheme.onSecondary),
+            Divider(color: Theme.of(context).colorScheme.onSecondary),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                 AutoSizeText('Department',
-                    style: TextStyle(fontWeight: FontWeight.bold,color:  Theme.of(context).colorScheme.onSecondary)),
+                AutoSizeText('Department',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.onSecondary)),
                 AutoSizeText(
                   data.department,
-                  style:  TextStyle(color:   Theme.of(context).colorScheme.onSecondary),
+                  style: TextStyle(
+                      color: Theme.of(context).colorScheme.onSecondary),
                 ),
               ],
             ),
-             Divider(color:   Theme.of(context).colorScheme.onSecondary),
+            Divider(color: Theme.of(context).colorScheme.onSecondary),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                 AutoSizeText('Email',
-                    style: TextStyle(fontWeight: FontWeight.bold,color: Theme.of(context).colorScheme.onSecondary)),
+                AutoSizeText('Email',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.onSecondary)),
                 AutoSizeText(
                   data.email,
-                  style:  TextStyle(color:   Theme.of(context).colorScheme.onSecondary),
+                  style: TextStyle(
+                      color: Theme.of(context).colorScheme.onSecondary),
                 ),
               ],
             ),
-             Divider(color:   Theme.of(context).colorScheme.onSecondary),
+            Divider(color: Theme.of(context).colorScheme.onSecondary),
           ],
         ),
-        error: (error) => Splash404(error: error),
+        error: (_) => Splash404(),
       );
     });
   }

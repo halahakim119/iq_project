@@ -2,9 +2,6 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class Splash404 extends StatelessWidget {
-  String error;
-  Splash404({required this.error});
-
   @override
   Widget build(BuildContext context) {
     return Align(
@@ -15,7 +12,7 @@ class Splash404 extends StatelessWidget {
         height: MediaQuery.of(context).size.height * 0.7,
         width: double.infinity,
         decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.onSecondary,
+            color: Theme.of(context).colorScheme.secondary,
             borderRadius: const BorderRadius.all(Radius.circular(20))),
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           Container(
@@ -32,16 +29,16 @@ class Splash404 extends StatelessWidget {
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 30,
-              color: Theme.of(context).colorScheme.onTertiary,
+              color: Theme.of(context).colorScheme.onSecondary,
             ),
           ),
           const SizedBox(
             height: 10,
           ),
           AutoSizeText(
-            error,
+            'An issue accured please try again later',
             style: TextStyle(
-              color: Theme.of(context).colorScheme.onTertiary,
+              color: Theme.of(context).colorScheme.onSecondary,
             ),
           ),
         ]),

@@ -15,7 +15,7 @@ class WeeklyScheduleScreen extends StatelessWidget {
           return state.when(
             loading: () => const CustomLoading(),
             loaded: (schedule) => WeeklySchedulaWidget(schedule: schedule),
-            error: (error) => Splash404(error: error),
+            error: (_) => Splash404(),
           );
         },
       ),

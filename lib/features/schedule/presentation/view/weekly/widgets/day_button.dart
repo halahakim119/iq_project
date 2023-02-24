@@ -24,15 +24,15 @@ class DayButton extends StatelessWidget {
             borderRadius: const BorderRadius.all(Radius.circular(50)),
             color: index == selectedDay
                 ? Theme.of(context).colorScheme.primary
-                : Theme.of(context).colorScheme.onSecondary),
+                : Theme.of(context).colorScheme.secondary),
         child: Center(
             child: AutoSizeText(
           day,
           style: TextStyle(
               fontWeight: FontWeight.bold,
               color: index == selectedDay
-                  ? Theme.of(context).colorScheme.background
-                  : Theme.of(context).colorScheme.onTertiary),
+                  ? Theme.of(context).colorScheme.onPrimary
+                  : Theme.of(context).colorScheme.onSecondary),
         )),
       ),
     );

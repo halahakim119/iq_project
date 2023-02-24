@@ -7,7 +7,7 @@ final appThemeData = {
   AppTheme.lightTheme: FlexThemeData.light(
     useMaterial3: true,
     scaffoldBackground: Colors.white,
-    primary: Color.fromARGB(255, 255, 77, 0),
+    primary: const Color.fromARGB(255, 255, 77, 0),
     onPrimary: Colors.white,
     secondary: Colors.white,
     onSecondary: Colors.black,
@@ -15,7 +15,7 @@ final appThemeData = {
   AppTheme.darkTheme: FlexThemeData.dark(
     useMaterial3: true,
     scaffoldBackground: Colors.black,
-    primary: Color.fromARGB(255, 255, 77, 0),
+    primary: const Color.fromARGB(255, 255, 77, 0),
     onPrimary: Colors.white,
     secondary: Colors.grey.shade900,
     onSecondary: Colors.white,
