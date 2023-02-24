@@ -114,7 +114,7 @@ class _LoginFormState extends State<LoginForm> {
             child: Text(
               'Log In',
               style:
-                  TextStyle(color: Theme.of(context).colorScheme.background),
+                  TextStyle(color: Theme.of(context).colorScheme.onPrimary),
             ),
           ),
         ],

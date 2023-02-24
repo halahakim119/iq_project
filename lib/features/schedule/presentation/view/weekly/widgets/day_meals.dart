@@ -11,7 +11,7 @@ class DayMeals extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: MediaQuery.of(context).size.height* 0.69,
+      height: MediaQuery.of(context).size.height * 0.69,
       child: ListView.separated(
         physics: const AlwaysScrollableScrollPhysics(),
         separatorBuilder: (BuildContext context, int index) => const Divider(),

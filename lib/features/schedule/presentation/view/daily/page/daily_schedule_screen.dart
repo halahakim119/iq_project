@@ -16,7 +16,7 @@ class DailyScheduleScreen extends StatelessWidget {
 
     return (day == 5 || day == 6)
         ? WeekendWidget()
-        : (hour >= 0 && hour < 24)
+        : (hour >= 9 && hour < 10)
             ? SingleChildScrollView(
                 child: BlocBuilder<ScheduleCubit, ScheduleState>(
                   builder: (context, state) {

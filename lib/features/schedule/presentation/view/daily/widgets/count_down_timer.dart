@@ -46,7 +46,7 @@ class _CountDownTimerState extends State<CountDownTimer> {
     final second = _start - minute * 60;
     return AutoSizeText(
       '${minute.toString().padLeft(2, '0')}:${second.toString().padLeft(2, '0')}',
-      style:  TextStyle(color: Theme.of(context).colorScheme.onTertiary,fontWeight: FontWeight.bold,fontSize: 16),
+      style:  TextStyle(color: Theme.of(context).colorScheme.onSecondary,fontWeight: FontWeight.bold,fontSize: 16),
     );
   }
 

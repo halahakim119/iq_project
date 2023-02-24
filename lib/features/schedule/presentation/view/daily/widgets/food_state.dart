@@ -17,7 +17,7 @@ class FoodState extends StatelessWidget {
           height: MediaQuery.of(context).size.height * 0.7,
           width: double.infinity,
           decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.onSecondary,
+              color: Theme.of(context).colorScheme.secondary,
               borderRadius: const BorderRadius.all(Radius.circular(20))),
           child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -78,7 +78,7 @@ class FoodState extends StatelessWidget {
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 25,
-              color: Theme.of(context).colorScheme.onTertiary,
+              color: Theme.of(context).colorScheme.onSecondary,
             ),
           ),
           const SizedBox(
@@ -88,7 +88,7 @@ class FoodState extends StatelessWidget {
             normalText,
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: Theme.of(context).colorScheme.onTertiary,
+              color: Theme.of(context).colorScheme.onSecondary,
             ),
           ),
         ],

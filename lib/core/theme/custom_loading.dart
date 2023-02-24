@@ -6,27 +6,14 @@ class CustomLoading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Align(
       alignment: Alignment.center,
-      height: MediaQuery.of(context).size.height * 0.5,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          Container(
-            height: 80,
-            width: 80,
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage(
-                    'assets/images/cloche.png',
-                  ),
-                  fit: BoxFit.contain),
-            ),
-          ),
-          CircularProgressIndicator(
-              strokeWidth: 1, 
-              color: Theme.of(context).colorScheme.onTertiary),
-        ],
+      child: LoadingBouncingGrid.square(
+        borderColor: Theme.of(context).colorScheme.primary,
+        borderSize: 0.5,
+        size: 30.0,
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        duration: const Duration(milliseconds: 1500),
       ),
     );
   }

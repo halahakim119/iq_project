@@ -17,43 +17,43 @@ class UserProfile extends StatelessWidget {
         loaded: (data) => Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-             Divider(color:   Theme.of(context).colorScheme.onPrimary),
+             Divider(color:   Theme.of(context).colorScheme.onSecondary),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                  AutoSizeText('Full Name',
-                    style: TextStyle(fontWeight: FontWeight.bold,color:  Theme.of(context).colorScheme.onTertiary)),
+                    style: TextStyle(fontWeight: FontWeight.bold,color:  Theme.of(context).colorScheme.onSecondary)),
                 AutoSizeText(
                   data.name,
-                  style:  TextStyle(color:   Theme.of(context).colorScheme.onPrimary),
+                  style:  TextStyle(color:   Theme.of(context).colorScheme.onSecondary),
                 ),
               ],
             ),
-             Divider(color:   Theme.of(context).colorScheme.onPrimary),
+             Divider(color:   Theme.of(context).colorScheme.onSecondary),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                  AutoSizeText('Department',
-                    style: TextStyle(fontWeight: FontWeight.bold,color:  Theme.of(context).colorScheme.onTertiary)),
+                    style: TextStyle(fontWeight: FontWeight.bold,color:  Theme.of(context).colorScheme.onSecondary)),
                 AutoSizeText(
                   data.department,
-                  style:  TextStyle(color:   Theme.of(context).colorScheme.onPrimary),
+                  style:  TextStyle(color:   Theme.of(context).colorScheme.onSecondary),
                 ),
               ],
             ),
-             Divider(color:   Theme.of(context).colorScheme.onPrimary),
+             Divider(color:   Theme.of(context).colorScheme.onSecondary),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                  AutoSizeText('Email',
-                    style: TextStyle(fontWeight: FontWeight.bold,color: Theme.of(context).colorScheme.onTertiary)),
+                    style: TextStyle(fontWeight: FontWeight.bold,color: Theme.of(context).colorScheme.onSecondary)),
                 AutoSizeText(
                   data.email,
-                  style:  TextStyle(color:   Theme.of(context).colorScheme.onPrimary),
+                  style:  TextStyle(color:   Theme.of(context).colorScheme.onSecondary),
                 ),
               ],
             ),
-             Divider(color:   Theme.of(context).colorScheme.onPrimary),
+             Divider(color:   Theme.of(context).colorScheme.onSecondary),
           ],
         ),
         error: (error) => Splash404(error: error),

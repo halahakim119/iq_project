@@ -55,131 +55,123 @@ class _DailyContainerState extends State<DailyContainer> {
       child: BlocListener<OrderCubit, OrderState>(
         listener: (context, state) {},
         child: Container(
-          height: MediaQuery.of(context).size.height * 0.4,
+          height: MediaQuery.of(context).size.height * 0.5,
           width: MediaQuery.of(context).size.width * 0.9,
           decoration: BoxDecoration(
             border: Border.all(
                 width: 1, color: Theme.of(context).colorScheme.primary),
-            color: Theme.of(context).colorScheme.onSecondary,
+            color: Theme.of(context).colorScheme.secondary,
             borderRadius: const BorderRadius.all(Radius.circular(20)),
           ),
           child: _submitted
-              ? Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(top: 30, bottom: 15, left: 30),
-                      child: AutoSizeText(
-                        'Selected meal:',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                            color: Theme.of(context).colorScheme.onTertiary),
+              ? Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            top: 30, bottom: 15, left: 30),
+                        child: AutoSizeText(
+                          'Selected meal:',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                              color: Theme.of(context).colorScheme.onSecondary),
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 30, bottom: 30),
-                      child: AutoSizeText(
-                        _selectedMeal,
-                        style: TextStyle(
-                            fontWeight: FontWeight.normal,
-                            fontSize: 16,
-                            color: Theme.of(context).colorScheme.onTertiary),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 30, bottom: 30),
+                        child: AutoSizeText(
+                          _selectedMeal,
+                          style: TextStyle(
+                              fontWeight: FontWeight.normal,
+                              fontSize: 16,
+                              color: Theme.of(context).colorScheme.onSecondary),
+                        ),
                       ),
-                    ),
-                    BlocListener<OrderCubit, OrderState>(
-                      listener: (context, state) {
-                        state.maybeWhen(
-                          loaded: (id) {
-                            Align(
-                              alignment: Alignment.bottomCenter,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      di.sl<OrderCubit>().deleteOrder(
-                                          id, currentUser!.photoURL!);
-                                      setState(() {
-                                        _submitted = false;
-                                        _selectedMeal = '';
-                                      });
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      minimumSize: Size(
-                                          MediaQuery.of(context).size.width *
-                                              0.35,
-                                          50),
-                                      backgroundColor:
-                                          Theme.of(context).colorScheme.primary,
-                                    ),
-                                    child: AutoSizeText(
-                                      'Delete',
-                                      style: TextStyle(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .background),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            );
-                          },
-                          orElse: () {},
-                        );
-                      },
-                    )
-                  ],
+                      // BlocListener<OrderCubit, OrderState>(
+                      //   listener: (context, state) {
+                      //     state.maybeWhen(
+                      //       loaded: (id) {
+                      //         Align(
+                      //           alignment: Alignment.bottomCenter,
+                      //           child: Row(
+                      //             mainAxisAlignment:
+                      //                 MainAxisAlignment.spaceEvenly,
+                      //             children: [
+                      //               ElevatedButton(
+                      //                 onPressed: () {
+                      //                   di.sl<OrderCubit>().deleteOrder(
+                      //                       id, currentUser!.photoURL!);
+                      //                   setState(() {
+                      //                     _submitted = false;
+                      //                     _selectedMeal = '';
+                      //                   });
+                      //                 },
+                      //                 style: ElevatedButton.styleFrom(
+                      //                   minimumSize: Size(
+                      //                       MediaQuery.of(context).size.width *
+                      //                           0.35,
+                      //                       50),
+                      //                   backgroundColor:
+                      //                       Theme.of(context).colorScheme.primary,
+                      //                 ),
+                      //                 child: AutoSizeText(
+                      //                   'Delete',
+                      //                   style: TextStyle(
+                      //                       color: Theme.of(context)
+                      //                           .colorScheme
+                      //                           .onPrimary),
+                      //                 ),
+                      //               ),
+                      //             ],
+                      //           ),
+                      //         );
+                      //       },
+                      //       orElse: () {},
+                      //     );
+                      //   },
+                      // )
+                    ],
+                  ),
                 )
-              : Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+              : Flex(
+                  direction: Axis.vertical,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(top: 30, bottom: 15, left: 30),
-                      child: AutoSizeText(
-                        'Todays schedule',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                            color: Theme.of(context).colorScheme.onTertiary),
-                      ),
-                    ),
                     Expanded(
+                        flex: 5,
                         child: CustomDailyMealsKSC(chosenRestaurant.meals)),
-                    Align(
-                        alignment: Alignment.center,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(100),
-                            child: ElevatedButton(
-                              onPressed: () {
-                                submitCustomOrder(chosenRestaurant);
-                                final OrderModel order = OrderModel(
-                                    mealID: selectedMealID,
-                                    restaurantID: selectedRestaurantID,
-                                    department: currentUser!.photoURL!);
-                        
-                                di.sl<OrderCubit>().order(order);
-                              },
-                              style: ElevatedButton.styleFrom(
-                                minimumSize: Size(
-                                    MediaQuery.of(context).size.width * 0.7, 50),
-                                backgroundColor:
-                                    Theme.of(context).colorScheme.primary,
-                              ),
-                              child: AutoSizeText(
-                                'Submit',
-                                style: TextStyle(
-                                    color:
-                                        Theme.of(context).colorScheme.background),
-                              ),
-                            ),
-                          ),
-                        ))
+                    Expanded(
+                      flex: 1,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          submitCustomOrder(chosenRestaurant);
+                          final OrderModel order = OrderModel(
+                              mealID: selectedMealID,
+                              restaurantID: selectedRestaurantID,
+                              department: currentUser!.photoURL!);
+
+                          di.sl<OrderCubit>().order(order);
+                        },
+                        style: ElevatedButton.styleFrom(
+                          shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(15),
+                                  bottomRight: Radius.circular(15))),
+                          minimumSize:
+                              Size(MediaQuery.of(context).size.width * 0.7, 50),
+                          backgroundColor:
+                              Theme.of(context).colorScheme.primary,
+                        ),
+                        child: AutoSizeText(
+                          'Submit',
+                          style: TextStyle(
+                              color: Theme.of(context).colorScheme.onPrimary),
+                        ),
+                      ),
+                    )
                   ],
                 ),
         ),
@@ -195,7 +187,7 @@ class _DailyContainerState extends State<DailyContainer> {
             index,
             AutoSizeText(meals[index].meal.toString(),
                 style: TextStyle(
-                    color: Theme.of(context).colorScheme.onTertiary)));
+                    color: Theme.of(context).colorScheme.onSecondary)));
       },
     );
   }
@@ -219,7 +211,7 @@ class _DailyContainerState extends State<DailyContainer> {
   Widget customRadioListTile(index, text) {
     return RadioListTile(
       dense: true,
-      activeColor: Theme.of(context).colorScheme.onTertiary,
+      activeColor: Theme.of(context).colorScheme.primary,
       controlAffinity: ListTileControlAffinity.leading,
       title: text,
       value: index,

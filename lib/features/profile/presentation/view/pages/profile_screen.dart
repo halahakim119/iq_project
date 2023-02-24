@@ -34,7 +34,7 @@ class ProfileScreen extends StatelessWidget {
                         border: Border.all(
                             width: 1,
                             color: Theme.of(context).colorScheme.primary),
-                        color: Theme.of(context).colorScheme.onSecondary,
+                        color: Theme.of(context).colorScheme.secondary,
                         borderRadius:
                             const BorderRadius.all(Radius.circular(20)),
                       ),
@@ -43,37 +43,33 @@ class ProfileScreen extends StatelessWidget {
                       padding: const EdgeInsets.all(20),
                       margin:
                           const EdgeInsets.only(top: 15, left: 15, right: 15),
-                      child: ListView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              AutoSizeText('Profile',
-                                  minFontSize: 20,
-                                  maxFontSize: 30,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .onTertiary)),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              UserProfile(),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              AutoSizeText('More',
-                                  minFontSize: 20,
-                                  maxFontSize: 30,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .onTertiary)),
-                              const MoreWidget(),
-                            ],
+                          AutoSizeText('Profile',
+                              minFontSize: 20,
+                              maxFontSize: 30,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onSecondary)),
+                          const SizedBox(
+                            height: 10,
                           ),
+                          UserProfile(),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          AutoSizeText('More',
+                              minFontSize: 20,
+                              maxFontSize: 30,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onSecondary)),
+                          const MoreWidget(),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -116,7 +112,7 @@ class ProfileScreen extends StatelessWidget {
                     }),
                     child: Text('LOG OUT',
                         style: TextStyle(
-                            color: Theme.of(context).colorScheme.background)),
+                            color: Theme.of(context).colorScheme.onPrimary)),
                   ),
                 ),
               ],

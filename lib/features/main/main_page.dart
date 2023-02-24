@@ -11,21 +11,26 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: AutoSizeText(
-          'iHUNGRY',
-          style: TextStyle(
-              letterSpacing: 4,
-              color: Theme.of(context).colorScheme.primary,
-              fontSize: 25,
-              fontFamily: 'Fredoka_One'),
+        body: NestedScrollView(
+      floatHeaderSlivers: true,
+      headerSliverBuilder: (context, innerBoxIsScrolled) => [
+        SliverAppBar(
+          floating: true,
+          snap: true,
+          automaticallyImplyLeading: false,
+          title: AutoSizeText(
+            'iHUNGRY',
+            style: TextStyle(
+                letterSpacing: 4,
+                color: Theme.of(context).colorScheme.primary,
+                fontSize: 25,
+                fontFamily: 'Fredoka_One'),
+          ),
+          centerTitle: true,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          elevation: 0,
         ),
-        centerTitle: true,
-        backgroundColor: Colors.transparent,
-        elevation: 0,shadowColor: Colors.black,
-      
-      ),
+      ],
       body: AutoTabsScaffold(
         routes: const [
           WeeklyScheduleScreenRoute(),
@@ -45,25 +50,25 @@ class MainPage extends StatelessWidget {
               Icon(
                 UniconsLine.calendar_alt,
                 color: tabsRouter.activeIndex == 0
-                    ? Theme.of(context).colorScheme.background
+                    ? Theme.of(context).scaffoldBackgroundColor
                     : Theme.of(context).colorScheme.primary,
               ),
               Icon(
                 UniconsLine.restaurant,
                 color: tabsRouter.activeIndex == 1
-                    ? Theme.of(context).colorScheme.background
+                    ? Theme.of(context).scaffoldBackgroundColor
                     : Theme.of(context).colorScheme.primary,
               ),
               Icon(
                 UniconsLine.user,
                 color: tabsRouter.activeIndex == 2
-                    ? Theme.of(context).colorScheme.background
+                    ? Theme.of(context).scaffoldBackgroundColor
                     : Theme.of(context).colorScheme.primary,
               ),
             ],
           );
         },
       ),
-    );
+    ));
   }
 }

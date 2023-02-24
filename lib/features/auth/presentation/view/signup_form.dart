@@ -90,7 +90,7 @@ class _SignUpFormState extends State<SignUpForm> {
                   });
                 },
                 elevation: 0,
-                dropdownColor: Theme.of(context).colorScheme.background,
+                dropdownColor: Theme.of(context).scaffoldBackgroundColor,
                 items: const [
                   DropdownMenuItem(
                     value: 'Sales',
@@ -253,7 +253,7 @@ class _SignUpFormState extends State<SignUpForm> {
             child: Text(
               'Sign Up',
               style:
-                  TextStyle(color: Theme.of(context).colorScheme.background),
+                  TextStyle(color: Theme.of(context).colorScheme.onPrimary),
             ),
           ),
         ],

@@ -9,16 +9,16 @@ class MoreWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-         Divider(color:   Theme.of(context).colorScheme.onPrimary),
+         Divider(color:   Theme.of(context).colorScheme.onSecondary),
         GestureDetector(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children:  [
               AutoSizeText('About Us', style: TextStyle(fontWeight: FontWeight.bold,
-              color: Theme.of(context).colorScheme.onTertiary)),
+              color: Theme.of(context).colorScheme.onSecondary)),
               Icon(
                 Icons.arrow_forward_ios_rounded,
-                color:  Theme.of(context).colorScheme.onTertiary,
+                color:  Theme.of(context).colorScheme.onSecondary,
                 size: 15,
               )
             ],
@@ -28,16 +28,16 @@ class MoreWidget extends StatelessWidget {
             context.router.pushNamed('aboutUs');
           },
         ),
-         Divider(color:   Theme.of(context).colorScheme.onPrimary),
+         Divider(color:   Theme.of(context).colorScheme.onSecondary),
         GestureDetector(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children:  [
               AutoSizeText('Ordering Policy',
-                  style: TextStyle(fontWeight: FontWeight.bold,color:  Theme.of(context).colorScheme.onTertiary)),
+                  style: TextStyle(fontWeight: FontWeight.bold,color:  Theme.of(context).colorScheme.onSecondary)),
               Icon(
                 Icons.arrow_forward_ios_rounded,
-                color: Theme.of(context).colorScheme.onTertiary,
+                color: Theme.of(context).colorScheme.onSecondary,
                 size: 15,
               )
             ],
@@ -46,7 +46,7 @@ class MoreWidget extends StatelessWidget {
             context.router.pushNamed('orderingPolicy');
           },
         ),
-         Divider(color:   Theme.of(context).colorScheme.onPrimary),
+         Divider(color:   Theme.of(context).colorScheme.onSecondary),
       ],
     );
   }

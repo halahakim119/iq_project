@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:overlay_support/overlay_support.dart';
 
@@ -14,12 +15,13 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   di.init();
+
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   final _appRouter = AppRouter();
- 
+
   MyApp({super.key});
 
   @override

@@ -38,8 +38,8 @@ class _DailyScheduleWidgetState extends State<DailyScheduleWidget> {
                   decoration: BoxDecoration(
                       border: Border.all(
                           width: 1,
-                          color: Theme.of(context).colorScheme.onSecondary),
-                      color: Theme.of(context).colorScheme.onSecondary,
+                          color: Theme.of(context).colorScheme.primary),
+                      color: Theme.of(context).colorScheme.secondary,
                       borderRadius: BorderRadius.all(Radius.circular(50))),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -130,14 +130,14 @@ class _DailyScheduleWidgetState extends State<DailyScheduleWidget> {
                   bottomRight: Radius.circular(50)),
               color: selectedRestaurant == restaurant
                   ? Theme.of(context).colorScheme.primary
-                  : Theme.of(context).colorScheme.onSecondary),
+                  : Theme.of(context).colorScheme.secondary),
           child: Center(
             child: AutoSizeText(
               restaurant.toUpperCase(),
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: selectedRestaurant == restaurant
-                      ? Theme.of(context).colorScheme.background
+                      ? Theme.of(context).colorScheme.onPrimary
                       : Theme.of(context).colorScheme.primary),
             ),
           ),
