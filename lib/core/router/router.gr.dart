@@ -11,115 +11,159 @@
 // ignore_for_file: type=lint
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i9;
-import 'package:flutter/material.dart' as _i10;
+import 'package:auto_route/auto_route.dart' as _i12;
+import 'package:flutter/material.dart' as _i13;
 
 import '../../features/auth/presentation/view/auth_screen.dart' as _i2;
+import '../../features/Kitchen/main/kitchen_main_page.dart' as _i6;
+import '../../features/Kitchen/orders_management/orders_management_screen.dart'
+    as _i11;
+import '../../features/Kitchen/schedule_management/schedule_management_screen.dart'
+    as _i10;
 import '../../features/main/main_page.dart' as _i5;
 import '../../features/profile/presentation/view/pages/profile_screen.dart'
-    as _i8;
+    as _i9;
 import '../../features/profile/presentation/view/widgets/about_us_screen.dart'
     as _i3;
 import '../../features/profile/presentation/view/widgets/ordering_policy_screen.dart'
     as _i4;
 import '../../features/schedule/presentation/view/daily/page/daily_schedule_screen.dart'
-    as _i7;
+    as _i8;
 import '../../features/schedule/presentation/view/weekly/pages/weekly_schedule_screen.dart'
-    as _i6;
+    as _i7;
 import '../../features/splash/loading_splash.dart' as _i1;
 
-class AppRouter extends _i9.RootStackRouter {
-  AppRouter([_i10.GlobalKey<_i10.NavigatorState>? navigatorKey])
+class AppRouter extends _i12.RootStackRouter {
+  AppRouter([_i13.GlobalKey<_i13.NavigatorState>? navigatorKey])
       : super(navigatorKey);
 
   @override
-  final Map<String, _i9.PageFactory> pagesMap = {
+  final Map<String, _i12.PageFactory> pagesMap = {
     LoadingSplashRoute.name: (routeData) {
-      return _i9.MaterialPageX<dynamic>(
+      return _i12.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i1.LoadingSplash(),
       );
     },
     AuthRoute.name: (routeData) {
-      return _i9.MaterialPageX<dynamic>(
+      return _i12.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i2.AuthScreen(),
       );
     },
     AboutUsScreenRoute.name: (routeData) {
-      return _i9.MaterialPageX<dynamic>(
+      return _i12.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i3.AboutUsScreen(),
       );
     },
     OrderingPolicyScreenRoute.name: (routeData) {
-      return _i9.MaterialPageX<dynamic>(
+      return _i12.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i4.OrderingPolicyScreen(),
       );
     },
     MainRoute.name: (routeData) {
-      return _i9.MaterialPageX<dynamic>(
+      return _i12.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i5.MainPage(),
       );
     },
-    WeeklyScheduleScreenRoute.name: (routeData) {
-      return _i9.MaterialPageX<dynamic>(
+    KitchenRoute.name: (routeData) {
+      return _i12.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i6.WeeklyScheduleScreen(),
+        child: const _i6.KitchenMainPage(),
+      );
+    },
+    WeeklyScheduleScreenRoute.name: (routeData) {
+      return _i12.MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: _i7.WeeklyScheduleScreen(),
       );
     },
     DailyScheduleScreenRoute.name: (routeData) {
-      return _i9.MaterialPageX<dynamic>(
+      return _i12.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i7.DailyScheduleScreen(),
+        child: _i8.DailyScheduleScreen(),
       );
     },
     ProfileScreenRoute.name: (routeData) {
-      return _i9.MaterialPageX<dynamic>(
+      return _i12.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i8.ProfileScreen(),
+        child: const _i9.ProfileScreen(),
+      );
+    },
+    ScheduleManagementScreenRoute.name: (routeData) {
+      return _i12.MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const _i10.ScheduleManagementScreen(),
+      );
+    },
+    OrdersManagementScreenRoute.name: (routeData) {
+      return _i12.MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const _i11.OrdersManagementScreen(),
       );
     },
   };
 
   @override
-  List<_i9.RouteConfig> get routes => [
-        _i9.RouteConfig(
+  List<_i12.RouteConfig> get routes => [
+        _i12.RouteConfig(
           LoadingSplashRoute.name,
           path: '/',
         ),
-        _i9.RouteConfig(
+        _i12.RouteConfig(
           AuthRoute.name,
           path: 'auth',
         ),
-        _i9.RouteConfig(
+        _i12.RouteConfig(
           AboutUsScreenRoute.name,
           path: 'aboutUs',
         ),
-        _i9.RouteConfig(
+        _i12.RouteConfig(
           OrderingPolicyScreenRoute.name,
           path: 'orderingPolicy',
         ),
-        _i9.RouteConfig(
+        _i12.RouteConfig(
           MainRoute.name,
           path: 'main',
           children: [
-            _i9.RouteConfig(
+            _i12.RouteConfig(
               WeeklyScheduleScreenRoute.name,
               path: 'weekly',
               parent: MainRoute.name,
             ),
-            _i9.RouteConfig(
+            _i12.RouteConfig(
               DailyScheduleScreenRoute.name,
               path: 'daily',
               parent: MainRoute.name,
             ),
-            _i9.RouteConfig(
+            _i12.RouteConfig(
               ProfileScreenRoute.name,
               path: 'profile',
               parent: MainRoute.name,
+            ),
+          ],
+        ),
+        _i12.RouteConfig(
+          KitchenRoute.name,
+          path: 'kitchen',
+          children: [
+            _i12.RouteConfig(
+              ScheduleManagementScreenRoute.name,
+              path: 'schedule',
+              parent: KitchenRoute.name,
+            ),
+            _i12.RouteConfig(
+              OrdersManagementScreenRoute.name,
+              path: 'orders',
+              parent: KitchenRoute.name,
+            ),
+            _i12.RouteConfig(
+              ProfileScreenRoute.name,
+              path: 'profile',
+              parent: KitchenRoute.name,
             ),
           ],
         ),
@@ -128,7 +172,7 @@ class AppRouter extends _i9.RootStackRouter {
 
 /// generated route for
 /// [_i1.LoadingSplash]
-class LoadingSplashRoute extends _i9.PageRouteInfo<void> {
+class LoadingSplashRoute extends _i12.PageRouteInfo<void> {
   const LoadingSplashRoute()
       : super(
           LoadingSplashRoute.name,
@@ -140,7 +184,7 @@ class LoadingSplashRoute extends _i9.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i2.AuthScreen]
-class AuthRoute extends _i9.PageRouteInfo<void> {
+class AuthRoute extends _i12.PageRouteInfo<void> {
   const AuthRoute()
       : super(
           AuthRoute.name,
@@ -152,7 +196,7 @@ class AuthRoute extends _i9.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i3.AboutUsScreen]
-class AboutUsScreenRoute extends _i9.PageRouteInfo<void> {
+class AboutUsScreenRoute extends _i12.PageRouteInfo<void> {
   const AboutUsScreenRoute()
       : super(
           AboutUsScreenRoute.name,
@@ -164,7 +208,7 @@ class AboutUsScreenRoute extends _i9.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i4.OrderingPolicyScreen]
-class OrderingPolicyScreenRoute extends _i9.PageRouteInfo<void> {
+class OrderingPolicyScreenRoute extends _i12.PageRouteInfo<void> {
   const OrderingPolicyScreenRoute()
       : super(
           OrderingPolicyScreenRoute.name,
@@ -176,8 +220,8 @@ class OrderingPolicyScreenRoute extends _i9.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i5.MainPage]
-class MainRoute extends _i9.PageRouteInfo<void> {
-  const MainRoute({List<_i9.PageRouteInfo>? children})
+class MainRoute extends _i12.PageRouteInfo<void> {
+  const MainRoute({List<_i12.PageRouteInfo>? children})
       : super(
           MainRoute.name,
           path: 'main',
@@ -188,8 +232,21 @@ class MainRoute extends _i9.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i6.WeeklyScheduleScreen]
-class WeeklyScheduleScreenRoute extends _i9.PageRouteInfo<void> {
+/// [_i6.KitchenMainPage]
+class KitchenRoute extends _i12.PageRouteInfo<void> {
+  const KitchenRoute({List<_i12.PageRouteInfo>? children})
+      : super(
+          KitchenRoute.name,
+          path: 'kitchen',
+          initialChildren: children,
+        );
+
+  static const String name = 'KitchenRoute';
+}
+
+/// generated route for
+/// [_i7.WeeklyScheduleScreen]
+class WeeklyScheduleScreenRoute extends _i12.PageRouteInfo<void> {
   const WeeklyScheduleScreenRoute()
       : super(
           WeeklyScheduleScreenRoute.name,
@@ -200,8 +257,8 @@ class WeeklyScheduleScreenRoute extends _i9.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i7.DailyScheduleScreen]
-class DailyScheduleScreenRoute extends _i9.PageRouteInfo<void> {
+/// [_i8.DailyScheduleScreen]
+class DailyScheduleScreenRoute extends _i12.PageRouteInfo<void> {
   const DailyScheduleScreenRoute()
       : super(
           DailyScheduleScreenRoute.name,
@@ -212,8 +269,8 @@ class DailyScheduleScreenRoute extends _i9.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i8.ProfileScreen]
-class ProfileScreenRoute extends _i9.PageRouteInfo<void> {
+/// [_i9.ProfileScreen]
+class ProfileScreenRoute extends _i12.PageRouteInfo<void> {
   const ProfileScreenRoute()
       : super(
           ProfileScreenRoute.name,
@@ -221,4 +278,28 @@ class ProfileScreenRoute extends _i9.PageRouteInfo<void> {
         );
 
   static const String name = 'ProfileScreenRoute';
+}
+
+/// generated route for
+/// [_i10.ScheduleManagementScreen]
+class ScheduleManagementScreenRoute extends _i12.PageRouteInfo<void> {
+  const ScheduleManagementScreenRoute()
+      : super(
+          ScheduleManagementScreenRoute.name,
+          path: 'schedule',
+        );
+
+  static const String name = 'ScheduleManagementScreenRoute';
+}
+
+/// generated route for
+/// [_i11.OrdersManagementScreen]
+class OrdersManagementScreenRoute extends _i12.PageRouteInfo<void> {
+  const OrdersManagementScreenRoute()
+      : super(
+          OrdersManagementScreenRoute.name,
+          path: 'orders',
+        );
+
+  static const String name = 'OrdersManagementScreenRoute';
 }

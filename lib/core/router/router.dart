@@ -1,7 +1,10 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:iq_project/features/Kitchen/orders_management/orders_management_screen.dart';
+import 'package:iq_project/features/Kitchen/schedule_management/schedule_management_screen.dart';
 import 'package:iq_project/features/profile/presentation/view/widgets/about_us_screen.dart';
 import 'package:iq_project/features/profile/presentation/view/widgets/ordering_policy_screen.dart';
 
+import '../../features/Kitchen/main/kitchen_main_page.dart';
 import '../../features/auth/presentation/view/auth_screen.dart';
 import '../../features/main/main_page.dart';
 import '../../features/profile/presentation/view/pages/profile_screen.dart';
@@ -47,6 +50,28 @@ import '../../features/splash/loading_splash.dart';
           path: 'daily',
           name: 'DailyScheduleScreenRoute',
           page: DailyScheduleScreen,
+        ),
+        AutoRoute(
+          path: 'profile',
+          name: 'ProfileScreenRoute',
+          page: ProfileScreen,
+        ),
+      ],
+    ),
+    AutoRoute(
+      path: 'kitchen',
+      name: 'kitchenRoute',
+      page: KitchenMainPage,
+      children: [
+        AutoRoute(
+          path: 'schedule',
+          name: 'ScheduleManagementScreenRoute',
+          page: ScheduleManagementScreen,
+        ),
+        AutoRoute(
+          path: 'orders',
+          name: 'OrdersManagementScreenRoute',
+          page: OrdersManagementScreen,
         ),
         AutoRoute(
           path: 'profile',

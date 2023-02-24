@@ -6,7 +6,6 @@ import '../../../../core/error/failure.dart';
 import '../../domain/entities/user_entity.dart';
 import '../../domain/repositories/user_repository.dart';
 import '../datasource/user_data_source.dart';
-import '../models/user_model.dart';
 
 class UserRepositoryImpl implements UserRepository {
   final UserDataSource userDataSource;

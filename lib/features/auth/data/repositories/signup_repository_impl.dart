@@ -31,14 +31,13 @@ class SignupRepositoryImpl implements SignupRepository {
       await currentUser?.sendEmailVerification();
 
       final UserModel userModel = UserModel(
-        userId: currentUser!.uid,
-        name: parameters.name,
-        email: parameters.email,
-        department: parameters.department,
-      );
+          name: parameters.name,
+          email: parameters.email,
+          department: parameters.department,
+          uType: 'normal');
 
       await _userRef
-          .child('users/${currentUser.uid}')
+          .child('users/${currentUser!.uid}')
           .set(userModel.toFirebaseMap());
 
       return const Right(unit);
