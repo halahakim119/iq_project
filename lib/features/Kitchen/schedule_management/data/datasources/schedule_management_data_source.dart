@@ -8,7 +8,7 @@ import '../../../../profile/data/models/user_model.dart';
 
 abstract class ScheduleManagementDataSource {
   Future<Map<String, dynamic>> getAllMeals();
-  Future<Unit> deleteMeal(int mealId, int dayIndex);
+  Future<Unit> deleteMeal(String mealId, int dayIndex);
   Future<Unit> addMeal(String meal, int dayIndex);
 }
 
@@ -26,11 +26,11 @@ class ScheduleManagementDataSourceImpl implements ScheduleManagementDataSource {
   }
 
   @override
-  Future<Unit> deleteMeal(int mealId, int dayIndex) async {
+  Future<Unit> deleteMeal(String mealId, int dayIndex) async {
     var kitchenType = await getUserType();
     FirebaseDatabase.instance
         .ref()
-        .child('schedule')
+        .child('schedule_management')
         .child(kitchenType)
         .child('$dayIndex')
         .child('$mealId')
@@ -43,9 +43,9 @@ class ScheduleManagementDataSourceImpl implements ScheduleManagementDataSource {
     var kitchenType = await getUserType();
     final data = await scheduleRef.get();
     if (data.exists) {}
-
     final dataString = json.encode(data.value);
     Map<String, dynamic> dataValues = json.decode(dataString);
+    print(dataValues);
     return dataValues;
   }
 

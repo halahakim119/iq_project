@@ -15,48 +15,49 @@ class AddDeleteMealBloc extends Bloc<AddDeleteMealEvent, AddDeleteMealState> {
 
   AddDeleteMealBloc(
       {required this.addMealUsecase, required this.deleteMealUsecase})
-      : super(AddDeleteMealInitial()) {
-    on<AddDeleteMealEvent>((event, emit) async {
-      if (event is AddMealEvent) {
-        emit(LoadingAddDeleteMealState());
+      : super(AddDeleteMealInitial());
 
-        final failureOrDoneMessage =
-            await addMealUsecase(event.meal, event.dayIndex);
+  @override
+  Stream<AddDeleteMealState> mapEventToState(AddDeleteMealEvent event) async* {
+    if (event is AddMealEvent) {
+      yield LoadingAddDeleteMealState();
 
-        emit(
-          _eitherDoneMessageOrErrorState(failureOrDoneMessage, 'ADD_SUCCESS'),
-        );
-      } else if (event is DeleteMealEvent) {
-        emit(LoadingAddDeleteMealState());
+      final failureOrDoneMessage =
+          await addMealUsecase(event.meal, event.dayIndex);
 
-        final failureOrDoneMessage =
-            await deleteMealUsecase(event.mealId, event.dayIndex);
+      yield _eitherDoneMessageOrErrorState(
+        failureOrDoneMessage,
+        'ADD_SUCCESS',
+      );
+    } else if (event is DeleteMealEvent) {
+      yield LoadingAddDeleteMealState();
 
-        emit(
-          _eitherDoneMessageOrErrorState(
-              failureOrDoneMessage, "DELETE_SUCCESS"),
-        );
-      }
-    });
+      final failureOrDoneMessage =
+          await deleteMealUsecase(event.mealId, event.dayIndex);
+
+      yield _eitherDoneMessageOrErrorState(
+        failureOrDoneMessage,
+        "DELETE_SUCCESS",
+      );
+    }
   }
-}
 
-AddDeleteMealState _eitherDoneMessageOrErrorState(
-    Either<Failure, Unit> either, String message) {
-  return either.fold(
-    (failure) => ErrorAddDeleteMealState(
-      message: _mapFailureToMessage(failure),
-    ),
-    (_) => MessageAddDeleteMealState(message: message),
-  );
-}
+  AddDeleteMealState _eitherDoneMessageOrErrorState(
+      Either<Failure, Unit> either, String message) {
+    return either.fold(
+      (failure) => ErrorAddDeleteMealState(
+        message: _mapFailureToMessage(failure),
+      ),
+      (_) => MessageAddDeleteMealState(message: message),
+    );
+  }
 
-String _mapFailureToMessage(Failure failure) {
-  switch (failure.runtimeType) {
-    case ServerFailure:
-      return 'SERVER_FAILURE';
-
-    default:
-      return "Unexpected Error , Please try again later .";
+  String _mapFailureToMessage(Failure failure) {
+    switch (failure.runtimeType) {
+      case ServerFailure:
+        return 'SERVER_FAILURE';
+      default:
+        return "Unexpected Error, Please try again later.";
+    }
   }
 }

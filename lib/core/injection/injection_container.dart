@@ -2,6 +2,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:get_it/get_it.dart';
 
+import '../../features/Kitchen/schedule_management/data/datasources/schedule_management_data_source.dart';
+import '../../features/Kitchen/schedule_management/data/repositories/schedule_management_repository_impl.dart';
+import '../../features/Kitchen/schedule_management/domain/repositories/schedule_management_repository.dart';
+import '../../features/Kitchen/schedule_management/domain/usecases/add_meal_usecase.dart';
+import '../../features/Kitchen/schedule_management/domain/usecases/delete_meal_usecase.dart';
+import '../../features/Kitchen/schedule_management/domain/usecases/get_all_meals_usecase.dart';
+import '../../features/Kitchen/schedule_management/presentation/logic/add_delete_meal_bloc/add_delete_meal_bloc.dart';
+import '../../features/Kitchen/schedule_management/presentation/logic/get_all_meals_bloc/bloc/get_all_meals_bloc.dart';
 import '../../features/auth/data/repositories/login_repository_impl.dart';
 import '../../features/auth/data/repositories/signup_repository_impl.dart';
 import '../../features/auth/domain/repositories/login_repository.dart';
@@ -69,6 +77,24 @@ Future<void> init() async {
 // data sources
   sl.registerLazySingleton<UserDataSource>(
       () => UserDataSourceImpl(userDatabaseReference: sl()));
+
+  //!Schedule management
+// bloc
+  sl.registerFactory(() => GetAllMealsBloc(getAllMealsUsecase: sl()));
+  sl.registerFactory(
+      () => AddDeleteMealBloc(addMealUsecase: sl(), deleteMealUsecase: sl()));
+
+// Usecases
+  sl.registerLazySingleton(() => GetAllMealsUsecase(sl()));
+  sl.registerLazySingleton(() => AddMealUsecase(sl()));
+  sl.registerLazySingleton(() => DeleteMealUsecase(sl()));
+
+// Repository
+  sl.registerLazySingleton<ScheduleManagementRepository>(() =>
+      ScheduleManagementRepositoryImpl(scheduleManagementDataSource: sl()));
+// data sources
+  sl.registerLazySingleton<ScheduleManagementDataSource>(
+      () => ScheduleManagementDataSourceImpl());
   //!order
 // cubit
   sl.registerFactory(() => OrderCubit(orderUseCase: sl()));

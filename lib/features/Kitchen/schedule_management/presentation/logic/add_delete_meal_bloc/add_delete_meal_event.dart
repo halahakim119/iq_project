@@ -18,7 +18,7 @@ class AddMealEvent extends AddDeleteMealEvent {
 }
 
 class DeleteMealEvent extends AddDeleteMealEvent {
-  final int mealId;
+  final String mealId;
   final int dayIndex;
 
   DeleteMealEvent({required this.mealId, required this.dayIndex});

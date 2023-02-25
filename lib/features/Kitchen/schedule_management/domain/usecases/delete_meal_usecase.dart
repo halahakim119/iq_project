@@ -8,7 +8,7 @@ class DeleteMealUsecase {
 
   DeleteMealUsecase(this.repository);
 
-  Future<Either<Failure, Unit>> call(int mealtId,int dayIndex) async {
+  Future<Either<Failure, Unit>> call(String mealtId,int dayIndex) async {
     return await repository.deleteMeal(mealtId,dayIndex);
   }
 }

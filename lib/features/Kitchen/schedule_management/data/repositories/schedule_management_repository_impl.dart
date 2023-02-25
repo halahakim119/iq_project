@@ -22,7 +22,7 @@ class ScheduleManagementRepositoryImpl implements ScheduleManagementRepository {
   }
 
   @override
-  Future<Either<Failure, Unit>> deleteMeal(int id, int dayIndex) async {
+  Future<Either<Failure, Unit>> deleteMeal(String id, int dayIndex) async {
     try {
       await scheduleManagementDataSource.deleteMeal(id, dayIndex);
       return const Right(unit);

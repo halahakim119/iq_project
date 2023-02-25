@@ -12,25 +12,20 @@ class GetAllMealsBloc extends Bloc<GetAllMealsEvent, GetAllMealsState> {
   final GetAllMealsUsecase getAllMealsUsecase;
   GetAllMealsBloc({required this.getAllMealsUsecase})
       : super(GetAllMealsInitial()) {
-    on<GetMealsEvent>((event, emit) async {
-      if (event is GetMealsEvent) {
+    on<GetAllMealsEvent>((event, emit) async {
+      if (event is GetMealsEvent || event is RefreshMealsEvent) {
         emit(LoadingGetAllMealsState());
 
-        final failureOrPosts = await getAllMealsUsecase();
-        emit(_mapFailureOrPostsToState(failureOrPosts));
-      } else if (event is RefreshMealsEvent) {
-        emit(LoadingGetAllMealsState());
-
-        final failureOrPosts = await getAllMealsUsecase();
-        emit(_mapFailureOrPostsToState(failureOrPosts));
+        final failureOrMeals = await getAllMealsUsecase();
+        emit(_mapFailureOrMealsToState(failureOrMeals));
       }
     });
   }
-  GetAllMealsState _mapFailureOrPostsToState(
+
+  GetAllMealsState _mapFailureOrMealsToState(
       Either<Failure, Map<String, dynamic>> either) {
     return either.fold(
-      (failure) =>
-          ErrorGetAllMealsState(message: _mapFailureToMessage(failure)),
+      (failure) => ErrorGetAllMealsState(message: _mapFailureToMessage(failure)),
       (meals) => LoadedGetAllMealsState(meals: meals),
     );
   }
@@ -38,10 +33,9 @@ class GetAllMealsBloc extends Bloc<GetAllMealsEvent, GetAllMealsState> {
   String _mapFailureToMessage(Failure failure) {
     switch (failure.runtimeType) {
       case ServerFailure:
-        return "SERVER_FAILURE";
-
+        return 'SERVER_FAILURE';
       default:
-        return "Unexpected Error , Please try again later .";
+        return 'Unexpected Error, Please try again later.';
     }
   }
 }
