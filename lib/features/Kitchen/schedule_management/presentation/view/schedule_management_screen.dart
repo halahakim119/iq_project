@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:iq_project/features/Kitchen/schedule_management/presentation/view/widgets/meals_list.dart';
 import 'package:unicons/unicons.dart';
 
 import '../../../../../core/injection/injection_container.dart';
@@ -8,6 +7,7 @@ import '../../../../../core/theme/custom_loading.dart';
 import '../../../../schedule/presentation/view/weekly/widgets/day_button.dart';
 import '../logic/add_delete_meal_bloc/add_delete_meal_bloc.dart';
 import '../logic/get_all_meals_bloc/bloc/get_all_meals_bloc.dart';
+import 'widgets/meals_list.dart';
 
 class ScheduleManagementScreen extends StatefulWidget {
   const ScheduleManagementScreen({Key? key}) : super(key: key);
