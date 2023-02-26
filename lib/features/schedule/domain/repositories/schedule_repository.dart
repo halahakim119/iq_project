@@ -4,5 +4,5 @@ import 'package:iq_project/features/schedule/domain/entities/schedule_entity.dar
 import '/core/error/failure.dart';
 
 abstract class ScheduleRepository {
-  Future<Either<Failure, ScheduleEntity>> getData();
+  Future<Either<FirebaseFailure, ScheduleEntity>> getData();
 }

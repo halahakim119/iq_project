@@ -6,13 +6,13 @@ import 'package:firebase_database/firebase_database.dart';
 import '../../../../core/error/failure.dart';
 
 abstract class ScheduleDataSource {
-  Future<Either<Failure, Map<String, dynamic>>> getSchedule();
+  Future<Either<FirebaseFailure, Map<String, dynamic>>> getSchedule();
 }
 
 class ScheduleDataSourceImpl implements ScheduleDataSource {
   final _databaseReference = FirebaseDatabase.instance.reference();
   @override
-  Future<Either<Failure, Map<String, dynamic>>> getSchedule() async {
+  Future<Either<FirebaseFailure, Map<String, dynamic>>> getSchedule() async {
     try {
       final snapshot = await _databaseReference.child('schedule').get();
 
@@ -24,7 +24,7 @@ class ScheduleDataSourceImpl implements ScheduleDataSource {
 
       return Right(data);
     } catch (e) {
-      return Left(ServerFailure());
+      return Left(FirebaseFailure(message: e.toString()));
     }
   }
 }

@@ -10,7 +10,7 @@ import '../../domain/entities/user_entity.dart';
 import '../models/user_model.dart';
 
 abstract class UserDataSource {
-  Future<Either<Failure, UserEntity>> getUserData();
+  Future<Either<FirebaseFailure, UserEntity>> getUserData();
 }
 
 class UserDataSourceImpl implements UserDataSource {
@@ -18,12 +18,12 @@ class UserDataSourceImpl implements UserDataSource {
 
   UserDataSourceImpl({required this.userDatabaseReference});
   @override
-  Future<Either<Failure, UserEntity>> getUserData() async {
+  Future<Either<FirebaseFailure, UserEntity>> getUserData() async {
     try {
       final currentUser = FirebaseAuth.instance.currentUser;
 
       if (currentUser == null) {
-        return Left(ServerFailure());
+        return Left(FirebaseFailure(message: 'current User isnull'));
       }
 
       final ref = FirebaseDatabase.instance.ref();
@@ -39,7 +39,7 @@ class UserDataSourceImpl implements UserDataSource {
 
       return Right(userEntity);
     } catch (e) {
-      return Left(ServerFailure());
+      return Left(FirebaseFailure(message: e.toString()));
     }
   }
 }

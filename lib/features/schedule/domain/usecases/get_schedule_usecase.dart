@@ -9,7 +9,7 @@ class GetScheduleUsecase {
 
   GetScheduleUsecase({required this.scheduleRepository});
 
-  Future<Either<Failure, ScheduleEntity>> call() async {
+  Future<Either<FirebaseFailure, ScheduleEntity>> call() async {
     return await scheduleRepository.getData();
   }
 }

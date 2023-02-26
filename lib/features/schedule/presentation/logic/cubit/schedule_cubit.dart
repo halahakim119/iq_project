@@ -11,7 +11,7 @@ class ScheduleCubit extends Cubit<ScheduleState> {
   final GetScheduleUsecase getData;
   ScheduleCubit({required this.getData}) : super(const ScheduleState.loading());
 
-  void fetchData() async {
+  Future<void> fetchData() async {
     emit(const ScheduleState.loading());
     final failureOrSchedule = await getData();
     emit(failureOrSchedule.fold(

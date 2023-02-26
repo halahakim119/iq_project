@@ -11,7 +11,7 @@ class UserCubit extends Cubit<UserState> {
   final GetUserUsecase getData;
   UserCubit({required this.getData}) : super(const UserState.loading());
 
-  void fetchData() async {
+  Future<void> fetchData() async {
     emit(const UserState.loading());
     final failureOrUsers = await getData();
     emit(failureOrUsers.fold((failure) => UserState.error(failure.toString()),

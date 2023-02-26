@@ -9,7 +9,7 @@ class GetUserUsecase {
   final UserRepository userRepository;
   GetUserUsecase({required this.userRepository});
 
-  Future<Either<Failure, UserEntity>> call() async {
+  Future<Either<FirebaseFailure, UserEntity>> call() async {
     return await userRepository.user();
   }
 }
