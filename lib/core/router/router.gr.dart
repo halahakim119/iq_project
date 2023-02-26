@@ -18,7 +18,7 @@ import '../../features/auth/presentation/view/auth_screen.dart' as _i2;
 import '../../features/Kitchen/main/kitchen_main_page.dart' as _i6;
 import '../../features/Kitchen/orders_management/orders_management_screen.dart'
     as _i11;
-import '../../features/Kitchen/schedule_management/presentation/view/schedule_management_screen.dart'
+import '../../features/Kitchen/schedule_management/presentation/view/pages/schedule_management_screen.dart'
     as _i10;
 import '../../features/main/main_page.dart' as _i5;
 import '../../features/profile/presentation/view/pages/profile_screen.dart'

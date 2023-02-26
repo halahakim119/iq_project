@@ -18,7 +18,7 @@ class GetAllMealsBloc extends Bloc<GetAllMealsEvent, GetAllMealsState> {
     required this.addDeleteMealBloc,
   }) : super(GetAllMealsInitial()) {
     on<GetAllMealsEvent>((event, emit) async {
-      if (event is GetMealsEvent || event is RefreshMealsEvent) {
+      if (event is GetMealsEvent) {
         emit(LoadingGetAllMealsState());
 
         try {
