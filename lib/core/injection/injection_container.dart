@@ -80,7 +80,7 @@ Future<void> init() async {
 
   //!Schedule management
 // bloc
-  sl.registerFactory(() => GetAllMealsBloc(getAllMealsUsecase: sl()));
+  sl.registerFactory(() => GetAllMealsBloc(getAllMealsUsecase: sl(),addDeleteMealBloc: sl()));
   sl.registerFactory(
       () => AddDeleteMealBloc(addMealUsecase: sl(), deleteMealUsecase: sl()));
 

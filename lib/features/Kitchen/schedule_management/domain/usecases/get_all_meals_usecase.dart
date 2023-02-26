@@ -8,7 +8,7 @@ class GetAllMealsUsecase {
 
   GetAllMealsUsecase(this.repository);
 
-  Future<Either<Failure, Map<String, dynamic>>> call() async {
+  Future<Either<FirebaseFailure, Map<String, dynamic>>> call() async {
     return await repository.getAllMeals();
   }
 }

@@ -1,7 +1,17 @@
-class SignUpWithEmailAndPasswordFailure implements Exception {
-  const SignUpWithEmailAndPasswordFailure([
-    this.message = 'An unknown exception occurred.',
-  ]);
+class FirebaseException implements Exception {
+  const FirebaseException({required this.message});
+  final String message;
+}
+
+class NoDataAvailableException implements FirebaseException {
+  const NoDataAvailableException(this.message);
+  final String message;
+}
+
+class SignUpWithEmailAndPasswordFailure implements FirebaseException {
+  const SignUpWithEmailAndPasswordFailure(this.message);
+  final String message;
+
   factory SignUpWithEmailAndPasswordFailure.fromCode(String code) {
     switch (code) {
       case 'invalid-email':
@@ -24,18 +34,18 @@ class SignUpWithEmailAndPasswordFailure implements Exception {
         return const SignUpWithEmailAndPasswordFailure(
           'Please enter a stronger password.',
         );
+
       default:
-        return const SignUpWithEmailAndPasswordFailure();
+        return const SignUpWithEmailAndPasswordFailure(
+          'An unknown exception occurred.',
+        );
     }
   }
-
-  final String message;
 }
 
-class LogInWithEmailAndPasswordFailure implements Exception {
-  const LogInWithEmailAndPasswordFailure([
-    this.message = 'An unknown exception occurred.',
-  ]);
+class LogInWithEmailAndPasswordFailure implements FirebaseException {
+  final String message;
+  const LogInWithEmailAndPasswordFailure(this.message);
 
   factory LogInWithEmailAndPasswordFailure.fromCode(String code) {
     switch (code) {
@@ -56,10 +66,14 @@ class LogInWithEmailAndPasswordFailure implements Exception {
           'Incorrect password, please try again.',
         );
       default:
-        return const LogInWithEmailAndPasswordFailure();
+        return const LogInWithEmailAndPasswordFailure(
+          'An unknown exception occurred.',
+        );
     }
   }
-  final String message;
 }
 
-class LogOutFailure implements Exception {}
+class LogOutFailure implements FirebaseException {
+  const LogOutFailure(this.message);
+  final String message;
+}

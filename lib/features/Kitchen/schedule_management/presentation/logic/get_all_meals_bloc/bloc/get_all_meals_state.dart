@@ -14,7 +14,7 @@ class LoadingGetAllMealsState extends GetAllMealsState {}
 class LoadedGetAllMealsState extends GetAllMealsState {
   final Map<String, dynamic> meals;
 
-  LoadedGetAllMealsState({required this.meals});
+  const LoadedGetAllMealsState({required this.meals});
 
   @override
   List<Object> get props => [meals];
@@ -23,8 +23,17 @@ class LoadedGetAllMealsState extends GetAllMealsState {
 class ErrorGetAllMealsState extends GetAllMealsState {
   final String message;
 
-  ErrorGetAllMealsState({required this.message});
+  const ErrorGetAllMealsState({required this.message});
 
   @override
   List<Object> get props => [message];
+}
+
+class MealsUpdatedState extends GetAllMealsState {
+  final Map<String, dynamic> meals;
+
+  const MealsUpdatedState({required this.meals});
+
+  @override
+  List<Object> get props => [meals];
 }

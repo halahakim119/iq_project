@@ -1,8 +1,9 @@
 import 'package:dartz/dartz.dart';
 
-import '../../../../core/error/firebase_exceptions.dart';
+import '../../../../core/error/failure.dart';
+
 import '../entities/login_entity.dart';
 
 abstract class LoginRepository {
-  Future<Either<LogInWithEmailAndPasswordFailure, Unit>> login(LoginEntity parameters);
+  Future<Either<FirebaseAuthFailure, Unit>> login(LoginEntity parameters);
 }

@@ -3,39 +3,49 @@ import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../../../../../../core/error/failure.dart';
+import '../../../../../../../core/error/firebase_exceptions.dart';
 import '../../../../domain/usecases/get_all_meals_usecase.dart';
+import '../../add_delete_meal_bloc/add_delete_meal_bloc.dart';
 
 part 'get_all_meals_event.dart';
 part 'get_all_meals_state.dart';
 
 class GetAllMealsBloc extends Bloc<GetAllMealsEvent, GetAllMealsState> {
   final GetAllMealsUsecase getAllMealsUsecase;
-  GetAllMealsBloc({required this.getAllMealsUsecase})
-      : super(GetAllMealsInitial()) {
+  final AddDeleteMealBloc addDeleteMealBloc;
+  GetAllMealsBloc({
+    required this.getAllMealsUsecase,
+    required this.addDeleteMealBloc,
+  }) : super(GetAllMealsInitial()) {
     on<GetAllMealsEvent>((event, emit) async {
       if (event is GetMealsEvent || event is RefreshMealsEvent) {
         emit(LoadingGetAllMealsState());
 
-        final failureOrMeals = await getAllMealsUsecase();
-        emit(_mapFailureOrMealsToState(failureOrMeals));
+        try {
+          final failureOrMeals = await getAllMealsUsecase();
+          emit(_mapFailureOrMealsToState(failureOrMeals));
+        } on FirebaseException catch (e) {
+          emit(ErrorGetAllMealsState(message: e.message));
+        }
+      }
+    });
+
+    addDeleteMealBloc.stream.listen((state) {
+      if (state is LoadedAddDeleteMealState) {
+        final meals = (this.state as LoadedGetAllMealsState).meals;
+        final updatedMeals = Map<String, dynamic>.from(meals)
+          ..addAll(state.meals);
+
+        emit(MealsUpdatedState(meals: updatedMeals));
       }
     });
   }
+}
 
-  GetAllMealsState _mapFailureOrMealsToState(
-      Either<Failure, Map<String, dynamic>> either) {
-    return either.fold(
-      (failure) => ErrorGetAllMealsState(message: _mapFailureToMessage(failure)),
-      (meals) => LoadedGetAllMealsState(meals: meals),
-    );
-  }
-
-  String _mapFailureToMessage(Failure failure) {
-    switch (failure.runtimeType) {
-      case ServerFailure:
-        return 'SERVER_FAILURE';
-      default:
-        return 'Unexpected Error, Please try again later.';
-    }
-  }
+GetAllMealsState _mapFailureOrMealsToState(
+    Either<FirebaseFailure, Map<String, dynamic>> either) {
+  return either.fold(
+    (failure) => ErrorGetAllMealsState(message: failure.message),
+    (meals) => LoadedGetAllMealsState(meals: meals),
+  );
 }

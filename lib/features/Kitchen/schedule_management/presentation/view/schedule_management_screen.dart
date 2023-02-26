@@ -39,6 +39,7 @@ class _ScheduleManagementScreenState extends State<ScheduleManagementScreen> {
   @override
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
+    bool _isLoading = false;
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -89,53 +90,20 @@ class _ScheduleManagementScreenState extends State<ScheduleManagementScreen> {
                 if (state is LoadingGetAllMealsState) {
                   return const CustomLoading();
                 } else if (state is LoadedGetAllMealsState) {
+                  return RefreshIndicator(
+                      onRefresh: () async {
+                        await _onRefresh(context);
+                      },
+                      child: MealsList(selectedDay: selectedDay));
+                } else if (state is MealsUpdatedState) {
                   Map<String, dynamic> meals = state.meals['ksc'][selectedDay];
                   List<dynamic> mealItems = meals.values.toList();
 
                   return RefreshIndicator(
-                    onRefresh: () async {
-                      await _onRefresh(context);
-                    
-                    },
-                    child: ListView.separated(
-                      separatorBuilder: (context, index) => const Divider(
-                        height: 1,
-                        thickness: 0.3,
-                      ),
-                      itemCount: meals.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        String mealId = meals.keys.toList()[index];
-                        String mealName = mealItems[index].toString();
-
-                        return ListTile(
-                          leading: Padding(
-                            padding: const EdgeInsets.only(left: 15),
-                            child: Text(
-                              "${index + 1} -",
-                              style: TextStyle(
-                                  color: Theme.of(context).colorScheme.primary,
-                                  fontSize: 16),
-                            ),
-                          ),
-                          trailing: IconButton(
-                            icon: Icon(Icons.delete,
-                                color: Theme.of(context).colorScheme.primary),
-                            onPressed: () async {
-                              await sl<AddDeleteMealBloc>()
-                                  .deleteMealUsecase(mealId, selectedDay);
-                          
-                            },
-                          ),
-                          title: Text(
-                            mealName,
-                            style: TextStyle(
-                                color:
-                                    Theme.of(context).colorScheme.onSecondary),
-                          ),
-                        );
+                      onRefresh: () async {
+                        await _onRefresh(context);
                       },
-                    ),
-                  );
+                      child: MealsList(selectedDay: selectedDay));
                 } else if (state is ErrorGetAllMealsState) {
                   return Center(child: Text(state.message));
                 }
@@ -164,19 +132,36 @@ class _ScheduleManagementScreenState extends State<ScheduleManagementScreen> {
                         return null;
                       },
                       decoration: InputDecoration(
-                        suffixIcon: IconButton(
-                          iconSize: 30,
-                          color: Theme.of(context).colorScheme.primary,
-                          icon: const Icon(UniconsThinline.arrow_circle_right),
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              sl<AddDeleteMealBloc>().addMealUsecase(
-                                  _textController.text, selectedDay);
-                              sl<GetAllMealsBloc>().getAllMealsUsecase();
-                              _textController.clear();
-                            }
-                          },
-                        ),
+                        suffixIcon: Stack(children: [
+                          Visibility(
+                            visible: !_isLoading,
+                            child: IconButton(
+                              iconSize: 30,
+                              color: Theme.of(context).colorScheme.primary,
+                              icon: const Icon(
+                                  UniconsThinline.arrow_circle_right),
+                              onPressed: () async {
+                                if (_formKey.currentState!.validate()) {
+                                  setState(() {
+                                    _isLoading = true;
+                                  });
+                                  await sl<AddDeleteMealBloc>().addMealUsecase(
+                                      _textController.text, selectedDay);
+                                  await sl<GetAllMealsBloc>()
+                                      .getAllMealsUsecase();
+                                  _textController.clear();
+                                  setState(() {
+                                    _isLoading = false;
+                                  });
+                                }
+                              },
+                            ),
+                          ),
+                          Visibility(
+                            visible: _isLoading,
+                            child: const CircularProgressIndicator(),
+                          ),
+                        ]),
                         hintText: 'Add a meal',
                         fillColor: Colors.transparent,
                         floatingLabelBehavior: FloatingLabelBehavior.never,
@@ -213,6 +198,66 @@ class _ScheduleManagementScreenState extends State<ScheduleManagementScreen> {
           ),
         ],
       ),
+    );
+  }
+}
+
+class MealsList extends StatelessWidget {
+  var selectedDay;
+  MealsList({
+    required this.selectedDay,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<AddDeleteMealBloc, AddDeleteMealState>(
+      builder: (context, state) {
+        if (state is LoadingAddDeleteMealState) {
+          return Center(child: CircularProgressIndicator());
+        } else if (state is LoadedAddDeleteMealState) {
+          return ListView.separated(
+            separatorBuilder: (context, index) => const Divider(
+              height: 1,
+              thickness: 0.3,
+            ),
+            itemCount: state.meals.length,
+            itemBuilder: (BuildContext context, int index) {
+              List<dynamic> mealItems = state.meals.values.toList();
+              String mealId = state.meals.keys.toList()[index];
+              String mealName = mealItems[index].toString();
+
+              return ListTile(
+                leading: Padding(
+                  padding: const EdgeInsets.only(left: 15),
+                  child: Text(
+                    "${index + 1} -",
+                    style: TextStyle(
+                        color: Theme.of(context).colorScheme.primary,
+                        fontSize: 16),
+                  ),
+                ),
+                trailing: IconButton(
+                  icon: Icon(Icons.delete,
+                      color: Theme.of(context).colorScheme.primary),
+                  onPressed: () async {
+                    await sl<AddDeleteMealBloc>()
+                        .deleteMealUsecase(mealId, selectedDay);
+                  },
+                ),
+                title: Text(
+                  mealName,
+                  style: TextStyle(
+                      color: Theme.of(context).colorScheme.onSecondary),
+                ),
+              );
+            },
+          );
+        } else if (state is ErrorAddDeleteMealState) {
+          return Center(child: Text(state.message));
+        } else {
+          return Center(child: Text('No meals found.'));
+        }
+      },
     );
   }
 }

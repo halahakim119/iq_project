@@ -9,11 +9,12 @@ class OrderUseCase {
 
   OrderUseCase({required this.orderRepository});
 
-  Future<Either<Failure, String>> call(OrderEntity parameters) async {
+  Future<Either<FirebaseFailure, String>> call(OrderEntity parameters) async {
     return await orderRepository.order(parameters);
   }
 
-  Future<Either<Failure, Unit>> deleteOrder(String orderId,String department) async {
-    return await orderRepository.deleteOrder(orderId,department);
+  Future<Either<FirebaseFailure, Unit>> deleteOrder(
+      String orderId, String department) async {
+    return await orderRepository.deleteOrder(orderId, department);
   }
 }

@@ -9,7 +9,23 @@ abstract class AddDeleteMealState extends Equatable {
 
 class AddDeleteMealInitial extends AddDeleteMealState {}
 
-class LoadingAddDeleteMealState extends AddDeleteMealState {}
+class LoadingAddDeleteMealState extends AddDeleteMealState {
+  final bool isLoading;
+
+  const LoadingAddDeleteMealState({required this.isLoading});
+
+  @override
+  List<Object> get props => [isLoading];
+}
+
+class LoadedAddDeleteMealState extends AddDeleteMealState {
+  final Map<String, dynamic> meals;
+
+  LoadedAddDeleteMealState({required this.meals});
+
+  @override
+  List<Object> get props => [meals];
+} 
 
 class ErrorAddDeleteMealState extends AddDeleteMealState {
   final String message;
