@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
@@ -11,7 +12,7 @@ import '../../../../../core/error/firebase_exceptions.dart';
 import '../../../../profile/data/models/user_model.dart';
 
 abstract class ScheduleManagementDataSource {
-  Future<Either<FirebaseFailure, Map<String, dynamic>>> getAllMeals();
+  Stream<Either<FirebaseFailure, Map<String, dynamic>>> getAllMeals();
   Future<Either<FirebaseFailure, Unit>> deleteMeal(String mealId, int dayIndex);
   Future<Either<FirebaseFailure, Unit>> addMeal(String meal, int dayIndex);
 }
@@ -19,6 +20,8 @@ abstract class ScheduleManagementDataSource {
 class ScheduleManagementDataSourceImpl implements ScheduleManagementDataSource {
   DatabaseReference scheduleRef =
       FirebaseDatabase.instance.reference().child('schedule_management');
+  late StreamSubscription _onChildAddedSubscription;
+  late StreamSubscription _onChildRemovedSubscription;
 
   @override
   Future<Either<FirebaseFailure, Unit>> addMeal(
@@ -54,19 +57,32 @@ class ScheduleManagementDataSourceImpl implements ScheduleManagementDataSource {
   }
 
   @override
-  Future<Either<FirebaseFailure, Map<String, dynamic>>> getAllMeals() async {
+  Stream<Either<FirebaseFailure, Map<String, dynamic>>> getAllMeals() async* {
     try {
       var kitchenType = await getUserType();
-      final data = await scheduleRef.get();
-      if (data.exists) {
-        final dataString = json.encode(data.value);
-        Map<String, dynamic> dataValues = json.decode(dataString);
-        return right(dataValues);
+      scheduleRef =
+          FirebaseDatabase.instance.reference().child('schedule_management');
+      DatabaseReference kitchenRef = scheduleRef.child(kitchenType);
+
+      final snapshot = await kitchenRef.once();
+      final dataString = json.encode(snapshot.snapshot.value);
+
+      Map<String, dynamic> data = json.decode(dataString);
+
+      if (data.isNotEmpty) {
+        _onChildAddedSubscription = kitchenRef.onChildAdded.listen((event) {
+          data[event.snapshot.key!] = event.snapshot.value;
+        });
+
+        _onChildRemovedSubscription = kitchenRef.onChildRemoved.listen((event) {
+          data.remove(event.snapshot.key);
+        });
+        yield right(data );
       } else {
         throw const NoDataAvailableException('No data available.');
       }
     } catch (e) {
-      return left(FirebaseFailure(message: e.toString()));
+      yield left(FirebaseFailure(message: e.toString()));
     }
   }
 
@@ -82,7 +98,7 @@ class ScheduleManagementDataSourceImpl implements ScheduleManagementDataSource {
         Map<String, dynamic> data = json.decode(dataString);
 
         final userEntity = UserModel.fromFirebaseMap(data);
-        if (userEntity.uType != null) {
+        if (userEntity.uType.isNotEmpty) {
           if (userEntity.uType == 'KSCKitchen') {
             return 'ksc';
           } else if (userEntity.uType == 'AwbaraKitchen') {
@@ -94,5 +110,10 @@ class ScheduleManagementDataSourceImpl implements ScheduleManagementDataSource {
     } catch (e) {
       throw fb.FirebaseException(message: e.toString());
     }
+  }
+
+  void dispose() {
+    _onChildAddedSubscription.cancel();
+    _onChildRemovedSubscription.cancel();
   }
 }

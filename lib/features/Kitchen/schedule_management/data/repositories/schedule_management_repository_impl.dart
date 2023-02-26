@@ -50,16 +50,13 @@ class ScheduleManagementRepositoryImpl implements ScheduleManagementRepository {
   }
 
   @override
-  Future<Either<FirebaseFailure, Map<String, dynamic>>> getAllMeals() async {
-    final meals = await scheduleManagementDataSource.getAllMeals();
-    return meals.fold(
-      (failure) {
-        return Left(failure);
-      },
-      (meals) {
-        return Right(meals);
-      },
-    );
+  Stream<Either<FirebaseFailure, Map<String, dynamic>>> getAllMeals() {
+    return scheduleManagementDataSource.getAllMeals().map(
+          (meals) => meals.fold(
+            (failure) => Left(failure),
+            (meals) => Right(meals),
+          ),
+        );
   }
 
   Future<String> getUserType() async {

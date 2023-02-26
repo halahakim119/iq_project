@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
@@ -13,6 +15,8 @@ part 'get_all_meals_state.dart';
 class GetAllMealsBloc extends Bloc<GetAllMealsEvent, GetAllMealsState> {
   final GetAllMealsUsecase getAllMealsUsecase;
   final AddDeleteMealBloc addDeleteMealBloc;
+  StreamSubscription? addDeleteMealSubscription;
+
   GetAllMealsBloc({
     required this.getAllMealsUsecase,
     required this.addDeleteMealBloc,
@@ -30,7 +34,7 @@ class GetAllMealsBloc extends Bloc<GetAllMealsEvent, GetAllMealsState> {
       }
     });
 
-    addDeleteMealBloc.stream.listen((state) {
+    addDeleteMealSubscription = addDeleteMealBloc.stream.listen((state) {
       if (state is LoadedAddDeleteMealState) {
         final meals = (this.state as LoadedGetAllMealsState).meals;
         final updatedMeals = Map<String, dynamic>.from(meals)
@@ -40,12 +44,18 @@ class GetAllMealsBloc extends Bloc<GetAllMealsEvent, GetAllMealsState> {
       }
     });
   }
-}
 
-GetAllMealsState _mapFailureOrMealsToState(
-    Either<FirebaseFailure, Map<String, dynamic>> either) {
-  return either.fold(
-    (failure) => ErrorGetAllMealsState(message: failure.message),
-    (meals) => LoadedGetAllMealsState(meals: meals),
-  );
+  @override
+  Future<void> close() {
+    addDeleteMealSubscription?.cancel();
+    return super.close();
+  }
+
+  GetAllMealsState _mapFailureOrMealsToState(
+      Either<FirebaseFailure, Map<String, dynamic>> either) {
+    return either.fold(
+      (failure) => ErrorGetAllMealsState(message: failure.message),
+      (meals) => LoadedGetAllMealsState(meals: meals),
+    );
+  }
 }

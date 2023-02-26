@@ -33,7 +33,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         margin: const EdgeInsets.only(
           left: 20,
           top: 5,
-          bottom: 10,
+          bottom: 15,
           right: 10,
         ),
         child: TextFormField(
@@ -45,7 +45,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
             return null;
           },
           decoration: InputDecoration(
-            prefix: SizedBox(
+            prefix: const SizedBox(
               width: 10,
             ),
             hintText: 'Add a meal',

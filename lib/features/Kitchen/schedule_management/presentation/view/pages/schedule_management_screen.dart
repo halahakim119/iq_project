@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../../core/theme/custom_loading.dart';
 import '../../../../../schedule/presentation/view/weekly/widgets/day_button.dart';
 import '../widgets/cutsom_text_field.dart';
 import '../widgets/meals_list.dart';
