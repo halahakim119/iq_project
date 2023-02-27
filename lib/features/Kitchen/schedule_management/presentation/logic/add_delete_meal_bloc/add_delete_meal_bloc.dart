@@ -59,7 +59,9 @@ class AddDeleteMealBloc extends Bloc<AddDeleteMealEvent, AddDeleteMealState> {
       (failure) => ErrorAddDeleteMealState(
         message: failure.message,
       ),
-      (_) => const LoadingAddDeleteMealState(isLoading: false),
+      (_) => MessageAddDeleteMealState(
+        message: message,
+      ),
     );
   }
 }

@@ -4,6 +4,6 @@ import '../../../../../core/error/failure.dart';
 
 abstract class ScheduleManagementRepository {
   Stream<Either<FirebaseFailure, Map<String, dynamic>>> getAllMeals();
-  Future<Either<FirebaseFailure, Unit>> addMeal(String Meal, int dayIndex);
-  Future<Either<FirebaseFailure, Unit>> deleteMeal(String mealid, int dayIndex);
+  Future<Either<FirebaseFailure, Unit>> addMeal(String meal, int dayIndex);
+  Future<Either<FirebaseFailure, Unit>> deleteMeal(String mealId, int dayIndex);
 }

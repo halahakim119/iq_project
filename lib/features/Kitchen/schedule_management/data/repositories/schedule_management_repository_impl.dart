@@ -20,9 +20,7 @@ class ScheduleManagementRepositoryImpl implements ScheduleManagementRepository {
 
   @override
   Future<Either<FirebaseFailure, Unit>> addMeal(
-    String meal,
-    int dayIndex,
-  ) async {
+      String meal, int dayIndex) async {
     try {
       await scheduleManagementDataSource.addMeal(meal, dayIndex);
       return const Right(unit);
@@ -33,9 +31,7 @@ class ScheduleManagementRepositoryImpl implements ScheduleManagementRepository {
 
   @override
   Future<Either<FirebaseFailure, Unit>> deleteMeal(
-    String mealId,
-    int dayIndex,
-  ) async {
+      String mealId, int dayIndex) async {
     try {
       final result =
           await scheduleManagementDataSource.deleteMeal(mealId, dayIndex);

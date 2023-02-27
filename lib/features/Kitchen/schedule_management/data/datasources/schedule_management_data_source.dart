@@ -3,12 +3,10 @@ import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 import 'package:firebase_database/firebase_database.dart';
 
 import '../../../../../core/error/failure.dart';
 import '../../../../../core/error/firebase_exceptions.dart' as fb;
-import '../../../../../core/error/firebase_exceptions.dart';
 import '../../../../profile/data/models/user_model.dart';
 
 abstract class ScheduleManagementDataSource {
@@ -20,8 +18,6 @@ abstract class ScheduleManagementDataSource {
 class ScheduleManagementDataSourceImpl implements ScheduleManagementDataSource {
   DatabaseReference scheduleRef =
       FirebaseDatabase.instance.reference().child('schedule_management');
-  late StreamSubscription _onChildAddedSubscription;
-  late StreamSubscription _onChildRemovedSubscription;
 
   @override
   Future<Either<FirebaseFailure, Unit>> addMeal(
@@ -48,7 +44,7 @@ class ScheduleManagementDataSourceImpl implements ScheduleManagementDataSource {
           .child('schedule_management')
           .child(kitchenType)
           .child('$dayIndex')
-          .child('$mealId')
+          .child(mealId)
           .remove();
       return right(unit);
     } catch (e) {
@@ -60,30 +56,23 @@ class ScheduleManagementDataSourceImpl implements ScheduleManagementDataSource {
   Stream<Either<FirebaseFailure, Map<String, dynamic>>> getAllMeals() async* {
     try {
       var kitchenType = await getUserType();
-      scheduleRef =
-          FirebaseDatabase.instance.reference().child('schedule_management');
       DatabaseReference kitchenRef = scheduleRef.child(kitchenType);
 
-      final snapshot = await kitchenRef.once();
-      final dataString = json.encode(snapshot.snapshot.value);
+      // Listen for changes to the database
+      var kitchenStream = kitchenRef.onValue;
 
+      var event = await kitchenStream.first;
+      final dataString = json.encode(event.snapshot.value);
       Map<String, dynamic> data = json.decode(dataString);
-
-      if (data.isNotEmpty) {
-        _onChildAddedSubscription = kitchenRef.onChildAdded.listen((event) {
-          data[event.snapshot.key!] = event.snapshot.value;
-        });
-
-        _onChildRemovedSubscription = kitchenRef.onChildRemoved.listen((event) {
-          data.remove(event.snapshot.key);
-        });
-        yield right(data );
-      } else {
-        throw const NoDataAvailableException('No data available.');
-      }
+      // Emit a Right value to the stream
+      yield Right(data);
     } catch (e) {
-      yield left(FirebaseFailure(message: e.toString()));
+      // If an error occurs before listening to the database, emit a Left value to the stream
+      yield Left(FirebaseFailure(message: e.toString()));
     }
+
+    // Add a return statement at the end of the function
+    return;
   }
 
   Future<String> getUserType() async {
@@ -110,10 +99,5 @@ class ScheduleManagementDataSourceImpl implements ScheduleManagementDataSource {
     } catch (e) {
       throw fb.FirebaseException(message: e.toString());
     }
-  }
-
-  void dispose() {
-    _onChildAddedSubscription.cancel();
-    _onChildRemovedSubscription.cancel();
   }
 }
