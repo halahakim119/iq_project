@@ -33,9 +33,11 @@ class MealsList extends StatelessWidget {
               ),
               itemCount: meals.length,
               itemBuilder: (BuildContext context, int index) {
+                
                 List<dynamic> mealItems = meals.values.toList();
-                String mealId = meals.keys.toList()[index];
-                String mealName = mealItems[index].toString();
+               
+                String mealId = meals.keys.toList()[0][index];
+                String mealName = mealItems[0][1].toString();
 
                 return ListTile(
                   leading: Padding(

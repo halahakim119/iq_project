@@ -9,15 +9,15 @@ import '../../logic/add_delete_meal_bloc/add_delete_meal_bloc.dart';
 import '../../logic/get_all_meals_bloc/bloc/get_all_meals_bloc.dart';
 import '../widgets/meals_list.dart';
 
-class ScheduleManagementScreen extends StatefulWidget {
-  const ScheduleManagementScreen({Key? key}) : super(key: key);
+class Screen extends StatefulWidget {
+  const Screen({Key? key}) : super(key: key);
 
   @override
   _ScheduleManagementScreenState createState() =>
       _ScheduleManagementScreenState();
 }
 
-class _ScheduleManagementScreenState extends State<ScheduleManagementScreen> {
+class _ScheduleManagementScreenState extends State<Screen> {
   int selectedDay = 0;
 
   final TextEditingController _textController = TextEditingController();

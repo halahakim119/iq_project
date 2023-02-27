@@ -7,10 +7,11 @@ import 'package:firebase_database/firebase_database.dart';
 
 import '../../../../../core/error/failure.dart';
 import '../../../../../core/error/firebase_exceptions.dart' as fb;
+import '../../../../../core/error/firebase_exceptions.dart';
 import '../../../../profile/data/models/user_model.dart';
 
 abstract class ScheduleManagementDataSource {
-  Stream<Either<FirebaseFailure, Map<String, dynamic>>> getAllMeals();
+  Future<Either<FirebaseFailure, Map<String, dynamic>>> getAllMeals();
   Future<Either<FirebaseFailure, Unit>> deleteMeal(String mealId, int dayIndex);
   Future<Either<FirebaseFailure, Unit>> addMeal(String meal, int dayIndex);
 }
@@ -53,27 +54,21 @@ class ScheduleManagementDataSourceImpl implements ScheduleManagementDataSource {
   }
 
   @override
-  Stream<Either<FirebaseFailure, Map<String, dynamic>>> getAllMeals() async* {
+  Future<Either<FirebaseFailure, Map<String, dynamic>>> getAllMeals() async {
     try {
       var kitchenType = await getUserType();
-      DatabaseReference kitchenRef = scheduleRef.child(kitchenType);
-      await for (var event in kitchenRef.onValue) {
-        if (event.snapshot.value == null) {
-          // break the loop if the stream is closed
-          break;
-        }
-        final dataString = json.encode(event.snapshot.value);
-        Map<String, dynamic> data = json.decode(dataString);
-        // Emit a Right value to the stream
-        yield Right(data);
+      final data = await scheduleRef.get();
+      if (data.exists) {
+        final dataString = json.encode(data.value);
+        Map<String, dynamic> dataValues = json.decode(dataString);
+       
+        return right(dataValues);
+      } else {
+        throw const NoDataAvailableException('No data available.');
       }
     } catch (e) {
-      // If an error occurs before listening to the database, emit a Left value to the stream
-      yield Left(FirebaseFailure(message: e.toString()));
+      return left(FirebaseFailure(message: e.toString()));
     }
-
-    // Add a return statement at the end of the function
-    return;
   }
 
   Future<String> getUserType() async {

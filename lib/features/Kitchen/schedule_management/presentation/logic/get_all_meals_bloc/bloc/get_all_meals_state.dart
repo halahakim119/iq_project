@@ -37,3 +37,4 @@ class MealsUpdatedState extends GetAllMealsState {
   @override
   List<Object> get props => [meals];
 }
+  

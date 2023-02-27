@@ -13,7 +13,7 @@ import 'features/schedule/presentation/logic/cubit/schedule_cubit.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  di.init();
+  di.init(); 
 
   runApp(MyApp());
 }
