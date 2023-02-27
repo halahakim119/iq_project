@@ -6,14 +6,13 @@ import '../../../../../../core/injection/injection_container.dart';
 import '../../logic/add_delete_meal_bloc/add_delete_meal_bloc.dart';
 
 class MealsList extends StatelessWidget {
-  var selectedDay;
-  MealsList({
-    required this.selectedDay,
-  });
+  final selectedDay;
+
+  const MealsList({Key? key, required this.selectedDay}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<GetAllMealsBloc>(
+    return BlocProvider(
       create: (context) => sl<GetAllMealsBloc>()..add(GetMealsEvent()),
       child: BlocBuilder<GetAllMealsBloc, GetAllMealsState>(
         builder: (context, state) {
@@ -22,15 +21,17 @@ class MealsList extends StatelessWidget {
           } else if (state is ErrorGetAllMealsState) {
             return Center(child: Text(state.message));
           } else if (state is LoadedGetAllMealsState) {
-            final meals = state.meals;
             return ListView.separated(
               separatorBuilder: (context, index) => const Divider(
                 height: 1,
                 thickness: 0.3,
               ),
-              itemCount: meals.length,
+              itemCount: state.meals.length,
               itemBuilder: (BuildContext context, int index) {
-                final meal = meals.values.elementAt(index);
+                List<dynamic> mealItems = state.meals.values.toList();
+                String mealId = state.meals.keys.toList()[index];
+                String mealName = mealItems[index].toString();
+
                 return ListTile(
                   leading: Padding(
                     padding: const EdgeInsets.only(left: 15),
@@ -49,11 +50,11 @@ class MealsList extends StatelessWidget {
                     ),
                     onPressed: () async {
                       await sl<AddDeleteMealBloc>()
-                          .deleteMealUsecase(meal['id'], selectedDay);
+                          .deleteMealUsecase(mealId, selectedDay);
                     },
                   ),
                   title: Text(
-                    meal['name'],
+                    mealName,
                     style: TextStyle(
                       color: Theme.of(context).colorScheme.onSecondary,
                     ),
@@ -62,15 +63,16 @@ class MealsList extends StatelessWidget {
               },
             );
           } else if (state is MealsUpdatedState) {
-            final meals = state.meals;
             return ListView.separated(
               separatorBuilder: (context, index) => const Divider(
                 height: 1,
                 thickness: 0.3,
               ),
-              itemCount: meals.length,
+              itemCount: state.meals.length,
               itemBuilder: (BuildContext context, int index) {
-                final meal = meals.values.elementAt(index);
+                List<dynamic> mealItems = state.meals.values.toList();
+                String mealId = state.meals.keys.toList()[index];
+                String mealName = mealItems[index].toString();
                 return ListTile(
                   leading: Padding(
                     padding: const EdgeInsets.only(left: 15),
@@ -89,11 +91,11 @@ class MealsList extends StatelessWidget {
                     ),
                     onPressed: () async {
                       await sl<AddDeleteMealBloc>()
-                          .deleteMealUsecase(meal['id'], selectedDay);
+                          .deleteMealUsecase(mealId, selectedDay);
                     },
                   ),
                   title: Text(
-                    meal['name'],
+                    mealName,
                     style: TextStyle(
                       color: Theme.of(context).colorScheme.onSecondary,
                     ),
@@ -102,7 +104,7 @@ class MealsList extends StatelessWidget {
               },
             );
           } else {
-            return Center(child: Text('No meals found!'));
+            return const Center(child: Text('No meals found!'));
           }
         },
       ),

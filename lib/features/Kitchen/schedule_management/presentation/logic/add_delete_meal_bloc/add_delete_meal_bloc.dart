@@ -28,7 +28,7 @@ class AddDeleteMealBloc extends Bloc<AddDeleteMealEvent, AddDeleteMealState> {
 
         yield _eitherDoneMessageOrErrorState(
           failureOrDoneMessage,
-          'ADD_SUCCESS',
+          'Meal added successfully.',
         );
       } on FirebaseException catch (e) {
         yield ErrorAddDeleteMealState(message: e.message);
@@ -43,7 +43,7 @@ class AddDeleteMealBloc extends Bloc<AddDeleteMealEvent, AddDeleteMealState> {
 
         yield _eitherDoneMessageOrErrorState(
           failureOrDoneMessage,
-          "DELETE_SUCCESS",
+          "Meal deleted successfully.",
         );
       } on FirebaseException catch (e) {
         yield ErrorAddDeleteMealState(message: e.message);
@@ -57,7 +57,7 @@ class AddDeleteMealBloc extends Bloc<AddDeleteMealEvent, AddDeleteMealState> {
       Either<FirebaseFailure, Unit> either, String message) {
     return either.fold(
       (failure) => ErrorAddDeleteMealState(
-        message: message,
+        message: failure.message,
       ),
       (_) => const LoadingAddDeleteMealState(isLoading: false),
     );
