@@ -57,15 +57,16 @@ class ScheduleManagementDataSourceImpl implements ScheduleManagementDataSource {
     try {
       var kitchenType = await getUserType();
       DatabaseReference kitchenRef = scheduleRef.child(kitchenType);
-
-      // Listen for changes to the database
-      var kitchenStream = kitchenRef.onValue;
-
-      var event = await kitchenStream.first;
-      final dataString = json.encode(event.snapshot.value);
-      Map<String, dynamic> data = json.decode(dataString);
-      // Emit a Right value to the stream
-      yield Right(data);
+      await for (var event in kitchenRef.onValue) {
+        if (event.snapshot.value == null) {
+          // break the loop if the stream is closed
+          break;
+        }
+        final dataString = json.encode(event.snapshot.value);
+        Map<String, dynamic> data = json.decode(dataString);
+        // Emit a Right value to the stream
+        yield Right(data);
+      }
     } catch (e) {
       // If an error occurs before listening to the database, emit a Left value to the stream
       yield Left(FirebaseFailure(message: e.toString()));
