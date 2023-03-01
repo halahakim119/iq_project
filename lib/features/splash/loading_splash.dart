@@ -62,6 +62,8 @@ class _LoadingSplashState extends State<LoadingSplash> {
           context.router.pushNamed('main');
         } else if (userEntity.uType == 'KSCKitchen') {
           context.router.pushNamed('kitchen');
+        } else if (userEntity.uType == 'AwbaraKitchen') {
+          context.router.pushNamed('kitchen');
         } else {
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             content: Text('Unknown user type.'),

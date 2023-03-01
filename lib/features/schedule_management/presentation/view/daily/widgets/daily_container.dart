@@ -1,0 +1,219 @@
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../../../../core/injection/injection_container.dart' as di;
+import '../../../../../../order/presentation/logic/cubit/order_cubit.dart';
+
+class DailyContainer extends StatefulWidget {
+  int selectedDay;
+  var schedule;
+  String restaurant;
+
+  DailyContainer({
+    required this.restaurant,
+    required this.selectedDay,
+    required this.schedule,
+  });
+
+  @override
+  State<DailyContainer> createState() => _DailyContainerState();
+}
+
+class _DailyContainerState extends State<DailyContainer> {
+  int _selectedIndex = 0;
+  String _selectedMeal = '';
+  bool _submitted = false;
+  String selectedRestaurantID = '1';
+  String selectedMealID = '1';
+  final currentUser = FirebaseAuth.instance.currentUser;
+
+  var day;
+  var chosenRestaurant;
+
+  @override
+  Widget build(BuildContext context) {
+    chosenRestaurant = widget.restaurant == 'ksc'
+        ? widget.schedule[widget.selectedDay]
+        : widget.schedule[widget.selectedDay];
+    return BlocProvider(
+      create: (context) => di.sl<OrderCubit>(),
+      child: BlocListener<OrderCubit, OrderState>(
+        listener: (context, state) {},
+        child: Container(
+          height: MediaQuery.of(context).size.height * 0.5,
+          width: MediaQuery.of(context).size.width * 0.9,
+          decoration: BoxDecoration(
+            border: Border.all(
+                width: 1, color: Theme.of(context).colorScheme.primary),
+            color: Theme.of(context).colorScheme.secondary,
+            borderRadius: const BorderRadius.all(Radius.circular(20)),
+          ),
+          child: _submitted
+              ? Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            top: 30, bottom: 15, left: 30),
+                        child: AutoSizeText(
+                          'Selected meal:',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                              color: Theme.of(context).colorScheme.onSecondary),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 30, bottom: 30),
+                        child: AutoSizeText(
+                          _selectedMeal,
+                          style: TextStyle(
+                              fontWeight: FontWeight.normal,
+                              fontSize: 16,
+                              color: Theme.of(context).colorScheme.onSecondary),
+                        ),
+                      ),
+                      // BlocListener<OrderCubit, OrderState>(
+                      //   listener: (context, state) {
+                      //     state.maybeWhen(
+                      //       loaded: (id) {
+                      //         Align(
+                      //           alignment: Alignment.bottomCenter,
+                      //           child: Row(
+                      //             mainAxisAlignment:
+                      //                 MainAxisAlignment.spaceEvenly,
+                      //             children: [
+                      //               ElevatedButton(
+                      //                 onPressed: () {
+                      //                   di.sl<OrderCubit>().deleteOrder(
+                      //                       id, currentUser!.photoURL!);
+                      //                   setState(() {
+                      //                     _submitted = false;
+                      //                     _selectedMeal = '';
+                      //                   });
+                      //                 },
+                      //                 style: ElevatedButton.styleFrom(
+                      //                   minimumSize: Size(
+                      //                       MediaQuery.of(context).size.width *
+                      //                           0.35,
+                      //                       50),
+                      //                   backgroundColor:
+                      //                       Theme.of(context).colorScheme.primary,
+                      //                 ),
+                      //                 child: AutoSizeText(
+                      //                   'Delete',
+                      //                   style: TextStyle(
+                      //                       color: Theme.of(context)
+                      //                           .colorScheme
+                      //                           .onPrimary),
+                      //                 ),
+                      //               ),
+                      //             ],
+                      //           ),
+                      //         );
+                      //       },
+                      //       orElse: () {},
+                      //     );
+                      //   },
+                      // )
+                    ],
+                  ),
+                )
+              : Flex(
+                  direction: Axis.vertical,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Expanded(
+                        flex: 5,
+                        child: CustomDailyMealsKSC(
+                            widget.schedule[widget.selectedDay])),
+                    Expanded(
+                      flex: 1,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          // submitCustomOrder(chosenRestaurant);
+                          // final OrderModel order = OrderModel(
+                          //     mealID: selectedMealID,
+                          //     restaurantID: selectedRestaurantID,
+                          //     department: currentUser!.photoURL!);
+
+                          // di.sl<OrderCubit>().order(order);
+                        },
+                        style: ElevatedButton.styleFrom(
+                          shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(15),
+                                  bottomRight: Radius.circular(15))),
+                          minimumSize:
+                              Size(MediaQuery.of(context).size.width * 0.7, 50),
+                          backgroundColor:
+                              Theme.of(context).colorScheme.primary,
+                        ),
+                        child: AutoSizeText(
+                          'Submit',
+                          style: TextStyle(
+                              color: Theme.of(context).colorScheme.onPrimary),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+        ),
+      ),
+    );
+  }
+
+  Widget CustomDailyMealsKSC(meals) {
+    return ListView.builder(
+      itemCount: meals.values.length == 1 ? 1 : meals['meals'].values.length,
+      itemBuilder: (context, index) {
+        if (meals.values.length == 1) {
+          String message = 'no available data';
+          return Center(child: Text(message));
+        }
+        String mealName = meals['meals'].values.toList()[index];
+        return customRadioListTile(
+            index,
+            AutoSizeText(mealName,
+                style: TextStyle(
+                    color: Theme.of(context).colorScheme.onSecondary)));
+      },
+    );
+  }
+
+  void submitCustomOrder(order) {
+    if (order.meals == null || order.meals!.isEmpty) {
+      return;
+    }
+    if (_selectedIndex < 0 || _selectedIndex >= order.meals!.length) {
+      return;
+    }
+    final selectedMeal = order.meals![_selectedIndex];
+    selectedRestaurantID = order.id.toString();
+    selectedMealID = selectedMeal.id.toString();
+    setState(() {
+      _selectedMeal = selectedMeal.meal.toString();
+      _submitted = !_submitted;
+    });
+  }
+
+  Widget customRadioListTile(index, text) {
+    return RadioListTile(
+      dense: true,
+      activeColor: Theme.of(context).colorScheme.primary,
+      controlAffinity: ListTileControlAffinity.leading,
+      title: text,
+      value: index,
+      groupValue: _selectedIndex,
+      onChanged: (value) {
+        setState(() {
+          _selectedIndex = value!;
+        });
+      },
+    );
+  }
+}

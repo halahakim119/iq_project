@@ -8,7 +8,6 @@ import 'core/router/router.gr.dart';
 import 'core/theme/app_theme/logic/theme_bloc.dart';
 import 'core/theme/app_theme/logic/theme_state.dart';
 import 'features/auth/presentation/logic/cubit/authentication_cubit.dart';
-import 'features/schedule/presentation/logic/cubit/schedule_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

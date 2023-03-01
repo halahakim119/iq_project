@@ -15,8 +15,8 @@ import 'package:auto_route/auto_route.dart' as _i12;
 import 'package:flutter/material.dart' as _i13;
 
 import '../../features/auth/presentation/view/auth_screen.dart' as _i2;
-import '../../features/Kitchen/main/kitchen_main_page.dart' as _i6;
-import '../../features/Kitchen/orders_management/orders_management_screen.dart'
+import '../../features/main/kitchen_main_page.dart' as _i6;
+import '../../features/orders_management/orders_management_screen.dart'
     as _i11;
 import '../../features/Kitchen/schedule_management/presentation/view/pages/schedule_management_screen.dart'
     as _i10;
@@ -27,9 +27,9 @@ import '../../features/profile/presentation/view/widgets/about_us_screen.dart'
     as _i3;
 import '../../features/profile/presentation/view/widgets/ordering_policy_screen.dart'
     as _i4;
-import '../../features/schedule/presentation/view/daily/page/daily_schedule_screen.dart'
+import '../../features/Kitchen/schedule_management/presentation/view/daily/page/daily_schedule_screen.dart'
     as _i8;
-import '../../features/schedule/presentation/view/weekly/pages/weekly_schedule_screen.dart'
+import '../../features/Kitchen/schedule_management/presentation/view/weekly/pages/weekly_schedule_screen.dart'
     as _i7;
 import '../../features/splash/loading_splash.dart' as _i1;
 
