@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../../core/injection/injection_container.dart' as di;
-import '../../../../../../order/presentation/logic/cubit/order_cubit.dart';
+import '../../../../../order/presentation/logic/cubit/order_cubit.dart';
 
 class DailyContainer extends StatefulWidget {
   int selectedDay;

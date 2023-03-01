@@ -2,14 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:get_it/get_it.dart';
 
-import '../../features/Kitchen/schedule_management/data/datasources/schedule_management_data_source.dart';
-import '../../features/Kitchen/schedule_management/data/repositories/schedule_management_repository_impl.dart';
-import '../../features/Kitchen/schedule_management/domain/repositories/schedule_management_repository.dart';
-import '../../features/Kitchen/schedule_management/domain/usecases/add_meal_usecase.dart';
-import '../../features/Kitchen/schedule_management/domain/usecases/delete_meal_usecase.dart';
-import '../../features/Kitchen/schedule_management/domain/usecases/get_all_meals_usecase.dart';
-import '../../features/Kitchen/schedule_management/presentation/logic/add_delete_meal_bloc/add_delete_meal_bloc.dart';
-import '../../features/Kitchen/schedule_management/presentation/logic/get_all_meals_bloc/cubit/get_all_meals_cubit.dart';
 import '../../features/auth/data/repositories/login_repository_impl.dart';
 import '../../features/auth/data/repositories/signup_repository_impl.dart';
 import '../../features/auth/domain/repositories/login_repository.dart';
@@ -27,11 +19,14 @@ import '../../features/profile/data/repositories/user_repository_impl.dart';
 import '../../features/profile/domain/repositories/user_repository.dart';
 import '../../features/profile/domain/usecases/get_user_usecase.dart';
 import '../../features/profile/presentation/logic/cubit/user_cubit.dart';
-import '../../features/schedule/data/datasources/schedule_data_source.dart';
-import '../../features/schedule/data/repositories/schedule_repository_impl.dart';
-import '../../features/schedule/domain/repositories/schedule_repository.dart';
-import '../../features/schedule/domain/usecases/get_schedule_usecase.dart';
-import '../../features/schedule/presentation/logic/cubit/schedule_cubit.dart';
+import '../../features/schedule/data/datasources/schedule_management_data_source.dart';
+import '../../features/schedule/data/repositories/schedule_management_repository_impl.dart';
+import '../../features/schedule/domain/repositories/schedule_management_repository.dart';
+import '../../features/schedule/domain/usecases/add_meal_usecase.dart';
+import '../../features/schedule/domain/usecases/delete_meal_usecase.dart';
+import '../../features/schedule/domain/usecases/get_all_meals_usecase.dart';
+import '../../features/schedule/presentation/logic/add_delete_meal_bloc/add_delete_meal_bloc.dart';
+import '../../features/schedule/presentation/logic/get_all_meals_bloc/cubit/get_all_meals_cubit.dart';
 import '../network/internet_checker.dart';
 
 final sl = GetIt.instance;
@@ -78,7 +73,7 @@ Future<void> init() async {
   sl.registerLazySingleton<UserDataSource>(
       () => UserDataSourceImpl(userDatabaseReference: sl()));
 
-  //!Schedule management
+  //!Schedule
 // bloc
   sl.registerFactory(() => GetAllMealsCubit(
       scheduleManagementDataSource: sl(), getAllMealsUsecase: sl()));
@@ -108,17 +103,4 @@ Future<void> init() async {
       () => OrderRepositoryImpl(orderDataSource: sl()));
 // data sources
   sl.registerLazySingleton<OrderDataSource>(() => OrderDataSourceImpl());
-
-  //!Schedule
-// cubit
-  sl.registerFactory(() => ScheduleCubit(getData: sl()));
-
-// Usecases
-  sl.registerLazySingleton(() => GetScheduleUsecase(scheduleRepository: sl()));
-
-// Repository
-  sl.registerLazySingleton<ScheduleRepository>(
-      () => ScheduleRepositoryImpl(scheduleDataSource: sl()));
-// data sources
-  sl.registerLazySingleton<ScheduleDataSource>(() => ScheduleDataSourceImpl());
 }
