@@ -1,13 +1,38 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'count_down_timer.dart';
 
-class FoodState extends StatelessWidget {
+class FoodState extends StatefulWidget {
   const FoodState({super.key});
 
   @override
+  State<FoodState> createState() => _FoodStateState();
+}
+
+class _FoodStateState extends State<FoodState> {
+  int hour = DateTime.now().hour;
+  Timer? _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    _timer = Timer.periodic(const Duration(minutes: 1), (_) {
+      setState(() {
+        hour = DateTime.now().hour;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    int hour = DateTime.now().hour;
     return SingleChildScrollView(
       child: Align(
         alignment: Alignment.center,

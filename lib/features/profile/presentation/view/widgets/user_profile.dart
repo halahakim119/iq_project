@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/theme/custom_loading.dart';
-import '../../../../splash/splash_404.dart';
+
 import '../../logic/cubit/user_cubit.dart';
 
 class UserProfile extends StatelessWidget {
@@ -63,7 +63,7 @@ class UserProfile extends StatelessWidget {
             Divider(color: Theme.of(context).colorScheme.onSecondary),
           ],
         ),
-        error: (_) => Splash404(),
+        error: (e) => Center(child: Text(e)),
       );
     });
   }

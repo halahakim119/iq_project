@@ -1,24 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../../core/theme/custom_loading.dart';
-import '../../../../../splash/splash_404.dart';
-import '../../../logic/cubit/schedule_cubit.dart';
+import '../../../../../../core/injection/injection_container.dart';
+import '../../../../../Kitchen/schedule_management/presentation/logic/get_all_meals_bloc/cubit/get_all_meals_cubit.dart';
 import '../widgets/weekly_schedule_widget.dart';
 
 class WeeklyScheduleScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: BlocBuilder<ScheduleCubit, ScheduleState>(
-        builder: (context, state) {
-          return state.when(
-            loading: () => const CustomLoading(),
-            loaded: (schedule) => WeeklySchedulaWidget(schedule: schedule),
-            error: (_) => Splash404(),
-          );
-        },
-      ),
-    );
+    return BlocProvider(
+        create: (context) => sl<GetAllMealsCubit>(),
+        child: BlocListener<GetAllMealsCubit, GetAllMealsState>(
+            listener: (context, state) {},
+            child: Builder(builder: (context) {
+              final state = context.select<GetAllMealsCubit, GetAllMealsState>(
+                (cubit) => cubit.state,
+              );
+              return state.when(
+                  getAllMealsInitial: () => const CircularProgressIndicator(),
+                  loadingGetAllMealsState: () =>
+                      const CircularProgressIndicator(),
+                  errorGetAllMealsState: (message) => Center(
+                        child: Text('Error loading meals $message'),
+                      ),
+                  loadedGetAllMealsState: (meals) => WeeklySchedulaWidget(
+                      kscSchedule: meals['ksc'],
+                      awbaraSchedule: meals['awbara']));
+            })));
   }
 }

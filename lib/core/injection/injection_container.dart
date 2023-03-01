@@ -9,7 +9,7 @@ import '../../features/Kitchen/schedule_management/domain/usecases/add_meal_usec
 import '../../features/Kitchen/schedule_management/domain/usecases/delete_meal_usecase.dart';
 import '../../features/Kitchen/schedule_management/domain/usecases/get_all_meals_usecase.dart';
 import '../../features/Kitchen/schedule_management/presentation/logic/add_delete_meal_bloc/add_delete_meal_bloc.dart';
-import '../../features/Kitchen/schedule_management/presentation/logic/get_all_meals_bloc/bloc/get_all_meals_bloc.dart';
+import '../../features/Kitchen/schedule_management/presentation/logic/get_all_meals_bloc/cubit/get_all_meals_cubit.dart';
 import '../../features/auth/data/repositories/login_repository_impl.dart';
 import '../../features/auth/data/repositories/signup_repository_impl.dart';
 import '../../features/auth/domain/repositories/login_repository.dart';
@@ -80,7 +80,8 @@ Future<void> init() async {
 
   //!Schedule management
 // bloc
-  sl.registerFactory(() => GetAllMealsBloc(getAllMealsUsecase: sl(),addDeleteMealBloc: sl()));
+  sl.registerFactory(() => GetAllMealsCubit(
+      scheduleManagementDataSource: sl(), getAllMealsUsecase: sl()));
   sl.registerFactory(
       () => AddDeleteMealBloc(addMealUsecase: sl(), deleteMealUsecase: sl()));
 

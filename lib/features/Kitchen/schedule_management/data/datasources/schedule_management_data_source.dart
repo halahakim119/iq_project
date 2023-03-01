@@ -14,12 +14,27 @@ abstract class ScheduleManagementDataSource {
   Future<Either<FirebaseFailure, Map<String, dynamic>>> getAllMeals();
   Future<Either<FirebaseFailure, Unit>> deleteMeal(String mealId, int dayIndex);
   Future<Either<FirebaseFailure, Unit>> addMeal(String meal, int dayIndex);
+  Stream<Either<FirebaseFailure, Map<String, dynamic>>> onMealsChanged();
 }
 
 class ScheduleManagementDataSourceImpl implements ScheduleManagementDataSource {
   DatabaseReference scheduleRef =
       FirebaseDatabase.instance.reference().child('schedule_management');
+  final _controller =
+      StreamController<Either<FirebaseFailure, Map<String, dynamic>>>();
+  ScheduleManagementDataSourceImpl() {
+    scheduleRef.onValue.listen((event) {
+      final data = event.snapshot.value;
+      if (data != null) {
+        final dataString = json.encode(data);
+        Map<String, dynamic> dataValues = json.decode(dataString);
 
+        _controller.add(Right(dataValues));
+      } else {
+        _controller.add(Left(FirebaseFailure(message: 'No data available.')));
+      }
+    });
+  }
   @override
   Future<Either<FirebaseFailure, Unit>> addMeal(
       String meal, int dayIndex) async {
@@ -27,7 +42,9 @@ class ScheduleManagementDataSourceImpl implements ScheduleManagementDataSource {
       var kitchenType = await getUserType();
       DatabaseReference restaurantRef = scheduleRef.child(kitchenType);
       DatabaseReference dayRef = restaurantRef.child('$dayIndex');
-      DatabaseReference newMealRef = dayRef.push();
+      DatabaseReference mealsRef = dayRef.child('meals');
+      DatabaseReference newMealRef = mealsRef.push();
+
       await newMealRef.set(meal);
       return right(unit);
     } catch (e) {
@@ -45,8 +62,10 @@ class ScheduleManagementDataSourceImpl implements ScheduleManagementDataSource {
           .child('schedule_management')
           .child(kitchenType)
           .child('$dayIndex')
+          .child('meals')
           .child(mealId)
           .remove();
+
       return right(unit);
     } catch (e) {
       return left(FirebaseFailure(message: e.toString()));
@@ -61,7 +80,7 @@ class ScheduleManagementDataSourceImpl implements ScheduleManagementDataSource {
       if (data.exists) {
         final dataString = json.encode(data.value);
         Map<String, dynamic> dataValues = json.decode(dataString);
-       
+
         return right(dataValues);
       } else {
         throw const NoDataAvailableException('No data available.');
@@ -70,6 +89,10 @@ class ScheduleManagementDataSourceImpl implements ScheduleManagementDataSource {
       return left(FirebaseFailure(message: e.toString()));
     }
   }
+
+  @override
+  Stream<Either<FirebaseFailure, Map<String, dynamic>>> onMealsChanged() =>
+      _controller.stream;
 
   Future<String> getUserType() async {
     try {

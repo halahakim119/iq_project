@@ -14,43 +14,38 @@ class AddDeleteMealBloc extends Bloc<AddDeleteMealEvent, AddDeleteMealState> {
   final AddMealUsecase addMealUsecase;
   final DeleteMealUsecase deleteMealUsecase;
 
-  AddDeleteMealBloc(
-      {required this.addMealUsecase, required this.deleteMealUsecase})
-      : super(AddDeleteMealInitial());
+  AddDeleteMealBloc({
+    required this.addMealUsecase,
+    required this.deleteMealUsecase,
+  }) : super(AddDeleteMealInitial()) {
+    on<AddMealEvent>((event, emit) async {
+      emit(const LoadingAddDeleteMealState(isLoading: true));
 
-  @override
-  Stream<AddDeleteMealState> mapEventToState(AddDeleteMealEvent event) async* {
-    if (event is AddMealEvent) {
-      yield const LoadingAddDeleteMealState(isLoading: true);
       try {
         final failureOrDoneMessage =
             await addMealUsecase(event.meal, event.dayIndex);
-
-        yield _eitherDoneMessageOrErrorState(
+        emit(_eitherDoneMessageOrErrorState(
           failureOrDoneMessage,
           'Meal added successfully.',
-        );
+        ));
       } on FirebaseException catch (e) {
-        yield ErrorAddDeleteMealState(message: e.message);
-      } catch (_) {
-        yield ErrorAddDeleteMealState(message: 'An unknown error occurred.');
+        emit(ErrorAddDeleteMealState(message: e.message));
       }
-    } else if (event is DeleteMealEvent) {
-      yield const LoadingAddDeleteMealState(isLoading: true);
+    });
+    on<DeleteMealEvent>((event, emit) async {
+      emit(const LoadingAddDeleteMealState(isLoading: true));
+
       try {
         final failureOrDoneMessage =
             await deleteMealUsecase(event.mealId, event.dayIndex);
-
-        yield _eitherDoneMessageOrErrorState(
+        emit(_eitherDoneMessageOrErrorState(
           failureOrDoneMessage,
           "Meal deleted successfully.",
-        );
+        ));
       } on FirebaseException catch (e) {
-        yield ErrorAddDeleteMealState(message: e.message);
-      } catch (_) {
-        yield ErrorAddDeleteMealState(message: 'An unknown error occurred.');
+        emit(ErrorAddDeleteMealState(message: e.message));
       }
-    }
+    });
   }
 
   AddDeleteMealState _eitherDoneMessageOrErrorState(

@@ -33,7 +33,7 @@ class KitchenMainPage extends StatelessWidget {
         ),
       ],
       body: AutoTabsScaffold(
-        routes: const [
+        routes:  const [
           ScheduleManagementScreenRoute(),
           OrdersManagementScreenRoute(),
           ProfileScreenRoute(),
