@@ -4,16 +4,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:overlay_support/overlay_support.dart';
 
 import 'core/injection/injection_container.dart' as di;
-
 import 'core/router/router.gr.dart';
 import 'core/theme/app_theme/logic/theme_bloc.dart';
 import 'core/theme/app_theme/logic/theme_state.dart';
 import 'features/auth/presentation/logic/cubit/authentication_cubit.dart';
+import 'features/schedule/presentation/logic/get_all_meals_bloc/cubit/get_all_meals_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  di.init(); 
+  di.init();
 
   runApp(MyApp());
 }
@@ -27,7 +27,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        
+        BlocProvider(
+          create: (context) => di.sl<GetAllMealsCubit>(),
+        ),
         BlocProvider(
           create: (context) => ThemeBloc(),
         ),

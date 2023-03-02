@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../../core/injection/injection_container.dart';
 import '../../../logic/get_all_meals_bloc/cubit/get_all_meals_cubit.dart';
-import '../../weekly/widgets/weekly_schedule_widget.dart';
 import '../widgets/daily_schedule_widget.dart';
 import '../widgets/food_state.dart';
 import '../widgets/weekend_widget.dart';
@@ -23,7 +22,7 @@ class _DailyScheduleScreenState extends State<DailyScheduleScreen> {
   @override
   void initState() {
     super.initState();
-    _timer = Timer.periodic(Duration(minutes: 1), (_) {
+    _timer = Timer.periodic(const Duration(minutes: 1), (_) {
       setState(() {
         _day = DateTime.now().weekday;
         _hour = DateTime.now().hour;
@@ -41,30 +40,21 @@ class _DailyScheduleScreenState extends State<DailyScheduleScreen> {
   Widget build(BuildContext context) {
     return (_day == 5 || _day == 6)
         ? WeekendWidget()
-        : (_hour >= 9 && _hour < 24)
-            ? BlocProvider(
-                create: (context) => sl<GetAllMealsCubit>(),
-                child: BlocListener<GetAllMealsCubit, GetAllMealsState>(
-                    listener: (context, state) {},
-                    child: Builder(builder: (context) {
-                      final state =
-                          context.select<GetAllMealsCubit, GetAllMealsState>(
-                        (cubit) => cubit.state,
-                      );
-                      return state.when(
-                          getAllMealsInitial: () =>
-                              const Center(child: CircularProgressIndicator()),
-                          loadingGetAllMealsState: () =>
-                              const Center(child: CircularProgressIndicator()),
-                          errorGetAllMealsState: (message) => Center(
-                                child: Text('Error loading meals $message'),
-                              ),
-                          loadedGetAllMealsState: (meals) => Expanded(
-                                child: DailyScheduleWidget(
-                                    kscSchedule: meals['ksc'],
-                                    awbaraSchedule: meals['awbara']),
-                              ));
-                    })))
-            : const Expanded(child: FoodState());
+        : (_hour >= 0 && _hour < 24)
+            ? BlocBuilder<GetAllMealsCubit, GetAllMealsState>(
+                builder: (context, state) {
+              return state.when(
+                  getAllMealsInitial: () =>
+                      const Center(child: CircularProgressIndicator()),
+                  loadingGetAllMealsState: () =>
+                      const Center(child: CircularProgressIndicator()),
+                  errorGetAllMealsState: (message) => Center(
+                        child: Text('Error loading meals $message'),
+                      ),
+                  loadedGetAllMealsState: (meals) => DailyScheduleWidget(
+                      kscSchedule: meals['ksc'],
+                      awbaraSchedule: meals['awbara']));
+            })
+            : const FoodState();
   }
 }

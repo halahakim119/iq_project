@@ -90,77 +90,67 @@ class _ScheduleManagementScreenState extends State<ScheduleManagementScreen> {
           ],
         ),
         Expanded(
-          child: BlocProvider(
-            create: (context) => sl<GetAllMealsCubit>(),
-            child: BlocListener<GetAllMealsCubit, GetAllMealsState>(
-              listener: (context, state) {},
-              child: Builder(
-                builder: (context) {
-                  final state =
-                      context.select<GetAllMealsCubit, GetAllMealsState>(
-                    (cubit) => cubit.state,
-                  );
-                  return state.when(
-                    getAllMealsInitial: () => const CircularProgressIndicator(),
-                    loadingGetAllMealsState: () =>
-                        const CircularProgressIndicator(),
-                    loadedGetAllMealsState: (meals) => ListView.separated(
-                      separatorBuilder: (context, index) => const Divider(
-                        height: 1,
-                        thickness: 0.3,
-                      ),
-                      itemCount: meals[userType][selectedDay].values.length == 1
-                          ? 1
-                          : meals[userType][selectedDay]['meals'].values.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        if (meals[userType][selectedDay].values.length == 1) {
-                          String message = 'no available data';
-                          return Center(child: Text(message));
-                        }
-                        String mealId = meals[userType][selectedDay]['meals']
-                            .keys
-                            .toList()[index];
-                        String mealName = meals[userType][selectedDay]['meals']
-                            .values
-                            .toList()[index];
+          child: BlocBuilder<GetAllMealsCubit, GetAllMealsState>(
+            builder: (context, state) {
+              return state.when(
+                getAllMealsInitial: () => const CircularProgressIndicator(),
+                loadingGetAllMealsState: () =>
+                    const CircularProgressIndicator(),
+                loadedGetAllMealsState: (meals) => ListView.separated(
+                  separatorBuilder: (context, index) => const Divider(
+                    height: 1,
+                    thickness: 0.3,
+                  ),
+                  itemCount: meals[userType][selectedDay].values.length == 1
+                      ? 1
+                      : meals[userType][selectedDay]['meals'].values.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    if (meals[userType][selectedDay].values.length == 1) {
+                      String message = 'no available data';
+                      return Center(child: Text(message));
+                    }
+                    String mealId = meals[userType][selectedDay]['meals']
+                        .keys
+                        .toList()[index];
+                    String mealName = meals[userType][selectedDay]['meals']
+                        .values
+                        .toList()[index];
 
-                        return ListTile(
-                          leading: Padding(
-                            padding: const EdgeInsets.only(left: 15),
-                            child: Text(
-                              "${index + 1} -",
-                              style: TextStyle(
-                                color: Theme.of(context).colorScheme.primary,
-                                fontSize: 16,
-                              ),
-                            ),
+                    return ListTile(
+                      leading: Padding(
+                        padding: const EdgeInsets.only(left: 15),
+                        child: Text(
+                          "${index + 1} -",
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.primary,
+                            fontSize: 16,
                           ),
-                          trailing: IconButton(
-                            icon: Icon(
-                              Icons.delete,
-                              color: Theme.of(context).colorScheme.primary,
-                            ),
-                            onPressed: () async {
-                              await sl<AddDeleteMealBloc>()
-                                  .deleteMealUsecase(mealId, selectedDay);
-                            },
-                          ),
-                          title: Text(
-                            mealName,
-                            style: TextStyle(
-                              color: Theme.of(context).colorScheme.onSecondary,
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                    errorGetAllMealsState: (message) => Center(
-                      child: Text('Error loading meals $message'),
-                    ),
-                  );
-                },
-              ),
-            ),
+                        ),
+                      ),
+                      trailing: IconButton(
+                        icon: Icon(
+                          Icons.delete,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                        onPressed: () async {
+                          await sl<AddDeleteMealBloc>()
+                              .deleteMealUsecase(mealId, selectedDay);
+                        },
+                      ),
+                      title: Text(
+                        mealName,
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.onSecondary,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+                errorGetAllMealsState: (message) => Center(
+                  child: Text('Error loading meals $message'),
+                ),
+              );
+            },
           ),
         ),
         Form(

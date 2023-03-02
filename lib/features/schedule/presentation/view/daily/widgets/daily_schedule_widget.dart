@@ -6,107 +6,168 @@ import 'package:flutter/material.dart';
 import 'daily_container.dart';
 
 class DailyScheduleWidget extends StatefulWidget {
-  final kscSchedule;
-  final awbaraSchedule;
+  final List<dynamic> kscSchedule;
+  final List<dynamic> awbaraSchedule;
 
-  DailyScheduleWidget(
+   DailyScheduleWidget(
       {required this.kscSchedule, required this.awbaraSchedule});
+
   @override
   State<DailyScheduleWidget> createState() => _DailyScheduleWidgetState();
 }
 
 class _DailyScheduleWidgetState extends State<DailyScheduleWidget> {
   String selectedRestaurant = 'ksc';
-  void onPressed(String selectedRestaurant) {
+
+  void onPressed(String restaurant) {
     setState(() {
-      this.selectedRestaurant = selectedRestaurant;
+      selectedRestaurant = restaurant;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: _getCurrentDay(),
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Container(
+          margin: const EdgeInsets.all(20),
+          height: 40,
+          decoration: BoxDecoration(
+            border: Border.all(
+              width: 1,
+              color: Theme.of(context).colorScheme.primary,
+            ),
+            color: Theme.of(context).colorScheme.secondary,
+            borderRadius: const BorderRadius.all(Radius.circular(50)),
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Container(
-                margin: const EdgeInsets.all(20),
-                height: 40,
-                decoration: BoxDecoration(
-                    border: Border.all(
-                        width: 1, color: Theme.of(context).colorScheme.primary),
-                    color: Theme.of(context).colorScheme.secondary,
-                    borderRadius: BorderRadius.all(Radius.circular(50))),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    customGestureDetector('ksc'),
-                    customGestureDetector('awbara'),
-                  ],
+              Expanded(
+                child: GestureDetector(
+                  onTap: () => onPressed('ksc'),
+                  child: Container(
+                    height: double.infinity,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(50),
+                        bottomLeft: Radius.circular(50),
+                      ),
+                      color: selectedRestaurant == 'ksc'
+                          ? Theme.of(context).colorScheme.primary
+                          : Theme.of(context).colorScheme.secondary,
+                    ),
+                    child: Center(
+                      child: AutoSizeText(
+                        'ksc'.toUpperCase(),
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: selectedRestaurant == 'ksc'
+                              ? Theme.of(context).colorScheme.onPrimary
+                              : Theme.of(context).colorScheme.primary,
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
               ),
-              selectedRestaurant == "ksc"
-              ? DailyContainer(
-                  restaurant: selectedRestaurant,
-                  schedule: widget.kscSchedule,
-                  selectedDay: snapshot.data.toString() == "Sunday"
-                      ? 0
-                      : snapshot.data.toString() == "Monday"
-                          ? 1
-                          : snapshot.data.toString() == "Tuesday"
-                              ? 2
-                              : snapshot.data.toString() == "Wednesday"
-                                  ? 3
-                                  : snapshot.data.toString() == "Thursday"
-                                      ? 4
-                                      : 5,
-                )
-              : DailyContainer(
-                  restaurant: selectedRestaurant,
-                  schedule: widget.awbaraSchedule,
-                  selectedDay: snapshot.data.toString() == "Sunday"
-                      ? 0
-                      : snapshot.data.toString() == "Monday"
-                          ? 1
-                          : snapshot.data.toString() == "Tuesday"
-                              ? 2
-                              : snapshot.data.toString() == "Wednesday"
-                                  ? 3
-                                  : snapshot.data.toString() == "Thursday"
-                                      ? 4
-                                      : 5,
-                )
+              Expanded(
+                child: GestureDetector(
+                  onTap: () => onPressed('awbara'),
+                  child: Container(
+                    height: double.infinity,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.only(
+                        topRight: Radius.circular(50),
+                        bottomRight: Radius.circular(50),
+                      ),
+                      color: selectedRestaurant == 'awbara'
+                          ? Theme.of(context).colorScheme.primary
+                          : Theme.of(context).colorScheme.secondary,
+                    ),
+                    child: Center(
+                      child: AutoSizeText(
+                        'awbara'.toUpperCase(),
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: selectedRestaurant == 'awbara'
+                              ? Theme.of(context).colorScheme.onPrimary
+                              : Theme.of(context).colorScheme.primary,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
             ],
-          );
-        } else {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-      },
+          ),
+        ),
+        FutureBuilder<String>(
+          future: _getCurrentDay(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return selectedRestaurant == 'ksc'
+                  ? DailyContainer(
+                      restaurant: selectedRestaurant,
+                      schedule: widget.kscSchedule,
+                      selectedDay: snapshot.data.toString() == "Sunday"
+                          ? 0
+                          : snapshot.data.toString() == "Monday"
+                              ? 1
+                              : snapshot.data.toString() == "Tuesday"
+                                  ? 2
+                                  : snapshot.data.toString() == "Wednesday"
+                                      ? 3
+                                      : snapshot.data.toString() == "Thursday"
+                                          ? 4
+                                          : 5,
+                    )
+                  : DailyContainer(
+                      restaurant: selectedRestaurant,
+                      schedule: widget.awbaraSchedule,
+                      selectedDay: snapshot.data.toString() == "Sunday"
+                          ? 0
+                          : snapshot.data.toString() == "Monday"
+                              ? 1
+                              : snapshot.data.toString() == "Tuesday"
+                                  ? 2
+                                  : snapshot.data.toString() == "Wednesday"
+                                      ? 3
+                                      : snapshot.data.toString() == "Thursday"
+                                          ? 4
+                                          : 5,
+                    );
+            } else {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          },
+        ),
+      ],
     );
   }
 
   Future<String> _getCurrentDay() async {
     DateTime now = DateTime.now();
-    int dayOfWeek = now.weekday;
-    switch (dayOfWeek) {
-      case 1:
+
+    switch (now.weekday) {
+      case DateTime.monday:
         return 'Monday';
-      case 2:
+      case DateTime.tuesday:
         return 'Tuesday';
-      case 3:
+      case DateTime.wednesday:
         return 'Wednesday';
-      case 4:
+      case DateTime.thursday:
         return 'Thursday';
-      case 5:
+      case DateTime.friday:
         return 'Friday';
-      case 6:
+      case DateTime.saturday:
         return 'Saturday';
-      case 7:
+      case DateTime.sunday:
         return 'Sunday';
       default:
         return 'Unknown';

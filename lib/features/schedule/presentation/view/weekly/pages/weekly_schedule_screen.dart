@@ -8,25 +8,19 @@ import '../widgets/weekly_schedule_widget.dart';
 class WeeklyScheduleScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-        create: (context) => sl<GetAllMealsCubit>(),
-        child: BlocListener<GetAllMealsCubit, GetAllMealsState>(
-            listener: (context, state) {},
-            child: Builder(builder: (context) {
-              final state = context.select<GetAllMealsCubit, GetAllMealsState>(
-                (cubit) => cubit.state,
-              );
-              return state.when(
-                  getAllMealsInitial: () =>
-                      const Center(child: CircularProgressIndicator()),
-                  loadingGetAllMealsState: () =>
-                      const Center(child: CircularProgressIndicator()),
-                  errorGetAllMealsState: (message) => Center(
-                        child: Text('Error loading meals $message'),
-                      ),
-                  loadedGetAllMealsState: (meals) => WeeklySchedulaWidget(
-                      kscSchedule: meals['ksc'],
-                      awbaraSchedule: meals['awbara']));
-            })));
+    return BlocBuilder<GetAllMealsCubit, GetAllMealsState>(
+          builder: (context, state) {
+      return state.when(
+          getAllMealsInitial: () =>
+              const Center(child: CircularProgressIndicator()),
+          loadingGetAllMealsState: () =>
+              const Center(child: CircularProgressIndicator()),
+          errorGetAllMealsState: (message) => Center(
+                child: Text('Error loading meals $message'),
+              ),
+          loadedGetAllMealsState: (meals) => WeeklySchedulaWidget(
+              kscSchedule: meals['ksc'],
+              awbaraSchedule: meals['awbara']));
+    });
   }
 }
