@@ -1,15 +1,17 @@
 import 'package:equatable/equatable.dart';
 
 class OrderEntity extends Equatable {
-  final String restaurantID;
-  final String mealID;
-  final String department;
+  final DateTime orderDate;
+  final String mealDes;
+  final String userEmail;
+  final String userDepartment;
   const OrderEntity({
-    required this.restaurantID,
-    required this.mealID,
-    required this.department,
+    required this.orderDate,
+    required this.mealDes,
+    required this.userEmail,
+    required this.userDepartment,
   });
 
   @override
-  List<Object?> get props => [restaurantID, mealID, department];
+  List<Object?> get props => [orderDate, mealDes, userEmail, userDepartment];
 }

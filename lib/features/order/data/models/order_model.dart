@@ -1,29 +1,31 @@
 import 'package:iq_project/features/order/domain/entities/order_entity.dart';
 
 class OrderModel extends OrderEntity {
-  final String? id;
   const OrderModel(
-      {this.id,
-      required String restaurantID,
-      required String mealID,
-      required String department})
+      {required DateTime orderDate,
+      required String mealDes,
+      required String userEmail,
+      required String userDepartment})
       : super(
-            restaurantID: restaurantID, mealID: mealID, department: department);
+            orderDate: orderDate,
+            mealDes: mealDes,
+            userEmail: userEmail,
+            userDepartment: userDepartment);
 
   Map<String, Object?> toJson() {
     return {
-      'id': id,
-      'restaurant_id': restaurantID,
-      'meal_id': mealID,
-      'department': department
+      'order_date': orderDate,
+      'meal_des': mealDes,
+      'user_email': userEmail,
+      'user_department': userDepartment
     };
   }
 
   factory OrderModel.fromJson(Map<String, Object?> json) {
     return OrderModel(
-        id: json['id'] as String,
-        restaurantID: json['restaurant_id'] as String,
-        mealID: json['meal_id'] as String,
-        department: json['department'] as String);
+        orderDate: json['order_date'] as DateTime,
+        mealDes: json['meal_des'] as String,
+        userEmail: json['user_email'] as String,
+        userDepartment: json['user_department'] as String);
   }
 }
