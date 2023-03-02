@@ -2,9 +2,9 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:iq_project/features/order/presentation/logic/bloc/add_delete_order_bloc.dart';
 
 import '../../../../../../../core/injection/injection_container.dart' as di;
-import '../../../../../order/presentation/logic/cubit/order_cubit.dart';
 
 class DailyContainer extends StatefulWidget {
   int selectedDay;
@@ -38,8 +38,8 @@ class _DailyContainerState extends State<DailyContainer> {
         ? widget.schedule[widget.selectedDay]
         : widget.schedule[widget.selectedDay];
     return BlocProvider(
-      create: (context) => di.sl<OrderCubit>(),
-      child: BlocListener<OrderCubit, OrderState>(
+      create: (context) => di.sl<AddDeleteOrderBloc>(),
+      child: BlocListener<AddDeleteOrderBloc, AddDeleteOrderState>(
         listener: (context, state) {},
         child: Container(
           height: MediaQuery.of(context).size.height * 0.5,

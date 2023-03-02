@@ -1,6 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:get_it/get_it.dart';
+import 'package:iq_project/features/order/domain/usecases/add_order_usecase.dart';
+import 'package:iq_project/features/order/domain/usecases/delete_order_usecase.dart';
+import 'package:iq_project/features/order/presentation/logic/bloc/add_delete_order_bloc.dart';
 
 import '../../features/auth/data/repositories/login_repository_impl.dart';
 import '../../features/auth/data/repositories/signup_repository_impl.dart';
@@ -12,8 +15,6 @@ import '../../features/auth/presentation/logic/cubit/authentication_cubit.dart';
 import '../../features/order/data/datasources/order_data_source.dart';
 import '../../features/order/data/repositories/order_repository_impl.dart';
 import '../../features/order/domain/repositories/order_repository.dart';
-import '../../features/order/domain/usecases/order_usecase.dart';
-import '../../features/order/presentation/logic/cubit/order_cubit.dart';
 import '../../features/profile/data/datasource/user_data_source.dart';
 import '../../features/profile/data/repositories/user_repository_impl.dart';
 import '../../features/profile/domain/repositories/user_repository.dart';
@@ -93,14 +94,16 @@ Future<void> init() async {
       () => ScheduleManagementDataSourceImpl());
   //!order
 // cubit
-  sl.registerFactory(() => OrderCubit(orderUseCase: sl()));
+  sl.registerFactory(() =>
+      AddDeleteOrderBloc(addOrderUsecase: sl(), deleteOrderUsecase: sl()));
 
 // Usecases
-  sl.registerLazySingleton(() => OrderUseCase(orderRepository: sl()));
+  sl.registerLazySingleton(() => AddOrderUsecase(sl()));
+  sl.registerLazySingleton(() => DeleteOrderUsecase(sl()));
 
 // Repository
   sl.registerLazySingleton<OrderRepository>(
       () => OrderRepositoryImpl(orderDataSource: sl()));
 // data sources
-  sl.registerLazySingleton<OrderDataSource>(() => OrderDataSourceImpl());
+  sl.registerLazySingleton<OrdersDataSource>(() => OrdersDataSourceImpl());
 }

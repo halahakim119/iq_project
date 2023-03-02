@@ -4,10 +4,9 @@ import 'dart:convert';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:intl/intl.dart';
-import 'package:iq_project/features/order/data/models/order_model.dart';
 
 import '../../../../../core/error/failure.dart';
-import '../../domain/entities/order_entity.dart';
+import '../models/order_model.dart';
 
 abstract class OrdersDataSource {
   Future<Either<FirebaseFailure, Map<String, dynamic>>> getAllOrders(
@@ -41,7 +40,7 @@ class OrdersDataSourceImpl implements OrdersDataSource {
   Future<Either<FirebaseFailure, Unit>> addOrder(
       OrderModel orderModel, String restaurant) async {
     try {
-      String orderDate = DateFormat('MM/yyyy').format(orderModel.orderDate);
+      String orderDate = DateFormat.yM().format(orderModel.orderDate);
       DatabaseReference restaurantRef = ordersRef.child(restaurant);
       DatabaseReference dateRef = restaurantRef.child(orderDate);
       DatabaseReference newMealRef = dateRef.push();
@@ -54,9 +53,22 @@ class OrdersDataSourceImpl implements OrdersDataSource {
 
   @override
   Future<Either<FirebaseFailure, Unit>> deleteOrder(
-      String orderId, DateTime orderDate, String restaurant) {
-    // TODO: implement deleteOrder
-    throw UnimplementedError();
+      String orderId, DateTime orderDate, String restaurant) async {
+    try {
+      String date = DateFormat.yM().format(orderDate);
+
+      await FirebaseDatabase.instance
+          .ref()
+          .child('orders')
+          .child(restaurant)
+          .child(date)
+          .child(orderId)
+          .remove();
+
+      return right(unit);
+    } catch (e) {
+      return left(FirebaseFailure(message: e.toString()));
+    }
   }
 
   @override
