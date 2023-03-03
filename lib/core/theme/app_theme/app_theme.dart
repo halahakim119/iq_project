@@ -17,7 +17,7 @@ final appThemeData = {
     scaffoldBackground: Colors.black,
     primary: const Color.fromARGB(255, 255, 77, 0),
     onPrimary: Colors.white,
-    secondary: Colors.grey.shade900,
+    secondary: Color.fromARGB(255, 22, 22, 22),
     onSecondary: Colors.white,
   )
 };
