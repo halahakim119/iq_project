@@ -14,7 +14,6 @@ import '../weekly/widgets/day_button.dart';
 
 class ScheduleManagementScreen extends StatefulWidget {
   const ScheduleManagementScreen({Key? key}) : super(key: key);
-
   @override
   _ScheduleManagementScreenState createState() =>
       _ScheduleManagementScreenState();
@@ -23,7 +22,7 @@ class ScheduleManagementScreen extends StatefulWidget {
 class _ScheduleManagementScreenState extends State<ScheduleManagementScreen> {
   int selectedDay = 0;
   String userType = '';
-  final TextEditingController _textController = TextEditingController();
+  final TextEditingController  _textController = TextEditingController();
 
   void onPressed(int index) {
     setState(() {

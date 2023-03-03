@@ -106,7 +106,8 @@ flutter:
     - assets/images/waiting.png
     - assets/images/cloche.png
     - assets/images/coffee.png
-    - assets/images/iq_logo.webp
+    - assets/images/iq_logo_white.webp
+    - assets/images/iq_logo_black.jpg
 
   
 

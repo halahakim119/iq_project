@@ -2,9 +2,11 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:iq_project/features/order/domain/entities/order_entity.dart';
 import 'package:iq_project/features/order/presentation/logic/bloc/add_delete_order_bloc.dart';
 
 import '../../../../../../../core/injection/injection_container.dart' as di;
+import '../../../../../../core/injection/injection_container.dart';
 
 class DailyContainer extends StatefulWidget {
   int selectedDay;
@@ -34,9 +36,8 @@ class _DailyContainerState extends State<DailyContainer> {
 
   @override
   Widget build(BuildContext context) {
-    chosenRestaurant = widget.restaurant == 'ksc'
-        ? widget.schedule[widget.selectedDay]
-        : widget.schedule[widget.selectedDay];
+    chosenRestaurant = widget.schedule[widget.selectedDay];
+
     return BlocProvider(
       create: (context) => di.sl<AddDeleteOrderBloc>(),
       child: BlocListener<AddDeleteOrderBloc, AddDeleteOrderState>(
@@ -51,77 +52,70 @@ class _DailyContainerState extends State<DailyContainer> {
             borderRadius: const BorderRadius.all(Radius.circular(20)),
           ),
           child: _submitted
-              ? Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            top: 30, bottom: 15, left: 30),
-                        child: AutoSizeText(
-                          'Selected meal:',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                              color: Theme.of(context).colorScheme.onSecondary),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 30, bottom: 30),
-                        child: AutoSizeText(
-                          _selectedMeal,
-                          style: TextStyle(
-                              fontWeight: FontWeight.normal,
-                              fontSize: 16,
-                              color: Theme.of(context).colorScheme.onSecondary),
-                        ),
-                      ),
-                      // BlocListener<OrderCubit, OrderState>(
-                      //   listener: (context, state) {
-                      //     state.maybeWhen(
-                      //       loaded: (id) {
-                      //         Align(
-                      //           alignment: Alignment.bottomCenter,
-                      //           child: Row(
-                      //             mainAxisAlignment:
-                      //                 MainAxisAlignment.spaceEvenly,
-                      //             children: [
-                      //               ElevatedButton(
-                      //                 onPressed: () {
-                      //                   di.sl<OrderCubit>().deleteOrder(
-                      //                       id, currentUser!.photoURL!);
-                      //                   setState(() {
-                      //                     _submitted = false;
-                      //                     _selectedMeal = '';
-                      //                   });
-                      //                 },
-                      //                 style: ElevatedButton.styleFrom(
-                      //                   minimumSize: Size(
-                      //                       MediaQuery.of(context).size.width *
-                      //                           0.35,
-                      //                       50),
-                      //                   backgroundColor:
-                      //                       Theme.of(context).colorScheme.primary,
-                      //                 ),
-                      //                 child: AutoSizeText(
-                      //                   'Delete',
-                      //                   style: TextStyle(
-                      //                       color: Theme.of(context)
-                      //                           .colorScheme
-                      //                           .onPrimary),
-                      //                 ),
-                      //               ),
-                      //             ],
-                      //           ),
-                      //         );
-                      //       },
-                      //       orElse: () {},
-                      //     );
-                      //   },
-                      // )
-                    ],
+              ? Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        top: 30, bottom: 15, left: 30),
+                    child: AutoSizeText(
+                      'Selected meal:',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: Theme.of(context).colorScheme.onSecondary),
+                    ),
                   ),
-                )
+                  Padding(
+                    padding: const EdgeInsets.only(left: 30, bottom: 30),
+                    child: AutoSizeText(
+                      _selectedMeal,
+                      style: TextStyle(
+                          fontWeight: FontWeight.normal,
+                          fontSize: 16,
+                          color: Theme.of(context).colorScheme.onSecondary),
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        ElevatedButton(
+                          onPressed: () async {
+                            // String mealId = state
+                            //     .Orders[chosenRestaurant][DateTime.now()]
+                            //     .keys
+                            //     .toList();
+                            // await sl<AddDeleteOrderBloc>()
+                            //     .deleteOrderUsecase(mealId, DateTime.now(),
+                            //         chosenRestaurant);
+
+                            setState(() {
+                              _submitted = false;
+                              // _selectedMeal = '';
+                            });
+                          },
+                          style: ElevatedButton.styleFrom(
+                            minimumSize: Size(
+                                MediaQuery.of(context).size.width * 0.35,
+                                50),
+                            backgroundColor:
+                                Theme.of(context).colorScheme.primary,
+                          ),
+                          child: AutoSizeText(
+                            'Delete',
+                            style: TextStyle(
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .onPrimary),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              )
               : Flex(
                   direction: Axis.vertical,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -134,14 +128,18 @@ class _DailyContainerState extends State<DailyContainer> {
                     Expanded(
                       flex: 1,
                       child: ElevatedButton(
-                        onPressed: () {
-                          // submitCustomOrder(chosenRestaurant);
-                          // final OrderModel order = OrderModel(
-                          //     mealID: selectedMealID,
-                          //     restaurantID: selectedRestaurantID,
-                          //     department: currentUser!.photoURL!);
+                        onPressed: () async {
+                          setState(() {
+                            _submitted = !_submitted;
+                          });
+                          final OrderEntity order = OrderEntity(
+                              mealDes: _selectedMeal,
+                              orderDate: DateTime.now(),
+                              userDepartment: currentUser!.photoURL!,
+                              userEmail: currentUser!.email!);
 
-                          // di.sl<OrderCubit>().order(order);
+                          await sl<AddDeleteOrderBloc>()
+                              .addOrderUsecase(order, chosenRestaurant);
                         },
                         style: ElevatedButton.styleFrom(
                           shape: const RoundedRectangleBorder(
@@ -185,21 +183,21 @@ class _DailyContainerState extends State<DailyContainer> {
     );
   }
 
-  void submitCustomOrder(order) {
-    if (order.meals == null || order.meals!.isEmpty) {
-      return;
-    }
-    if (_selectedIndex < 0 || _selectedIndex >= order.meals!.length) {
-      return;
-    }
-    final selectedMeal = order.meals![_selectedIndex];
-    selectedRestaurantID = order.id.toString();
-    selectedMealID = selectedMeal.id.toString();
-    setState(() {
-      _selectedMeal = selectedMeal.meal.toString();
-      _submitted = !_submitted;
-    });
-  }
+  // void submitCustomOrder(order) {
+  //   if (order == null || order.meals!.isEmpty) {
+  //     return;
+  //   }
+  //   if (_selectedIndex < 0 || _selectedIndex >= order.meals!.length) {
+  //     return;
+  //   }
+  //   final selectedMeal = order.meals![_selectedIndex];
+  //   selectedRestaurantID = order.id.toString();
+  //   selectedMealID = selectedMeal.id.toString();
+  //   setState(() {
+  //     _selectedMeal = selectedMeal.meal.toString();
+  //     _submitted = !_submitted;
+  //   });
+  // }
 
   Widget customRadioListTile(index, text) {
     return RadioListTile(

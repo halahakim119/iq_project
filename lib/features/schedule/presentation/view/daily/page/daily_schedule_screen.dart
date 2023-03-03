@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../../../core/injection/injection_container.dart';
 import '../../../logic/get_all_meals_bloc/cubit/get_all_meals_cubit.dart';
 import '../widgets/daily_schedule_widget.dart';
 import '../widgets/food_state.dart';
@@ -43,18 +42,18 @@ class _DailyScheduleScreenState extends State<DailyScheduleScreen> {
         : (_hour >= 0 && _hour < 24)
             ? BlocBuilder<GetAllMealsCubit, GetAllMealsState>(
                 builder: (context, state) {
-              return state.when(
-                  getAllMealsInitial: () =>
-                      const Center(child: CircularProgressIndicator()),
-                  loadingGetAllMealsState: () =>
-                      const Center(child: CircularProgressIndicator()),
-                  errorGetAllMealsState: (message) => Center(
-                        child: Text('Error loading meals $message'),
-                      ),
-                  loadedGetAllMealsState: (meals) => DailyScheduleWidget(
-                      kscSchedule: meals['ksc'],
-                      awbaraSchedule: meals['awbara']));
-            })
+                return state.when(
+                    getAllMealsInitial: () =>
+                        const Center(child: CircularProgressIndicator()),
+                    loadingGetAllMealsState: () =>
+                        const Center(child: CircularProgressIndicator()),
+                    errorGetAllMealsState: (message) => Center(
+                          child: Text('Error loading meals $message'),
+                        ),
+                    loadedGetAllMealsState: (meals) => DailyScheduleWidget(
+                        kscSchedule: meals['ksc'],
+                        awbaraSchedule: meals['awbara']));
+              })
             : const FoodState();
   }
 }
