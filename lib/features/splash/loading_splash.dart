@@ -27,6 +27,7 @@ class _LoadingSplashState extends State<LoadingSplash> {
   void initState() {
     super.initState();
     di.sl<InternetChecker>().run();
+
     Future.delayed(const Duration(seconds: 3), () async {
       _user = _auth.currentUser;
       if (_user != null) {
@@ -64,6 +65,8 @@ class _LoadingSplashState extends State<LoadingSplash> {
           context.router.pushNamed('kitchen');
         } else if (userEntity.uType == 'AwbaraKitchen') {
           context.router.pushNamed('kitchen');
+        } else if (userEntity.uType == 'HQ') {
+          context.router.pushNamed('HQ');
         } else {
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             content: Text('Unknown user type.'),

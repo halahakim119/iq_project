@@ -27,37 +27,28 @@ class _DailyContainerState extends State<DailyContainer> {
   int _selectedIndex = 0;
   String _selectedMeal = '';
   bool _submitted = false;
-  String selectedRestaurantID = '1';
-  String selectedMealID = '1';
   final currentUser = FirebaseAuth.instance.currentUser;
-
-  var day;
-  var chosenRestaurant;
 
   @override
   Widget build(BuildContext context) {
-    chosenRestaurant = widget.schedule[widget.selectedDay];
-
     return BlocProvider(
       create: (context) => di.sl<AddDeleteOrderBloc>(),
-      child: BlocListener<AddDeleteOrderBloc, AddDeleteOrderState>(
-        listener: (context, state) {},
-        child: Container(
-          height: MediaQuery.of(context).size.height * 0.5,
-          width: MediaQuery.of(context).size.width * 0.9,
-          decoration: BoxDecoration(
-            border: Border.all(
-                width: 1, color: Theme.of(context).colorScheme.primary),
-            color: Theme.of(context).colorScheme.secondary,
-            borderRadius: const BorderRadius.all(Radius.circular(20)),
-          ),
-          child: _submitted
-              ? Column(
+      child: Container(
+        height: MediaQuery.of(context).size.height * 0.5,
+        width: MediaQuery.of(context).size.width * 0.9,
+        decoration: BoxDecoration(
+          border: Border.all(
+              width: 1, color: Theme.of(context).colorScheme.primary),
+          color: Theme.of(context).colorScheme.secondary,
+          borderRadius: const BorderRadius.all(Radius.circular(20)),
+        ),
+        child: _submitted
+            ? Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(
-                        top: 30, bottom: 15, left: 30),
+                    padding:
+                        const EdgeInsets.only(top: 30, bottom: 15, left: 30),
                     child: AutoSizeText(
                       'Selected meal:',
                       style: TextStyle(
@@ -83,13 +74,12 @@ class _DailyContainerState extends State<DailyContainer> {
                       children: [
                         ElevatedButton(
                           onPressed: () async {
-                            // String mealId = state
-                            //     .Orders[chosenRestaurant][DateTime.now()]
-                            //     .keys
-                            //     .toList();
-                            // await sl<AddDeleteOrderBloc>()
-                            //     .deleteOrderUsecase(mealId, DateTime.now(),
-                            //         chosenRestaurant);
+                            String mealId = widget
+                                .schedule[widget.selectedDay]['meals'].keys
+                                .toList()[_selectedIndex];
+                                print(mealId);
+                            await sl<AddDeleteOrderBloc>().deleteOrderUsecase(
+                                mealId, DateTime.now(), widget.restaurant);
 
                             setState(() {
                               _submitted = false;
@@ -98,17 +88,14 @@ class _DailyContainerState extends State<DailyContainer> {
                           },
                           style: ElevatedButton.styleFrom(
                             minimumSize: Size(
-                                MediaQuery.of(context).size.width * 0.35,
-                                50),
+                                MediaQuery.of(context).size.width * 0.35, 50),
                             backgroundColor:
                                 Theme.of(context).colorScheme.primary,
                           ),
                           child: AutoSizeText(
                             'Delete',
                             style: TextStyle(
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .onPrimary),
+                                color: Theme.of(context).colorScheme.onPrimary),
                           ),
                         ),
                       ],
@@ -116,51 +103,49 @@ class _DailyContainerState extends State<DailyContainer> {
                   )
                 ],
               )
-              : Flex(
-                  direction: Axis.vertical,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Expanded(
-                        flex: 5,
-                        child: CustomDailyMealsKSC(
-                            widget.schedule[widget.selectedDay])),
-                    Expanded(
-                      flex: 1,
-                      child: ElevatedButton(
-                        onPressed: () async {
-                          setState(() {
-                            _submitted = !_submitted;
-                          });
-                          final OrderEntity order = OrderEntity(
-                              mealDes: _selectedMeal,
-                              orderDate: DateTime.now(),
-                              userDepartment: currentUser!.photoURL!,
-                              userEmail: currentUser!.email!);
+            : Flex(
+                direction: Axis.vertical,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Expanded(
+                      flex: 5,
+                      child: CustomDailyMealsKSC(
+                          widget.schedule[widget.selectedDay])),
+                  Expanded(
+                    flex: 1,
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        setState(() {
+                          _submitted = !_submitted;
+                        });
+                        final OrderEntity order = OrderEntity(
+                            mealDes: _selectedMeal,
+                            orderDate: DateTime.now(),
+                            userDepartment: currentUser!.photoURL!,
+                            userEmail: currentUser!.email!);
 
-                          await sl<AddDeleteOrderBloc>()
-                              .addOrderUsecase(order, chosenRestaurant);
-                        },
-                        style: ElevatedButton.styleFrom(
-                          shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.only(
-                                  bottomLeft: Radius.circular(15),
-                                  bottomRight: Radius.circular(15))),
-                          minimumSize:
-                              Size(MediaQuery.of(context).size.width * 0.7, 50),
-                          backgroundColor:
-                              Theme.of(context).colorScheme.primary,
-                        ),
-                        child: AutoSizeText(
-                          'Submit',
-                          style: TextStyle(
-                              color: Theme.of(context).colorScheme.onPrimary),
-                        ),
+                        await sl<AddDeleteOrderBloc>()
+                            .addOrderUsecase(order, widget.restaurant);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(15),
+                                bottomRight: Radius.circular(15))),
+                        minimumSize:
+                            Size(MediaQuery.of(context).size.width * 0.7, 50),
+                        backgroundColor: Theme.of(context).colorScheme.primary,
                       ),
-                    )
-                  ],
-                ),
-        ),
+                      child: AutoSizeText(
+                        'Submit',
+                        style: TextStyle(
+                            color: Theme.of(context).colorScheme.onPrimary),
+                      ),
+                    ),
+                  )
+                ],
+              ),
       ),
     );
   }
@@ -174,42 +159,24 @@ class _DailyContainerState extends State<DailyContainer> {
           return Center(child: Text(message));
         }
         String mealName = meals['meals'].values.toList()[index];
-        return customRadioListTile(
-            index,
-            AutoSizeText(mealName,
-                style: TextStyle(
-                    color: Theme.of(context).colorScheme.onSecondary)));
+        return customRadioListTile(index, mealName);
       },
     );
   }
 
-  // void submitCustomOrder(order) {
-  //   if (order == null || order.meals!.isEmpty) {
-  //     return;
-  //   }
-  //   if (_selectedIndex < 0 || _selectedIndex >= order.meals!.length) {
-  //     return;
-  //   }
-  //   final selectedMeal = order.meals![_selectedIndex];
-  //   selectedRestaurantID = order.id.toString();
-  //   selectedMealID = selectedMeal.id.toString();
-  //   setState(() {
-  //     _selectedMeal = selectedMeal.meal.toString();
-  //     _submitted = !_submitted;
-  //   });
-  // }
-
-  Widget customRadioListTile(index, text) {
+  Widget customRadioListTile(index, mealName) {
     return RadioListTile(
       dense: true,
       activeColor: Theme.of(context).colorScheme.primary,
       controlAffinity: ListTileControlAffinity.leading,
-      title: text,
+      title: AutoSizeText(mealName,
+          style: TextStyle(color: Theme.of(context).colorScheme.onSecondary)),
       value: index,
       groupValue: _selectedIndex,
       onChanged: (value) {
         setState(() {
           _selectedIndex = value!;
+          _selectedMeal = mealName;
         });
       },
     );

@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 
 import '../../../../../core/error/failure.dart';
-import '../../../../../core/error/firebase_exceptions.dart' as fb;
+import '../../../../../core/error/firebase_exceptions.dart' ;
 import '../../domain/repositories/schedule_management_repository.dart';
 import '../datasources/schedule_management_data_source.dart';
 
@@ -18,7 +18,7 @@ class ScheduleManagementRepositoryImpl implements ScheduleManagementRepository {
     try {
       await scheduleManagementDataSource.addMeal(meal, dayIndex);
       return const Right(unit);
-    } on fb.FirebaseException catch (e) {
+    } on FirebaseException catch (e) {
       return Left(FirebaseFailure(message: e.toString()));
     }
   }
@@ -34,7 +34,7 @@ class ScheduleManagementRepositoryImpl implements ScheduleManagementRepository {
       }, (_) {
         return const Right(unit);
       });
-    } on fb.FirebaseException catch (e) {
+    } on FirebaseException catch (e) {
       return Left(FirebaseFailure(message: e.message));
     }
   }

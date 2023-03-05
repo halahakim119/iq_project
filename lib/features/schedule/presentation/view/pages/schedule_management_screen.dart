@@ -22,7 +22,7 @@ class ScheduleManagementScreen extends StatefulWidget {
 class _ScheduleManagementScreenState extends State<ScheduleManagementScreen> {
   int selectedDay = 0;
   String userType = '';
-  final TextEditingController  _textController = TextEditingController();
+  final TextEditingController _textController = TextEditingController();
 
   void onPressed(int index) {
     setState(() {

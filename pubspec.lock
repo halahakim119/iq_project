@@ -273,22 +273,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.7.8"
-  dio:
-    dependency: "direct main"
-    description:
-      name: dio
-      sha256: "9fdbf71baeb250fc9da847f6cb2052196f62c19906a3657adfc18631a667d316"
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.0.0"
-  dropdown_textfield:
-    dependency: "direct main"
-    description:
-      name: dropdown_textfield
-      sha256: "6e306d29d4bf8f88e2f9a4336d5e8dcc551d797fa8f541bb52a72817cc275cc4"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.8"
   email_validator:
     dependency: "direct main"
     description:
@@ -401,30 +385,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.2.1+23"
-  firebase_storage:
+  firebase_messaging:
     dependency: "direct main"
     description:
-      name: firebase_storage
-      sha256: fac4ebf20da0ff7c7f23596d741130a85e8bd5fac4cabf8f568f38ba55fba19d
+      name: firebase_messaging
+      sha256: "95f7565b8e992d2188cdd8dc5612330f7c309485fe425d3f9844f18e90741e3e"
       url: "https://pub.dev"
     source: hosted
-    version: "11.0.14"
-  firebase_storage_platform_interface:
+    version: "14.2.5"
+  firebase_messaging_platform_interface:
     dependency: transitive
     description:
-      name: firebase_storage_platform_interface
-      sha256: c58dedec6d12416306e08dde463f3c65443aa2d5ccc100856ae7da75bab63e29
+      name: firebase_messaging_platform_interface
+      sha256: c5e79e15d1018cafffea1a6e45249db0d6bc42dbe35178634c77488179880e79
       url: "https://pub.dev"
     source: hosted
-    version: "4.1.30"
-  firebase_storage_web:
+    version: "4.2.14"
+  firebase_messaging_web:
     dependency: transitive
     description:
-      name: firebase_storage_web
-      sha256: "28e2c6317214f63af56b1b3f2907d168534a7629ec24269b036556f399063d5a"
+      name: firebase_messaging_web
+      sha256: cd0cfcab7a63282049dec95a9955e7a487b5e580162310d12a82a10c0c32c546
       url: "https://pub.dev"
     source: hosted
-    version: "3.3.23"
+    version: "3.2.15"
   fixnum:
     dependency: transitive
     description:
@@ -470,6 +454,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.1"
+  flutter_local_notifications:
+    dependency: "direct main"
+    description:
+      name: flutter_local_notifications
+      sha256: "293995f94e120c8afce768981bd1fa9c5d6de67c547568e3b42ae2defdcbb4a0"
+      url: "https://pub.dev"
+    source: hosted
+    version: "13.0.0"
+  flutter_local_notifications_linux:
+    dependency: transitive
+    description:
+      name: flutter_local_notifications_linux
+      sha256: ccb08b93703aeedb58856e5637450bf3ffec899adb66dc325630b68994734b89
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0+1"
+  flutter_local_notifications_platform_interface:
+    dependency: transitive
+    description:
+      name: flutter_local_notifications_platform_interface
+      sha256: "5ec1feac5f7f7d9266759488bc5f76416152baba9aa1b26fe572246caa00d1ab"
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.0.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -528,14 +536,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.2.0"
-  http:
-    dependency: "direct main"
-    description:
-      name: http
-      sha256: "6aa2946395183537c8b880962d935877325d6a09a2867c3970c05c0fed6ac482"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.13.5"
   http_multi_server:
     dependency: transitive
     description:
@@ -933,6 +933,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.4.16"
+  timezone:
+    dependency: transitive
+    description:
+      name: timezone
+      sha256: "24c8fcdd49a805d95777a39064862133ff816ebfffe0ceff110fb5960e557964"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.9.1"
   timing:
     dependency: transitive
     description:
@@ -993,10 +1001,10 @@ packages:
     dependency: transitive
     description:
       name: xdg_directories
-      sha256: ee1505df1426458f7f60aac270645098d318a8b4766d85fde75f76f2e21807d1
+      sha256: bd512f03919aac5f1313eb8249f223bacf4927031bf60b02601f81f687689e86
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.0"
+    version: "0.2.0+3"
   xml:
     dependency: transitive
     description:

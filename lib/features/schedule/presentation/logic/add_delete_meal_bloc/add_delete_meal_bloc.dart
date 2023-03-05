@@ -19,7 +19,7 @@ class AddDeleteMealBloc extends Bloc<AddDeleteMealEvent, AddDeleteMealState> {
     required this.deleteMealUsecase,
   }) : super(AddDeleteMealInitial()) {
     on<AddMealEvent>((event, emit) async {
-      emit(const LoadingAddDeleteMealState(isLoading: true));
+      emit(LoadingAddDeleteMealState());
 
       try {
         final failureOrDoneMessage =
@@ -33,7 +33,7 @@ class AddDeleteMealBloc extends Bloc<AddDeleteMealEvent, AddDeleteMealState> {
       }
     });
     on<DeleteMealEvent>((event, emit) async {
-      emit(const LoadingAddDeleteMealState(isLoading: true));
+      emit(LoadingAddDeleteMealState());
 
       try {
         final failureOrDoneMessage =

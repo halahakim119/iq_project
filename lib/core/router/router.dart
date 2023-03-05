@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 
-
 import '../../features/auth/presentation/view/auth_screen.dart';
+import '../../features/main/hq_main_page.dart';
 import '../../features/main/kitchen_main_page.dart';
 import '../../features/main/main_page.dart';
 import '../../features/orders/orders_management_screen.dart';
@@ -68,6 +68,28 @@ import '../../features/splash/loading_splash.dart';
           path: 'schedule',
           name: 'ScheduleManagementScreenRoute',
           page: ScheduleManagementScreen,
+        ),
+        AutoRoute(
+          path: 'orders',
+          name: 'OrdersManagementScreenRoute',
+          page: OrdersManagementScreen,
+        ),
+        AutoRoute(
+          path: 'profile',
+          name: 'ProfileScreenRoute',
+          page: ProfileScreen,
+        ),
+      ],
+    ),
+    AutoRoute(
+      path: 'HQ',
+      name: 'HQRoute',
+      page: HQMainPage,
+      children: [
+        AutoRoute(
+          path: 'weekly',
+          name: 'WeeklyScheduleScreenRoute',
+          page: WeeklyScheduleScreen,
         ),
         AutoRoute(
           path: 'orders',

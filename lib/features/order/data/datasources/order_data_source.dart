@@ -6,11 +6,12 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../../core/error/failure.dart';
+import '../../../../core/error/firebase_exceptions.dart';
 import '../models/order_model.dart';
 
 abstract class OrdersDataSource {
   Future<Either<FirebaseFailure, Map<String, dynamic>>> getAllOrders(
-      DateTime ordersDate);
+      String restaurant, DateTime ordersDate);
   Future<Either<FirebaseFailure, Unit>> deleteOrder(
       String orderId, DateTime orderDate, String restaurant);
   Future<Either<FirebaseFailure, Unit>> addOrder(
@@ -40,11 +41,13 @@ class OrdersDataSourceImpl implements OrdersDataSource {
   Future<Either<FirebaseFailure, Unit>> addOrder(
       OrderModel orderModel, String restaurant) async {
     try {
-      String orderDate = DateFormat.yM().format(orderModel.orderDate);
+      String date = DateFormat.yM().format(orderModel.orderDate);
+
       DatabaseReference restaurantRef = ordersRef.child(restaurant);
-      DatabaseReference dateRef = restaurantRef.child(orderDate);
+      DatabaseReference dateRef = restaurantRef.child(date);
       DatabaseReference newMealRef = dateRef.push();
       await newMealRef.set(orderModel.toJson());
+
       return right(unit);
     } catch (e) {
       return left(FirebaseFailure(message: e.toString()));
@@ -73,14 +76,23 @@ class OrdersDataSourceImpl implements OrdersDataSource {
 
   @override
   Future<Either<FirebaseFailure, Map<String, dynamic>>> getAllOrders(
-      DateTime ordersDate) {
-    // TODO: implement getAllOrders
-    throw UnimplementedError();
+      String restaurant, DateTime ordersDate) async {
+    try {
+      final data = await ordersRef.child(restaurant).child('$ordersDate').get();
+      if (data.exists) {
+        final dataString = json.encode(data.value);
+        Map<String, dynamic> dataValues = json.decode(dataString);
+
+        return right(dataValues);
+      } else {
+        throw const NoDataAvailableException('No data available.');
+      }
+    } catch (e) {
+      return left(FirebaseFailure(message: e.toString()));
+    }
   }
 
   @override
-  Stream<Either<FirebaseFailure, Map<String, dynamic>>> onOrdersChanged() {
-    // TODO: implement onOrdersChanged
-    throw UnimplementedError();
-  }
+  Stream<Either<FirebaseFailure, Map<String, dynamic>>> onOrdersChanged() =>
+      _controller.stream;
 }

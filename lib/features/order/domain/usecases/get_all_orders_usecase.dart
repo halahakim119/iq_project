@@ -8,9 +8,9 @@ class GetAllOrdersUsecase {
   final OrderRepository repository;
   GetAllOrdersUsecase(this.repository);
   Future<Either<FirebaseFailure, Map<String, dynamic>>> call(
-      DateTime ordersDate) async {
+      String restaurant, DateTime ordersDate) async {
     try {
-      final result = await repository.getAllOrders(ordersDate);
+      final result = await repository.getAllOrders(restaurant, ordersDate);
       return result.fold((failure) => Left(failure), (order) => Right(order));
     } on FirebaseException catch (e) {
       return Left(FirebaseFailure(message: e.message));

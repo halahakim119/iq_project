@@ -9,14 +9,7 @@ abstract class AddDeleteOrderState extends Equatable {
 
 class AddDeleteOrderInitial extends AddDeleteOrderState {}
 
-class LoadingAddDeleteOrderState extends AddDeleteOrderState {
-  final bool isLoading;
-
-  const LoadingAddDeleteOrderState({required this.isLoading});
-
-  @override
-  List<Object> get props => [isLoading];
-}
+class LoadingAddDeleteOrderState extends AddDeleteOrderState {}
 
 class LoadedAddDeleteOrderState extends AddDeleteOrderState {
   final Map<String, dynamic> Orders;

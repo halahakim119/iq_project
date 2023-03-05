@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../../../core/injection/injection_container.dart';
 import '../../../logic/get_all_meals_bloc/cubit/get_all_meals_cubit.dart';
 import '../widgets/weekly_schedule_widget.dart';
 

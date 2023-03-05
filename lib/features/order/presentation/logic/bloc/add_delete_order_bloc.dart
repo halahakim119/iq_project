@@ -23,7 +23,7 @@ class AddDeleteOrderBloc
     required this.deleteOrderUsecase,
   }) : super(AddDeleteOrderInitial()) {
     on<AddOrderEvent>((event, emit) async {
-      emit(const LoadingAddDeleteOrderState(isLoading: true));
+      emit(LoadingAddDeleteOrderState());
 
       try {
         final failureOrDoneMessage =
@@ -37,7 +37,7 @@ class AddDeleteOrderBloc
       }
     });
     on<DeleteOrderEvent>((event, emit) async {
-      emit(const LoadingAddDeleteOrderState(isLoading: true));
+      emit(LoadingAddDeleteOrderState());
 
       try {
         final failureOrDoneMessage = await deleteOrderUsecase(

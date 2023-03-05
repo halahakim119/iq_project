@@ -1,5 +1,5 @@
 import 'package:iq_project/features/order/domain/entities/order_entity.dart';
-
+import 'package:intl/intl.dart';
 class OrderModel extends OrderEntity {
   const OrderModel(
       {required DateTime orderDate,
@@ -14,7 +14,7 @@ class OrderModel extends OrderEntity {
 
   Map<String, Object?> toJson() {
     return {
-      'order_date': orderDate,
+      'order_date':    DateFormat('yyyy-MM-dd HH:mm').format(orderDate),
       'meal_des': mealDes,
       'user_email': userEmail,
       'user_department': userDepartment

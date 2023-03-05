@@ -31,15 +31,31 @@ class OrderRepositoryImpl implements OrderRepository {
 
   @override
   Future<Either<FirebaseFailure, Unit>> deleteOrder(
-      String orderId, DateTime orderDate, String restaurant) {
-    // TODO: implement deleteOrder
-    throw UnimplementedError();
+      String orderId, DateTime orderDate, String restaurant) async {
+    try {
+      final result =
+          await orderDataSource.deleteOrder(orderId, orderDate, restaurant);
+      return result.fold((failure) {
+        return Left(failure);
+      }, (_) {
+        return const Right(unit);
+      });
+    } on FirebaseException catch (e) {
+      return Left(FirebaseFailure(message: e.message));
+    }
   }
 
   @override
   Future<Either<FirebaseFailure, Map<String, dynamic>>> getAllOrders(
-      DateTime ordersDate) {
-    // TODO: implement getAllOrders
-    throw UnimplementedError();
+      String restaurant, DateTime ordersDate) async {
+    final meals = await orderDataSource.getAllOrders(restaurant, ordersDate);
+    return meals.fold(
+      (failure) {
+        return Left(failure);
+      },
+      (meals) {
+        return Right(meals);
+      },
+    );
   }
 }
