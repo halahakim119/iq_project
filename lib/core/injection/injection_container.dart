@@ -3,6 +3,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:get_it/get_it.dart';
 import 'package:iq_project/features/order/domain/usecases/add_order_usecase.dart';
 import 'package:iq_project/features/order/domain/usecases/delete_order_usecase.dart';
+import 'package:iq_project/features/order/domain/usecases/get_all_orders_usecase.dart';
 import 'package:iq_project/features/order/presentation/logic/bloc/add_delete_order_bloc.dart';
 
 import '../../features/auth/data/repositories/login_repository_impl.dart';
@@ -15,6 +16,7 @@ import '../../features/auth/presentation/logic/cubit/authentication_cubit.dart';
 import '../../features/order/data/datasources/order_data_source.dart';
 import '../../features/order/data/repositories/order_repository_impl.dart';
 import '../../features/order/domain/repositories/order_repository.dart';
+import '../../features/order/presentation/logic/cubit/get_all_orders_cubit.dart';
 import '../../features/profile/data/datasource/user_data_source.dart';
 import '../../features/profile/data/repositories/user_repository_impl.dart';
 import '../../features/profile/domain/repositories/user_repository.dart';
@@ -96,10 +98,13 @@ Future<void> init() async {
 // cubit
   sl.registerFactory(() =>
       AddDeleteOrderBloc(addOrderUsecase: sl(), deleteOrderUsecase: sl()));
+  sl.registerFactory(() =>
+      GetAllOrdersCubit(getAllOrdersUsecase: sl(), ordersDataSource: sl()));
 
 // Usecases
   sl.registerLazySingleton(() => AddOrderUsecase(sl()));
   sl.registerLazySingleton(() => DeleteOrderUsecase(sl()));
+  sl.registerLazySingleton(() => GetAllOrdersUsecase(sl()));
 
 // Repository
   sl.registerLazySingleton<OrderRepository>(

@@ -8,10 +8,10 @@ class DeleteOrderUsecase {
   final OrderRepository repository;
   DeleteOrderUsecase(this.repository);
   Future<Either<FirebaseFailure, Unit>> call(
-      String orderId, DateTime orderDate, String restaurant) async {
+       String restaurant) async {
     try {
       final result =
-          await repository.deleteOrder(orderId, orderDate, restaurant);
+          await repository.deleteOrder( restaurant);
       return result.fold((failure) => Left(failure), (_) => const Right(unit));
     } on FirebaseException catch (e) {
       return Left(FirebaseFailure(message: e.message));

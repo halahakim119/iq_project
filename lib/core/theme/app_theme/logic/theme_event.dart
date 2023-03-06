@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../main.dart';
 import '../app_theme.dart';
 
 @immutable
@@ -11,8 +12,15 @@ class ThemeChanged extends ThemeEvent {
 
   ThemeChanged({
     required this.theme,
-  });
+  }) {
+    saveThemeToPrefs();
+  }
 
   @override
   List<Object?> get props => [theme];
+
+  void saveThemeToPrefs() {
+    final index = AppTheme.values.indexOf(theme!);
+    prefs.setInt('theme', index);
+  }
 }

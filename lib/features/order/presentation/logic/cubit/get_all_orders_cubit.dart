@@ -16,44 +16,57 @@ class GetAllOrdersCubit extends Cubit<GetAllOrdersState> {
   final OrdersDataSource ordersDataSource;
   final GetAllOrdersUsecase getAllOrdersUsecase;
   StreamSubscription<Either<FirebaseFailure, Map<String, dynamic>>>?
-      _OrdersSubscription;
+      _ordersSubscription;
   Map<String, dynamic> _previousOrders;
   GetAllOrdersCubit(
       {required this.ordersDataSource, required this.getAllOrdersUsecase})
       : _previousOrders = {},
         super(const GetAllOrdersState.getAllOrdersInitial());
 
-  Future<void> _getOrders(String restaurant, DateTime ordersDate) async {
+  Future<void> _getOrders([String? restaurant, DateTime? ordersDate]) async {
     emit(const GetAllOrdersState.loadingGetAllOrdersState());
-    var result = await getAllOrdersUsecase(restaurant, ordersDate);
+
+    Either<Failure, Map<String, dynamic>> result;
+    if (restaurant != null && ordersDate != null) {
+      result = await getAllOrdersUsecase(restaurant, ordersDate);
+    } else {
+      result = await getAllOrdersUsecase();
+    }
+
     result.fold(
       (failure) =>
-          emit(GetAllOrdersState.errorGetAllOrdersState(failure.message)),
+          emit(GetAllOrdersState.errorGetAllOrdersState(failure.toString())),
       (data) {
-        _previousOrders = data;
-        emit(GetAllOrdersState.loadedGetAllOrdersState(_previousOrders));
-      },
-    );
-
-    _OrdersSubscription?.cancel();
-    _OrdersSubscription = ordersDataSource.onOrdersChanged().listen(
-      (orders) {
-        final newOrders = orders.getOrElse(() => _previousOrders);
-        if (!mapEquals(newOrders, _previousOrders)) {
-          _previousOrders = newOrders;
+        if (data.isEmpty) {
+          emit(GetAllOrdersState.errorGetAllOrdersState('no available data'));
+        } else {
+          _previousOrders = data;
           emit(GetAllOrdersState.loadedGetAllOrdersState(_previousOrders));
         }
       },
     );
+
+    _ordersSubscription?.cancel();
+    _ordersSubscription = ordersDataSource.onOrdersChanged().listen(
+      (orders) {
+        final newOrders = orders.getOrElse(() => _previousOrders);
+        _previousOrders = newOrders;
+        emit(GetAllOrdersState.loadedGetAllOrdersState(_previousOrders));
+      },
+    );
   }
 
-  void fetchOrders(String restaurant, DateTime ordersDate) {
-    _getOrders(restaurant, ordersDate);
+  void fetchOrders([String? restaurant, DateTime? ordersDate]) {
+    if (restaurant != null && ordersDate != null) {
+      _getOrders(restaurant, ordersDate);
+    } else {
+      _getOrders();
+    }
   }
 
   @override
   Future<void> close() {
-    _OrdersSubscription?.cancel();
+    _ordersSubscription?.cancel();
     return super.close();
   }
 }

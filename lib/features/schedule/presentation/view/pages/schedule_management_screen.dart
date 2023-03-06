@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:unicons/unicons.dart';
 
 import '../../../../../../core/injection/injection_container.dart';
+import '../../../../profile/data/datasource/user_data_source.dart';
 import '../../../../profile/data/models/user_model.dart';
 import '../../logic/add_delete_meal_bloc/add_delete_meal_bloc.dart';
 import '../../logic/get_all_meals_bloc/cubit/get_all_meals_cubit.dart';
@@ -40,9 +41,9 @@ class _ScheduleManagementScreenState extends State<ScheduleManagementScreen> {
   @override
   void initState() {
     super.initState();
-    getUserType().then((value) {
+    UserDataSource.getUserType().then((value) {
       setState(() {
-        userType = value;
+        value.fold((l) => null, (type) => userType = type);
       });
     });
   }
@@ -218,26 +219,4 @@ class _ScheduleManagementScreenState extends State<ScheduleManagementScreen> {
       ],
     );
   }
-}
-
-Future<String> getUserType() async {
-  final currentUser = FirebaseAuth.instance.currentUser;
-  final ref = FirebaseDatabase.instance.ref();
-  final snapshot = await ref.child('users/${currentUser!.uid}').get();
-
-  if (snapshot.exists) {
-    final dataString = json.encode(snapshot.value);
-
-    Map<String, dynamic> data = json.decode(dataString);
-
-    final userEntity = UserModel.fromFirebaseMap(data);
-    if (userEntity.uType.isNotEmpty) {
-      if (userEntity.uType == 'KSCKitchen') {
-        return 'ksc';
-      } else if (userEntity.uType == 'AwbaraKitchen') {
-        return 'awbara';
-      }
-    }
-  }
-  return '';
 }

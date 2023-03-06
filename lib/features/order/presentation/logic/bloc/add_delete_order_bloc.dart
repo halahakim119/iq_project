@@ -26,6 +26,7 @@ class AddDeleteOrderBloc
       emit(LoadingAddDeleteOrderState());
 
       try {
+        
         final failureOrDoneMessage =
             await addOrderUsecase(event.orderEntity, event.restaurant);
         emit(_eitherDoneMessageOrErrorState(
@@ -41,7 +42,7 @@ class AddDeleteOrderBloc
 
       try {
         final failureOrDoneMessage = await deleteOrderUsecase(
-            event.orderId, event.orderDate, event.restaurant);
+          event.restaurant);
         emit(_eitherDoneMessageOrErrorState(
           failureOrDoneMessage,
           "Order deleted successfully.",

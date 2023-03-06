@@ -24,7 +24,7 @@ class _WeeklySchedulaWidgetState extends State<WeeklySchedulaWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
+    
       children: [
         const SizedBox(height: 15),
         Row(

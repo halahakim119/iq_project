@@ -13,6 +13,7 @@ import '../../logic/cubit/user_cubit.dart';
 import '../widgets/more_widget.dart';
 import '../widgets/user_profile.dart';
 
+
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
@@ -74,7 +75,7 @@ class ProfileScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               IconButton(
-                                  isSelected: seleted == true ? true : false,
+                                  // isSelected: seleted == true ? true : false,
                                   onPressed: () {
                                     BlocProvider.of<ThemeBloc>(context).add(
                                         ThemeChanged(

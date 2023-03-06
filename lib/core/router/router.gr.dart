@@ -18,7 +18,7 @@ import '../../features/auth/presentation/view/auth_screen.dart' as _i2;
 import '../../features/main/hq_main_page.dart' as _i7;
 import '../../features/main/kitchen_main_page.dart' as _i6;
 import '../../features/main/main_page.dart' as _i5;
-import '../../features/orders/orders_management_screen.dart' as _i12;
+import '../../features/order/presentation/view/orders_management_screen.dart' as _i12;
 import '../../features/profile/presentation/view/pages/profile_screen.dart'
     as _i10;
 import '../../features/profile/presentation/view/widgets/about_us_screen.dart'

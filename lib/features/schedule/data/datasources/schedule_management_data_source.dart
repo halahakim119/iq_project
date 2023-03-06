@@ -2,13 +2,11 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
-import 'package:firebase_auth/firebase_auth.dart'; 
 import 'package:firebase_database/firebase_database.dart';
 
 import '../../../../../core/error/failure.dart';
-import '../../../../../core/error/firebase_exceptions.dart' as fb;
 import '../../../../../core/error/firebase_exceptions.dart';
-import '../../../profile/data/models/user_model.dart';
+import '../../../profile/data/datasource/user_data_source.dart';
 
 abstract class ScheduleManagementDataSource {
   Future<Either<FirebaseFailure, Map<String, dynamic>>> getAllMeals();
@@ -39,13 +37,16 @@ class ScheduleManagementDataSourceImpl implements ScheduleManagementDataSource {
   Future<Either<FirebaseFailure, Unit>> addMeal(
       String meal, int dayIndex) async {
     try {
-      var kitchenType = await getUserType();
-      DatabaseReference restaurantRef = scheduleRef.child(kitchenType);
-      DatabaseReference dayRef = restaurantRef.child('$dayIndex');
-      DatabaseReference mealsRef = dayRef.child('meals');
-      DatabaseReference newMealRef = mealsRef.push();
-
-      await newMealRef.set(meal);
+      var kitchenType = await UserDataSource.getUserType();
+      kitchenType.fold((failure) {
+        return left(FirebaseFailure(message: failure.message));
+      }, (type) async {
+        DatabaseReference restaurantRef = scheduleRef.child(type);
+        DatabaseReference dayRef = restaurantRef.child('$dayIndex');
+        DatabaseReference mealsRef = dayRef.child('meals');
+        DatabaseReference newMealRef = mealsRef.push();
+        await newMealRef.set(meal);
+      });
       return right(unit);
     } catch (e) {
       return left(FirebaseFailure(message: e.toString()));
@@ -56,15 +57,19 @@ class ScheduleManagementDataSourceImpl implements ScheduleManagementDataSource {
   Future<Either<FirebaseFailure, Unit>> deleteMeal(
       String mealId, int dayIndex) async {
     try {
-      var kitchenType = await getUserType();
-      await FirebaseDatabase.instance
-          .ref()
-          .child('schedule_management')
-          .child(kitchenType)
-          .child('$dayIndex')
-          .child('meals')
-          .child(mealId)
-          .remove();
+      var kitchenType = await UserDataSource.getUserType();
+      kitchenType.fold((failure) {
+        return left(FirebaseFailure(message: failure.message));
+      }, (type) async {
+        await FirebaseDatabase.instance
+            .ref()
+            .child('schedule_management')
+            .child(type)
+            .child('$dayIndex')
+            .child('meals')
+            .child(mealId)
+            .remove();
+      });
 
       return right(unit);
     } catch (e) {
@@ -75,7 +80,7 @@ class ScheduleManagementDataSourceImpl implements ScheduleManagementDataSource {
   @override
   Future<Either<FirebaseFailure, Map<String, dynamic>>> getAllMeals() async {
     try {
-      var kitchenType = await getUserType();
+      var kitchenType = await UserDataSource.getUserType();
       final data = await scheduleRef.get();
       if (data.exists) {
         final dataString = json.encode(data.value);
@@ -93,30 +98,4 @@ class ScheduleManagementDataSourceImpl implements ScheduleManagementDataSource {
   @override
   Stream<Either<FirebaseFailure, Map<String, dynamic>>> onMealsChanged() =>
       _controller.stream;
-
-  Future<String> getUserType() async {
-    try {
-      final currentUser = FirebaseAuth.instance.currentUser;
-      final ref = FirebaseDatabase.instance.ref();
-      final snapshot = await ref.child('users/${currentUser!.uid}').get();
-
-      if (snapshot.exists) {
-        final dataString = json.encode(snapshot.value);
-
-        Map<String, dynamic> data = json.decode(dataString);
-
-        final userEntity = UserModel.fromFirebaseMap(data);
-        if (userEntity.uType.isNotEmpty) {
-          if (userEntity.uType == 'KSCKitchen') {
-            return 'ksc';
-          } else if (userEntity.uType == 'AwbaraKitchen') {
-            return 'awbara';
-          }
-        }
-      }
-      return '';
-    } catch (e) {
-      throw fb.FirebaseException(message: e.toString());
-    }
-  }
 }

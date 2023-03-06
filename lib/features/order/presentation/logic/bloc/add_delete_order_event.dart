@@ -18,15 +18,10 @@ class AddOrderEvent extends AddDeleteOrderEvent {
 }
 
 class DeleteOrderEvent extends AddDeleteOrderEvent {
-  String orderId;
-  DateTime orderDate;
   String restaurant;
 
-  DeleteOrderEvent(
-      {required this.orderId,
-      required this.orderDate,
-      required this.restaurant});
+  DeleteOrderEvent({required this.restaurant});
 
   @override
-  List<Object> get props => [orderId, orderDate, restaurant];
+  List<Object> get props => [restaurant];
 }

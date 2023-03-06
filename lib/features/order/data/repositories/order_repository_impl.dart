@@ -30,11 +30,9 @@ class OrderRepositoryImpl implements OrderRepository {
   }
 
   @override
-  Future<Either<FirebaseFailure, Unit>> deleteOrder(
-      String orderId, DateTime orderDate, String restaurant) async {
+  Future<Either<FirebaseFailure, Unit>> deleteOrder(String restaurant) async {
     try {
-      final result =
-          await orderDataSource.deleteOrder(orderId, orderDate, restaurant);
+      final result = await orderDataSource.deleteOrder(restaurant);
       return result.fold((failure) {
         return Left(failure);
       }, (_) {
@@ -47,14 +45,18 @@ class OrderRepositoryImpl implements OrderRepository {
 
   @override
   Future<Either<FirebaseFailure, Map<String, dynamic>>> getAllOrders(
-      String restaurant, DateTime ordersDate) async {
-    final meals = await orderDataSource.getAllOrders(restaurant, ordersDate);
-    return meals.fold(
+      [String? restaurant, DateTime? ordersDate]) async {
+    
+    if (restaurant != null && ordersDate != null) {
+     var orders = await orderDataSource.getAllOrders(restaurant, ordersDate);
+    }
+   var orders = await orderDataSource.getAllOrders();
+    return orders.fold(
       (failure) {
         return Left(failure);
       },
-      (meals) {
-        return Right(meals);
+      (orders) {
+        return Right(orders);
       },
     );
   }

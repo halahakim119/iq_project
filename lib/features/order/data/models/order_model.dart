@@ -14,7 +14,7 @@ class OrderModel extends OrderEntity {
 
   Map<String, Object?> toJson() {
     return {
-      'order_date':    DateFormat('yyyy-MM-dd HH:mm').format(orderDate),
+      'order_date':    DateFormat('yyyy-MM-dd').format(orderDate),
       'meal_des': mealDes,
       'user_email': userEmail,
       'user_department': userDepartment

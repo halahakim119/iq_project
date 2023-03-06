@@ -9,7 +9,7 @@ class DailyScheduleWidget extends StatefulWidget {
   final List<dynamic> kscSchedule;
   final List<dynamic> awbaraSchedule;
 
-   DailyScheduleWidget(
+  DailyScheduleWidget(
       {required this.kscSchedule, required this.awbaraSchedule});
 
   @override
@@ -28,7 +28,8 @@ class _DailyScheduleWidgetState extends State<DailyScheduleWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisAlignment: MainAxisAlignment.start,
+
       children: [
         Container(
           margin: const EdgeInsets.all(20),
@@ -38,7 +39,6 @@ class _DailyScheduleWidgetState extends State<DailyScheduleWidget> {
               width: 1,
               color: Theme.of(context).colorScheme.primary,
             ),
-            color: Theme.of(context).colorScheme.secondary,
             borderRadius: const BorderRadius.all(Radius.circular(50)),
           ),
           child: Row(
