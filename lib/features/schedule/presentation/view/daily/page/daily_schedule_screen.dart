@@ -39,7 +39,7 @@ class _DailyScheduleScreenState extends State<DailyScheduleScreen> {
   Widget build(BuildContext context) {
     return (_day == 5 || _day == 6)
         ? WeekendWidget()
-        : (_hour >= 9 && _hour < 13)
+        : (_hour >= 9 && _hour < 15)
             ? BlocBuilder<GetAllMealsCubit, GetAllMealsState>(
                 builder: (context, state) {
                 return state.when(

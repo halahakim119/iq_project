@@ -9,7 +9,7 @@ class DailyScheduleWidget extends StatefulWidget {
   final List<dynamic> kscSchedule;
   final List<dynamic> awbaraSchedule;
 
-  DailyScheduleWidget(
+  const DailyScheduleWidget(
       {required this.kscSchedule, required this.awbaraSchedule});
 
   @override
@@ -29,7 +29,6 @@ class _DailyScheduleWidgetState extends State<DailyScheduleWidget> {
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
-
       children: [
         Container(
           margin: const EdgeInsets.all(20),

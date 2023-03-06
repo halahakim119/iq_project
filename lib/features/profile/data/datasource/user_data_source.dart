@@ -35,7 +35,7 @@ abstract class UserDataSource {
           }
         }
       }
-      throw fb.NoDataAvailableException('user is not defined');
+      throw const fb.NoDataAvailableException('user is not defined');
     } catch (e) {
       throw fb.FirebaseException(message: e.toString());
     }

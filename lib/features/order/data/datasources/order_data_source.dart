@@ -124,23 +124,20 @@ class OrdersDataSourceImpl implements OrdersDataSource {
           } else if (type == 'normal') {
             var orders = dataValues[restaurant]
                 [DateFormat('yyyy-M').format(ordersDate!)];
+
             for (final orderId in orders.keys) {
-              final orderData = Map<String, dynamic>.from(orders[orderId]);
-              if (orderData['user_email'] == currentUser.email &&
-                  orderData['order_date'] ==
+              var order = orders[orderId];
+
+              if (order['user_email'] == currentUser.email &&
+                  order['order_date'] ==
                       DateFormat('yyyy-MM-dd').format(ordersDate)) {
-                final orderRef = ordersRef.child(orderId);
-                final dataString = json.encode(orderRef);
-                Map<String, dynamic> dataValues = json.decode(dataString);
-                return right(dataValues);
+                return dataValues = order;
               }
             }
           } else {
             dataValues.forEach((key, value) {
               key == type ? dataValues = value : null;
             });
-
-            return right(dataValues);
           }
         });
       }
