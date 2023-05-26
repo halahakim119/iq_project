@@ -73,7 +73,7 @@ class detail extends StatelessWidget {
                           order['meal_des'] == mealName)
                       .toList();
 
-                  // If there are no orders for today's date, display a message
+                 
                   if (todayOrders.isEmpty) {
                     return Text('No orders available yet');
                   }

@@ -12,4 +12,5 @@ class LoginUseCase {
   Future<Either<FirebaseAuthFailure, Unit>> call(LoginEntity parameters) async {
     return await _loginRepository.login(parameters);
   }
+  
 }
